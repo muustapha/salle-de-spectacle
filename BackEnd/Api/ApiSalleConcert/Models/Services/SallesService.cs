@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace ApiSalleConcert.Models.Services
 {
-	public class SallesService
+    public class SallesService
 	{
 		private readonly IMongoCollection<Salle> _salleCollection;
 
