@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace ApiSalleConcert.Models.Services
 {
-    public class SallesService
+	public class SallesService
 	{
 		private readonly IMongoCollection<Salle> _salleCollection;
 
@@ -36,5 +36,4 @@ namespace ApiSalleConcert.Models.Services
 		public async Task RemoveAsync(string id) =>
 			await _salleCollection.DeleteOneAsync(x => x.Id == id);
 	}
-}
 }
