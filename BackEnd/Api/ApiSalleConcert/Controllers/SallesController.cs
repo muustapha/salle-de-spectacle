@@ -18,7 +18,7 @@ namespace ApiSalleConcert.Controllers
 		public async Task<List<Salle>> Get() =>
 			await _sallesService.GetAsync();
 
-		[HttpGet("{id:length(24)}")]
+		[HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
 			var book = await _sallesService.GetAsync(id);
@@ -39,7 +39,7 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
 		}
 
-		[HttpPut("{id:length(24)}")]
+		[HttpPut("id")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
 			var book = await _sallesService.GetAsync(id);
@@ -56,7 +56,7 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("{id:length(24)}")]
+		[HttpDelete("id")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var book = await _sallesService.GetAsync(id);

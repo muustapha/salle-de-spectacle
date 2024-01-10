@@ -1,0 +1,19 @@
+BackEnd
+- Compteur pour le POST (En back)
+- Améliorer le Back ( Gérer le DTO, Mapper, Profil )
+- Systeme d'authentification ( Login, SignUp , TOKEN ...) Optionnelle
+
+Visuel
+- L'interface utilisateur (HTML / CSS)
+
+AJAX en JS 
+- Afficher toutes les salles
+- Rechercher (nom / ville / styles)
+- Faire une carte interactif
+- Ajout d'avis
+
+Créer un administrateur
+- Ajouter une salle
+- Modifier une salle
+- Update une salle 
+- Supprimer une salle
