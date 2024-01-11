@@ -4,20 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Salle de concert</title>
-    <link href="./CSS/MainStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./CSS/MainStyle.css" />
   </head>
   <body>
     <header class="header-section">
       <!-- Navbar pour administrateur -->
       <button class="login-btn">Administrateur</button>
     </header>
-    <main>
+    <main class="main-section">
       <!-- Une Section recherche -->
+      <section class="section-recherche">
+        <div class="recherche-input">
+          <label for="nameSalle" class="recherche-label">Nom </label>
+          <input
+            type="text"
+            id="nameSalle"
+            name="nameSalle"
+            class="recherche-input"
+          />
+        </div>
+        <div class="recherche-input">
+          <label for="citySalle" class="recherche-label">Ville </label>
+          <input
+            type="text"
+            id="citySalle"
+            name="citySalle"
+            class="recherche-input"
+          />
+        </div>
+        <div class="recherche-input">
+          <label for="stylesSalle" class="recherche-label">Style </label>
+          <select name="stylesSalle" id="stylesSalle" class="recherche-input">
+            <option value="">test</option>
+          </select>
+        </div>
+      </section>
       <!-- Une Section affichage des salles  -->
+      <section class="section-affiche-Salle">
+        <div class="card">
+          <div class="infos-card">
+            <!-- nom, ville, styles, capacités -->
+            <p class="info-salle">Nom : <span id="nom-salle"></span></p>
+            <p class="info-salle">
+              Localisation : <span id="ville-salle"></span>
+            </p>
+            <p class="info-salle">Style(s) : <span id="styles-salle"></span></p>
+            <p class="info-salle">
+              Capacitées : <span id="capacite-salle"></span>
+            </p>
+          </div>
+          <button class="more-info-btn">Détails</button>
+        </div>
+        <div class="card">
+          <div class="infos-card">
+            <!-- nom, ville, styles, capacités -->
+            <p class="info-salle">Nom : <span id="nom-salle">test</span></p>
+            <p class="info-salle">
+              Localisation : <span id="ville-salle">test</span>
+            </p>
+            <p class="info-salle">
+              Style(s) : <span id="styles-salle">test</span>
+            </p>
+            <p class="info-salle">
+              Capacitées : <span id="capacite-salle">test</span>
+            </p>
+          </div>
+          <button class="more-info-btn">Détails</button>
+        </div>
+      </section>
     </main>
-    <footer>
+    <footer class="footer-section">
       <!-- Certif -->
+      <p class="text-footer">Ne pas copier, merci bien !</p>
     </footer>
-    <script src="./JS/Controllers/GetAllSalle.js"></script>
   </body>
+  <script src="./JS/Controllers/GetAllSalle.js"></script>
 </html>
