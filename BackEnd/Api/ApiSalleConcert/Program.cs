@@ -15,6 +15,14 @@ namespace ApiSalleConcert
 			builder.Services.AddSingleton<SallesService>();
 			// Add services to the container.
 
+			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+			builder.Services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,policy => { policy.WithOrigins("*");});
+			});
+
+
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
@@ -22,6 +30,7 @@ namespace ApiSalleConcert
 
 			var app = builder.Build();
 
+			app.UseCors(MyAllowSpecificOrigins);
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
