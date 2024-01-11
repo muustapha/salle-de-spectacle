@@ -1,13 +1,13 @@
 BackEnd
-- Compteur pour le POST (En back)
-- Améliorer le Back ( Gérer le DTO, Mapper, Profil )
+- Compteur pour le POST (En back) => Pour ajouter l'Id, Récupérer le dernier Id du tableau du GetAllSalle et faire  + 1. OK 
+- Améliorer le Back ( Gérer le DTO, Mapper, Profil ) OK 
 - Systeme d'authentification ( Login, SignUp , TOKEN ...) Optionnelle
 
 Visuel
-- L'interface utilisateur (HTML / CSS)
+- L'interface utilisateur (HTML / CSS) OK 
 
 AJAX en JS 
-- Afficher toutes les salles
+- Afficher toutes les salles OK
 - Rechercher (nom / ville / styles)
 - Faire une carte interactif
 - Ajout d'avis
