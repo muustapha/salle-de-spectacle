@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salle de concert</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link href="./CSS/MainStyle.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header class="header-section">
+      <!-- Navbar pour administrateur -->
+      <button class="login-btn">Administrateur</button>
+    </header>
+    <main>
+      <!-- Une Section recherche -->
+      <!-- Une Section affichage des salles  -->
+    </main>
+    <footer>
+      <!-- Certif -->
+    </footer>
+    <div id="map"></div>
+    
+    <script src="./JS/Controllers/GetAllSalle.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+         crossorigin=""></script>
+        <script>
+         // URL de l'API
+         var url = "https://localhost:7005/api/Salles/1"; // Remplacez "example.com" par le vrai domaine de votre API.
+         
+         // Faire une requête à l'API
+         fetch(url)
+             .then(response => response.json())  // convertir la réponse en JSON
+             .then(data => {
+                 // extraire les coordonnées du JSON
+                 var lat = data.adresse.localisation.coordinates[0];
+                 var lon = data.adresse.localisation.coordinates[1];
+         
+                 // utiliser les coordonnées pour définir la vue de la carte
+                 var map = L.map('map').setView([lat, lon], 13);
+         
+                 // Ajouter une couche de carte (par exemple, OpenStreetMap)
+                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                     attribution: '© OpenStreetMap contributors'
+                 }).addTo(map);
+         
+                 // Ajouter un marqueur à la position
+                 L.marker([lat, lon]).addTo(map);
+             })
+             .catch(error => console.error('Erreur:', error));
+             </script>
+  </body>
+</html>

@@ -5,7 +5,7 @@
   --color4: #232826;
   --color5: #131114;
 }
-
+#map { height: 180px; }
 @font-face {
   font-family: "font-text";
   src: url(../../Asset/Font/Almarai-Regular.ttf);
