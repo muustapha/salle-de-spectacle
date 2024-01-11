@@ -14,10 +14,10 @@ namespace ApiSalleConcert.Models
 		public string? Nom { get; set; } = null!;
 
 		[BsonElement("adresse")]
-		public Adresse? AdresseSalle { get; set; } = null!;
+		public Adresse AdresseSalle { get; set; } = null!;
 
 		[BsonElement("styles")]
-		public List<string> Styles { get; set; }
+		public List<string>? Styles { get; set; } = null!;
 
 		[BsonElement("avis")]
 		public Avis[]? ListeAvis { get; set; } = null!;
@@ -30,5 +30,8 @@ namespace ApiSalleConcert.Models
 
 		[BsonElement("contact")]
 		public Contact[]? ContactSalle { get; set; } = null!;
-	}
+
+		[BsonElement("isDelete")]
+		public bool IsDelete { get; set; } = false;
+    }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ApiSalleConcert.Models;
+using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models.Services;
+using AutoMapper;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -10,15 +12,22 @@ namespace ApiSalleConcert.Controllers
 	public class SallesController : ControllerBase
 	{
 		private readonly SallesService _sallesService;
+		private readonly IMapper _mapper;
 
-		public SallesController(SallesService sallesService) =>
+		public SallesController(SallesService sallesService, IMapper mapper)
+		{
 			_sallesService = sallesService;
+			_mapper = mapper;
+		}
 
 		[HttpGet]
-		public async Task<List<Salle>> Get() =>
-			await _sallesService.GetAsync();
+		public async Task<List<SalleRecherche>> Get()
+		{
+			var listeSalle = await _sallesService.GetAsync();
+            return _mapper.Map<List<SalleRecherche>>(listeSalle);
+		}
 
-		[HttpGet("id")]
+        [HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
 			var book = await _sallesService.GetAsync(id);
