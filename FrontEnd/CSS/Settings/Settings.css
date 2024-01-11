@@ -28,6 +28,31 @@ body {
   background: var(--color1);
 }
 
+.header-section {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.main-section {
+  height: 100vh;
+}
+.footer-section {
+  height: 20vh;
+  width: 100%;
+  background-color: var(--color5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-footer {
+  color: white;
+  font-size: 32px;
+}
+
 h1,
 h2,
 h3,
