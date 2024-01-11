@@ -1,6 +1,5 @@
 BackEnd
 - Compteur pour le POST (En back)
-- Améliorer le Back ( Gérer le DTO, Mapper, Profil )
 - Systeme d'authentification ( Login, SignUp , TOKEN ...) Optionnelle
 
 Visuel
