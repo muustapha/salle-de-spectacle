@@ -39,6 +39,7 @@ body {
 .main-section {
   height: 120vh;
 }
+
 .footer-section {
   height: 15vh;
   width: 100%;
@@ -65,4 +66,8 @@ h6 {
 button {
   border: none;
   cursor: pointer;
+}
+
+#map {
+  height: 180px;
 }
