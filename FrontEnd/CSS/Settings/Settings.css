@@ -31,3 +31,8 @@ h5,
 h6 {
   font-family: "font-title";
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}
