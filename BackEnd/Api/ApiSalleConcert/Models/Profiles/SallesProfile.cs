@@ -7,7 +7,7 @@ namespace ApiSalleConcert.Models.Profiles
     {
         public SallesProfile() 
         {
-            CreateMap<Salle, SalleRecherche>().ForMember(dest => dest.Ville, opts => opts.MapFrom(src => src.AdresseSalle.Ville));
+            CreateMap<Salle, SalleRecherche>().ForMember(dest => dest.Ville, opts => opts.MapFrom(src => src.AdresseSalle!.Ville));
         }
     }
 }

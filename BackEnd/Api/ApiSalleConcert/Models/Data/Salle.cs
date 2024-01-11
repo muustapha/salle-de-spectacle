@@ -8,13 +8,13 @@ namespace ApiSalleConcert.Models
 	{
 		[BsonId]
 		[BsonElement("_id")]
-		public int Id { get; set; }
+		public int? Id { get; set; }
 
 		[BsonElement("nom")]
 		public string? Nom { get; set; } = null!;
 
 		[BsonElement("adresse")]
-		public Adresse AdresseSalle { get; set; } = null!;
+		public Adresse? AdresseSalle { get; set; } = null!;
 
 		[BsonElement("styles")]
 		public List<string>? Styles { get; set; } = null!;
@@ -33,5 +33,17 @@ namespace ApiSalleConcert.Models
 
 		[BsonElement("isDelete")]
 		public bool IsDelete { get; set; } = false;
+
+		public void Supprimer()
+		{
+			IsDelete = true;
+			Nom = null;
+			AdresseSalle = null;
+			Styles = null;
+			ListeAvis = null;
+			Capacite = null;
+			Smac = null;
+			ContactSalle = null;
+		}
     }
 }
