@@ -14,6 +14,7 @@ namespace ApiSalleConcert
 			builder.Configuration.GetSection("SallesStoreDatabase"));
 			builder.Services.AddSingleton<SallesService>();
 			// Add services to the container.
+<<<<<<< HEAD
 
 			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -23,6 +24,9 @@ namespace ApiSalleConcert
 			});
 
 
+=======
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+>>>>>>> 897d9b95c497fbe76752dc2fe53cc8b7f7b60aaf
 			builder.Services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
