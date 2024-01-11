@@ -14,7 +14,7 @@ namespace ApiSalleConcert.Models
         public string? CodePostal { get; set; } = null!;
 
         [BsonElement("ville")]
-        public string Ville { get; set; } = null!;
+        public string? Ville { get; set; } = null!;
 
         [BsonElement("localisation")]
         public Localisation? LocalisationAdresse { get; set; } = null!;

@@ -65,19 +65,38 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("id")]
-		public async Task<IActionResult> Delete(int id)
-		{
-			var book = await _sallesService.GetAsync(id);
+        [HttpDelete("id")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var salle = await _sallesService.GetAsync(id);
 
-			if (book is null)
-			{
-				return NotFound();
-			}
+            if (salle is null)
+            {
+                return NotFound();
+            }
 
-			await _sallesService.RemoveAsync(id);
+            Salle deletedSalle = salle;
+			deletedSalle.Supprimer();
 
-			return NoContent();
-		}
+            await _sallesService.UpdateAsync(id, deletedSalle);
+
+            return NoContent();
+        }
+
+
+		//[HttpDelete("id")]
+		//public async Task<IActionResult> Delete(int id)
+		//{
+		//	var book = await _sallesService.GetAsync(id);
+
+		//	if (book is null)
+		//	{
+		//		return NotFound();
+		//	}
+
+		//	await _sallesService.RemoveAsync(id);
+
+		//	return NoContent();
+		//}
 	}
 }

@@ -33,7 +33,7 @@ namespace ApiSalleConcert.Models.Services
 		public async Task UpdateAsync(int id, Salle updateSalle) =>
 			await _salleCollection.ReplaceOneAsync(x => x.Id == id, updateSalle);
 
-		public async Task RemoveAsync(int id) =>
+        public async Task RemoveAsync(int id) =>
 			await _salleCollection.DeleteOneAsync(x => x.Id == id);
-	}
+    }
 }
