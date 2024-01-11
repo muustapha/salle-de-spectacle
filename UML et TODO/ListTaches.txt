@@ -1,6 +1,10 @@
 BackEnd
+<<<<<<< HEAD
+- Compteur pour le POST (En back)
+=======
 - Compteur pour le POST (En back) => Pour ajouter l'Id, Récupérer le dernier Id du tableau du GetAllSalle et faire  + 1. OK 
 - Améliorer le Back ( Gérer le DTO, Mapper, Profil ) OK 
+>>>>>>> 67c67c710943c92adff1d47355f4c5c59a8d4195
 - Systeme d'authentification ( Login, SignUp , TOKEN ...) Optionnelle
 
 Visuel
