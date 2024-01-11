@@ -1,0 +1,26 @@
+.section-affiche-Salle {
+  width: 80%;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 15px;
+  padding: 3%;
+  display: grid;
+  grid-template-columns: repeat(4, 0.5fr);
+  gap: 4%;
+}
+
+.card {
+  border-radius: 15px;
+  padding: 5%;
+  background: var(--color2);
+  box-shadow: 0 0 4px 0 black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-salle {
+  font-size: 20px;
+  padding: 5%;
+}
