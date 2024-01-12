@@ -27,6 +27,25 @@ namespace ApiSalleConcert.Controllers
             return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}
 
+        [HttpGet("GetAllNotDelete")]
+        public async Task<List<SalleRecherche>> GetAllNotDelete()
+        {
+            List<Salle> listeSalle = await _sallesService.GetAsync();
+
+            if (listeSalle == null || listeSalle.Count == 0)
+                return _mapper.Map<List<SalleRecherche>>(listeSalle);
+
+            List<Salle> sallesActive = new();
+
+            for (int i = 0; i < listeSalle.Count; i++)
+            {
+                if (!listeSalle[i].IsDelete)
+                    sallesActive.Add(listeSalle[i]);
+            }
+
+            return _mapper.Map<List<SalleRecherche>>(sallesActive);
+        }
+
         [HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
@@ -43,12 +62,12 @@ namespace ApiSalleConcert.Controllers
         [HttpGet("GetAllResearched")]
         public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
         {
-            List<Salle> listeSalle = await _sallesService.GetAsync();
+            List<SalleRecherche> listeSalle = await GetAllNotDelete();
 
             if (listeSalle == null || listeSalle.Count == 0 || (nomRecherche == "" && villeRecherchee == "" && styleRecherche == ""))
                 return _mapper.Map<List<SalleRecherche>>(listeSalle);
 
-            List<Salle> sallesRecherchees = new();
+            List<SalleRecherche> sallesRecherchees = new();
 
             if (nomRecherche != "")
             {
@@ -56,7 +75,7 @@ namespace ApiSalleConcert.Controllers
 
                 for (int i = 0; i < listeSalle.Count; i++)
                 {
-                    if (!listeSalle[i].IsDelete && listeSalle[i].Nom != null && listeSalle[i].Nom!.ToLower().StartsWith(nomRecherche))
+                    if (listeSalle[i].Nom != null && listeSalle[i].Nom!.ToLower().StartsWith(nomRecherche))
                         sallesRecherchees.Add(listeSalle[i]);
                 }
 
@@ -69,7 +88,7 @@ namespace ApiSalleConcert.Controllers
 
                 for (int i = 0; i < listeSalle.Count; i++)
                 {
-                    if (!listeSalle[i].IsDelete && listeSalle[i].AdresseSalle!.Ville != null && listeSalle[i].AdresseSalle!.Ville!.ToLower().StartsWith(villeRecherchee))
+                    if (listeSalle[i].Ville != null && listeSalle[i].Ville!.ToLower().StartsWith(villeRecherchee))
                         sallesRecherchees.Add(listeSalle[i]);
                 }
 
@@ -85,7 +104,7 @@ namespace ApiSalleConcert.Controllers
                     if (listeSalle[i].Styles != null && listeSalle[i].Styles!.Count > 0)
                         foreach (string style in listeSalle[i].Styles!)
                         {
-                            if (!listeSalle[i].IsDelete && style.ToLower().StartsWith(styleRecherche))
+                            if (style.ToLower().StartsWith(styleRecherche))
                                 sallesRecherchees.Add(listeSalle[i]);
                         }
                 }
