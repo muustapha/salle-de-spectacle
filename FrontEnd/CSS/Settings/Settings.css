@@ -28,36 +28,8 @@ body {
   background: var(--color1);
 }
 
-.header-section {
-  height: 10vh;
-  width: 100%;
-  padding: 0 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title-main-page {
-  font-size: 24px;
-}
-
-.main-section {
+main{
   height: 65vh;
-}
-
-.footer-section {
-  height: 15vh;
-  width: 100%;
-  margin-top: 5%;
-  background-color: var(--color5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.text-footer {
-  color: white;
-  font-size: 32px;
 }
 
 h1,
@@ -72,8 +44,4 @@ h6 {
 button {
   border: none;
   cursor: pointer;
-}
-
-#map {
-  height: 180px;
 }
