@@ -1,0 +1,31 @@
+.card {
+    border-radius: 15px;
+    padding: 5%;
+    background: var(--color2);
+    box-shadow: 0 0 4px 0 black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-salle {
+    font-size: 20px;
+    padding: 5%;
+}
+.btn-card {
+    display: flex;
+}
+
+.more-info-btn {
+    margin: 10% auto;
+    font-size: 20px;
+    padding: 5% 25%;
+    background-color: var(--color3);
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.more-info-btn:hover {
+    background-color: brown;
+    color: white;
+}

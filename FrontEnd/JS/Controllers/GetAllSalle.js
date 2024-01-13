@@ -3,7 +3,7 @@ const sectionAffichage = document.getElementById("section-affichage");
 
 // Récup les données de L'Api (GetAllSalle)
 const fetchData = async () => {
-  await fetch("https://localhost:44371/api/Salles")
+  await fetch("https://localhost:44371/api/Salles/GetAllNotDelete")
     .then((res) => res.json())
     .then((data) => createAllCard(data))
     .catch((err) => console.log("Pas de GetAllSalle", err));
@@ -25,9 +25,9 @@ const createCard = ({ nom, ville, styles, capacite }) => {
   const divInfoCard = document.createElement("div");
   divInfoCard.classList.add("infos-card");
 
-  const pNomSalle = document.createElement("p");
+  const pNomSalle = document.createElement("h3");
   pNomSalle.classList.add("info-salle");
-  pNomSalle.innerText = "Nom : " + nom;
+  pNomSalle.innerText = nom;
   const pVilleSalle = document.createElement("p");
   pVilleSalle.classList.add("info-salle");
   pVilleSalle.innerText = "Localisation : " + ville;
@@ -36,16 +36,20 @@ const createCard = ({ nom, ville, styles, capacite }) => {
   pSytleSalle.innerText = "Style(s) : " + displayElementBoucle(styles);
   const pCapaciteSalle = document.createElement("p");
   pCapaciteSalle.classList.add("info-salle");
-  pCapaciteSalle.innerText = "Capacitées : " + capacite;
+  pCapaciteSalle.innerText = "Capacitées : " + capacite + " personnes";
+
+  const divBtnCard = document.createElement("div");
+  divBtnCard.classList.add("btn-card");
   const btn = document.createElement("button");
   btn.classList.add("more-info-btn");
   btn.innerHTML = "Détails";
+  divBtnCard.appendChild(btn);
 
   divInfoCard.appendChild(pNomSalle);
   divInfoCard.appendChild(pVilleSalle);
   divInfoCard.appendChild(pSytleSalle);
   divInfoCard.appendChild(pCapaciteSalle);
-  divInfoCard.appendChild(btn);
+  divInfoCard.appendChild(divBtnCard);
 
   card.appendChild(divInfoCard);
 
