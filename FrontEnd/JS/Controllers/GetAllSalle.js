@@ -1,14 +1,15 @@
+//*************** Récup les données de L'Api (GetAllSalle) ***************//
+//#region
 // Récup de la section
 const sectionAffichage = document.getElementById("section-affichage");
-
-// Récup les données de L'Api (GetAllSalle)
+// Fetch les données de l'API
 const fetchData = async () => {
   await fetch("https://localhost:44371/api/Salles/GetAllNotDelete")
     .then((res) => res.json())
     .then((data) => createAllCard(data))
     .catch((err) => console.log("Pas de GetAllSalle", err));
 };
-
+// Affiche le tableau des styles
 const displayElementBoucle = (data) => {
   let style = "";
   data.forEach((element) => {
@@ -16,7 +17,6 @@ const displayElementBoucle = (data) => {
   });
   return style;
 };
-
 // Fonction pour créer la card
 const createCard = ({ nom, ville, styles, capacite }) => {
   const card = document.createElement("div");
@@ -55,15 +55,34 @@ const createCard = ({ nom, ville, styles, capacite }) => {
 
   sectionAffichage.appendChild(card);
 };
-
+// Créer toutes les cartes
 const createAllCard = (data) => {
-  console.log(data);
   data.forEach((card) => {
     createCard(card);
   });
 };
+//#endregion
+//************************************************************************//
+//********* Récup les données issus des inputs (recherche) ***************//
+//#region
+// Mettre les styles dans le select
+const displayStyleInSelect = () => {
+  let arrayOfStyle = ["jazz", "soul", "funk", "blues", "rock"];
+  const inputSelect = document.getElementById("stylesSalle");
 
+  arrayOfStyle.forEach((style) => {
+    let selectOption = document.createElement("option");
+    selectOption.innerHTML = style;
+
+    inputSelect.appendChild(selectOption);
+  });
+};
+// Récupération des inputs et actualisation des salles en temps réel
+// Affichage
+//#endregion
+//************************************************************************//
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
   await fetchData();
+  displayStyleInSelect();
 });
