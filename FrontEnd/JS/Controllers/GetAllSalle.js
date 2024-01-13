@@ -4,7 +4,7 @@
 const sectionAffichage = document.getElementById("section-affichage");
 // Fetch les données de l'API
 const fetchData = async () => {
-  await fetch("https://localhost:44371/api/Salles/GetAllNotDelete")
+  await fetch("https://localhost:44371/api/Salles/GetAllResearched")
     .then((res) => res.json())
     .then((data) => createAllCard(data))
     .catch((err) => console.log("Pas de GetAllSalle", err));
@@ -78,6 +78,51 @@ const displayStyleInSelect = () => {
   });
 };
 // Récupération des inputs et actualisation des salles en temps réel
+// URL de l'API => https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=s&villeRecherchee=l&styleRecherche=blues
+let allInput = document.querySelectorAll("[data-input]");
+let saisiInputNomSalle = "";
+let saisiInputVilleSalle = "";
+let saisiSelectStyle = "";
+
+// récupération des inputs remplit pour l'utilisateur
+allInput.forEach((elemnt) => {
+  // Si c'est un INPUT
+  if (elemnt.tagName == "INPUT") {
+    elemnt.addEventListener("input", (e) => {
+      if (e.target.id == "nameSalle") {
+        saisiInputNomSalle = e.target.value;
+      } else {
+        saisiInputVilleSalle = e.target.value;
+      }
+      fetchSearchData(
+        saisiInputNomSalle,
+        saisiInputVilleSalle,
+        saisiSelectStyle
+      );
+    });
+  } else {
+    // Si c'est un SELECT
+    elemnt.addEventListener("change", (e) => {
+      saisiSelectStyle += e.target.value;
+      fetchSearchData(
+        saisiInputNomSalle,
+        saisiInputVilleSalle,
+        saisiSelectStyle
+      );
+    });
+  }
+});
+
+// fonction pour fetch ave la recherche
+const fetchSearchData = async (nom = " ", ville = " ", style = " ") => {
+  await fetch(
+    `https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${style}`
+  )
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log("petit problème" + err));
+};
+
 // Affichage
 //#endregion
 //************************************************************************//

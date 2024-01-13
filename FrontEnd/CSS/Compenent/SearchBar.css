@@ -2,25 +2,24 @@
   display: flex;
   justify-content: space-around;
   width: 60%;
+  padding: 2%;
   margin: 5% auto;
   background: white;
   box-shadow: 0 0 4px 0 black;
   border-radius: 5px;
 }
 
-.recherche-input {
+.div-recherche-input {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 3% 6%;
 }
 
 .recherche-label {
   font-size: 24px;
-  margin-right: 2%;
+  margin-right: 3%;
 }
 
 .recherche-input {
   font-size: 24px;
+  width: 50%;
 }
