@@ -3,12 +3,12 @@
 // Récup de la section
 const sectionAffichage = document.getElementById("section-affichage");
 // Fetch les données de l'API
-const fetchData = async () => {
-  await fetch("https://localhost:44371/api/Salles/GetAllResearched")
-    .then((res) => res.json())
-    .then((data) => createAllCard(data))
-    .catch((err) => console.log("Pas de GetAllSalle", err));
-};
+// const fetchData = async () => {
+//   await fetch("https://localhost:44371/api/Salles/GetAllResearched")
+//     .then((res) => res.json())
+//     .then((data) => createAllCard(data))
+//     .catch((err) => console.log("Pas de GetAllSalle", err));
+// };
 // Affiche le tableau des styles
 const displayElementBoucle = (data) => {
   let style = "";
@@ -17,8 +17,8 @@ const displayElementBoucle = (data) => {
   });
   return style;
 };
-// Fonction pour créer la card
-const createCard = ({ nom, ville, styles, capacite }) => {
+// Fonction pour créer la cardcreateAllCard
+const createCard = ({ id, nom, ville, styles, capacite }) => {
   const card = document.createElement("div");
   card.classList.add("card");
 
@@ -41,6 +41,7 @@ const createCard = ({ nom, ville, styles, capacite }) => {
   const divBtnCard = document.createElement("div");
   divBtnCard.classList.add("btn-card");
   const btn = document.createElement("button");
+  btn.setAttribute("data-id", id);
   btn.classList.add("more-info-btn");
   btn.innerHTML = "Détails";
   divBtnCard.appendChild(btn);
@@ -115,11 +116,12 @@ allInput.forEach((elemnt) => {
 
 // fonction pour fetch ave la recherche
 const fetchSearchData = async (nom = " ", ville = " ", style = " ") => {
+  let arrayData = [];
   await fetch(
     `https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${style}`
   )
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {})
     .catch((err) => console.log("petit problème" + err));
 };
 
@@ -128,6 +130,6 @@ const fetchSearchData = async (nom = " ", ville = " ", style = " ") => {
 //************************************************************************//
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
-  await fetchData();
+  await fetchSearchData();
   displayStyleInSelect();
 });
