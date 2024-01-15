@@ -105,7 +105,6 @@ allInput.forEach((elemnt) => {
     // Si c'est un SELECT
     elemnt.addEventListener("change", (e) => {
       saisiSelectStyle = e.target.value;
-      console.log(saisiSelectStyle);
       fetchSearchData(
         saisiInputNomSalle,
         saisiInputVilleSalle,
