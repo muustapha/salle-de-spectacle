@@ -7,9 +7,9 @@ Visuel
 - L'interface utilisateur (HTML / CSS) OK 
 
 AJAX en JS 
-- Afficher toutes les salles OK A Finir
-- Faire une carte interactif A finir / implémenter
-- Ajout d'avis A faire (formulaire)
+- Afficher toutes les salles OK 
+- Faire une carte interactif + Détails En cours
+- Ajout d'avis Créer un formulaire
 
 Créer un administrateur
 - Ajouter une salle
