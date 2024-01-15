@@ -1,14 +1,14 @@
+const sectionAffichage = document.getElementById("section-affichage");
 //*************** Récup les données de L'Api (GetAllSalle) ***************//
 //#region
 // Récup de la section
-const sectionAffichage = document.getElementById("section-affichage");
 // Fetch les données de l'API
-// const fetchData = async () => {
-//   await fetch("https://localhost:44371/api/Salles/GetAllResearched")
-//     .then((res) => res.json())
-//     .then((data) => createAllCard(data))
-//     .catch((err) => console.log("Pas de GetAllSalle", err));
-// };
+const fetchData = async () => {
+  await fetch("https://localhost:44371/api/Salles/GetAllResearched")
+    .then((res) => res.json())
+    .then((data) => createAllCard(data))
+    .catch((err) => console.log("Pas de GetAllSalle", err));
+};
 // Affiche le tableau des styles
 const displayElementBoucle = (data) => {
   let style = "";
@@ -58,6 +58,7 @@ const createCard = ({ id, nom, ville, styles, capacite }) => {
 };
 // Créer toutes les cartes
 const createAllCard = (data) => {
+  sectionAffichage.innerHTML = "";
   data.forEach((card) => {
     createCard(card);
   });
@@ -79,7 +80,6 @@ const displayStyleInSelect = () => {
   });
 };
 // Récupération des inputs et actualisation des salles en temps réel
-// URL de l'API => https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=s&villeRecherchee=l&styleRecherche=blues
 let allInput = document.querySelectorAll("[data-input]");
 let saisiInputNomSalle = "";
 let saisiInputVilleSalle = "";
@@ -104,7 +104,8 @@ allInput.forEach((elemnt) => {
   } else {
     // Si c'est un SELECT
     elemnt.addEventListener("change", (e) => {
-      saisiSelectStyle += e.target.value;
+      saisiSelectStyle = e.target.value;
+      console.log(saisiSelectStyle);
       fetchSearchData(
         saisiInputNomSalle,
         saisiInputVilleSalle,
@@ -115,21 +116,35 @@ allInput.forEach((elemnt) => {
 });
 
 // fonction pour fetch ave la recherche
-const fetchSearchData = async (nom = " ", ville = " ", style = " ") => {
-  let arrayData = [];
+const fetchSearchData = async (nom, ville, style) => {
   await fetch(
     `https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${style}`
   )
     .then((res) => res.json())
-    .then((data) => {})
+    .then((data) => createAllCard(data))
     .catch((err) => console.log("petit problème" + err));
 };
 
 // Affichage
 //#endregion
 //************************************************************************//
+
+// reset de barre de recherche
+const btnReset = document.getElementById("btn-reset-search");
+btnReset.addEventListener("click", () => {
+  allInput.forEach((elemnt) => {
+    if (elemnt.tagName == "INPUT") {
+      elemnt.innerHTML = "";
+      elemnt.value = "";
+    } else {
+      elemnt.value = "";
+    }
+  });
+  fetchData();
+});
+
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
-  await fetchSearchData();
+  await fetchData();
   displayStyleInSelect();
 });
