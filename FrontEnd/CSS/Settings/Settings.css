@@ -28,8 +28,8 @@ body {
   background: var(--color1);
 }
 
-main{
-  /* height: 65vh; */
+main {
+  height: 65vh;
 }
 
 h1,
@@ -39,6 +39,11 @@ h4,
 h5,
 h6 {
   font-family: "font-title";
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 button {
