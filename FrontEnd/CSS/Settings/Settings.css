@@ -28,8 +28,8 @@ body {
   background: var(--color1);
 }
 
-main{
-  /* height: 65vh; */
+main {
+  height: 65vh;
 }
 
 h1,

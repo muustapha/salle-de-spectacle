@@ -59,9 +59,13 @@ const createCard = ({ id, nom, ville, styles, capacite }) => {
 // Créer toutes les cartes
 const createAllCard = (data) => {
   sectionAffichage.innerHTML = "";
-  data.forEach((card) => {
-    createCard(card);
-  });
+  if (data.length == 0) {
+    sectionAffichage.innerHTML = "Rien n'a été trouvé !";
+  } else {
+    data.forEach((card) => {
+      createCard(card);
+    });
+  }
 };
 //#endregion
 //************************************************************************//
