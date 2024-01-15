@@ -40,9 +40,12 @@
 .container-avis {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 0.5fr;
+  column-gap: 3%;
 }
-
+.title-avis {
+  width: 80%;
+  margin: 0 auto;
+}
 .avis {
   background-color: white;
   text-align: center;
