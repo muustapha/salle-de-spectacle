@@ -3,12 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="nom-salle"></title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="../CSS/MainStyle.css" />
+    <title id="salle"></title>
   </head>
   <body>
-    <script src="..\JS\Models\Data\detailSalle.js"></script>
-    <script src="../JS/Models/Data/titreDetail.js"></script>
-    <script src="../JS/Controllers/GetSalleById.js"></script>
-    <script src="../JS/Models/Data/mapInteractive.js"></script>
+    <header class="header-section">
+      <!-- Navbar pour administrateur -->
+      <h1 class="title-main-page">Gestion salles</h1>
+      <button class="login-btn">Administrateur</button>
+    </header>
+    <main class="main-section-detail">
+      <h2 class="nom-salle description"></h2>
+      <section class="section-description">
+        <div class="container container-description">
+          <!-- Adresse -->
+          <div class="container-adresse">
+            <h3>Adresse :</h3>
+            <p class="p-description description"></p>
+            <div class="complement-adresse">
+              <p class="code-postal description"></p>
+              <p class="ville description"></p>
+            </div>
+          </div>
+          <!-- capacite -->
+          <div class="container-autre">
+            <h3>Capacité :</h3>
+            <p class="p-description description"></p>
+          </div>
+          <!-- Disponible -->
+          <div class="container-autre">
+            <h3>SMAC :</h3>
+            <p class="p-description description"></p>
+          </div>
+          <!-- Styles -->
+          <div class="container-styles">
+            <h3>Style :</h3>
+            <div class="tous-style">
+              <p class="p-description description"></p>
+            </div>
+          </div>
+        </div>
+        <!-- Map -->
+        <div class="container container-map" id="map"></div>
+        <!-- Avis -->
+        <div class="container container-avis">
+          <!-- <div class="avis"> -->
+          <!-- contient tous les avis  -->
+          <!-- <p class="avis-note"></p> -->
+          <!-- <p class="avis-date"></p> -->
+          <!-- </div> -->
+        </div>
+        <button class="btn-ajout-avis">Ajouter avis</button>
+      </section>
+    </main>
+    <footer class="footer-section">
+      <!-- Certif -->
+      <p class="text-footer">Ne pas copier, merci bien !</p>
+    </footer>
   </body>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="../JS/Controllers/GetSalleById.js"></script>
 </html>
