@@ -41,6 +41,11 @@ h6 {
   font-family: "font-title";
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 button {
   border: none;
   cursor: pointer;

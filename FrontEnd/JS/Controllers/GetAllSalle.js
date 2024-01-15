@@ -40,7 +40,9 @@ const createCard = ({ id, nom, ville, styles, capacite }) => {
 
   const divBtnCard = document.createElement("div");
   divBtnCard.classList.add("btn-card");
-  const btn = document.createElement("button");
+
+  const btn = document.createElement("a");
+  btn.setAttribute("href", `./Pages/DetailsPage.html?id=${id}`);
   btn.setAttribute("data-id", id);
   btn.classList.add("more-info-btn");
   btn.innerHTML = "Détails";
