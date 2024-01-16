@@ -2,9 +2,9 @@ body {
   position: relative;
 }
 
-.visivility-hidden {
+/* .visivility-hidden {
   display: none !important;
-}
+} */
 
 #page-ajout-avis {
   position: absolute;
