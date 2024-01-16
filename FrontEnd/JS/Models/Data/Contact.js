@@ -1,7 +1,5 @@
-class Contact
-{
-    constructor(telephone)
-    {
-        this.Telephone = telephone;
-    }
+export class Contact {
+  constructor(telephone) {
+    this.Telephone = telephone;
+  }
 }

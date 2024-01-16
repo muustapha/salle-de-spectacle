@@ -1,4 +1,4 @@
-class Salle {
+export class Salle {
   constructor(
     id,
     nom,

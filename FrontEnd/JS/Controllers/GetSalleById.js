@@ -84,7 +84,6 @@ const displayAvis = ({ listeAvis }) => {
   let containerAvis = document.querySelector(".container-avis");
   if (listeAvis != null) {
     listeAvis.forEach((a) => {
-      console.log(a.date);
       const divAvis = document.createElement("div");
       divAvis.classList.add("avis");
 
@@ -108,7 +107,10 @@ const displayAvis = ({ listeAvis }) => {
 //*************************************************************//
 //********************Ajouter Avis*****************************//
 const btnAjoutAvis = document.getElementById("ajout-avis");
-btnAjoutAvis.addEventListener("click", () => {});
+btnAjoutAvis.addEventListener("click", () => {
+  const sectionFormAvis = document.getElementById("page-ajout-avis");
+  sectionFormAvis.classList.remove("visivility-hidden");
+});
 //*************************************************************//
 
 // Pour que la fonction de l'API se lance au chargement de la page
