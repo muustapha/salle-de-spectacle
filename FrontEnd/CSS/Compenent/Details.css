@@ -35,6 +35,7 @@
 
 #map {
   height: 200px;
+  z-index: 1 !important;
 }
 
 .container-avis {

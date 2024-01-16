@@ -62,19 +62,25 @@
         </div>
         <button id="ajout-avis" class="btn-ajout-avis">Ajouter avis</button>
       </section>
-      <section id="page-ajout-avis">
+      <section id="page-ajout-avis" class="visivility-hidden">
         <div class="container-input-avis">
-          <form>
-            <label for="rating">Note (0-10):</label>
-            <input
-              type="number"
-              id="rating"
-              name="rating"
-              min="0"
-              max="10"
-              required
-            />
-            <button type="submit">Ajouter</button>
+          <form class="form-ajout-avis">
+            <div class="div-form">
+              <label for="rating" class="labelAvis">Note (0-10):</label>
+              <input
+                type="number"
+                id="rating"
+                name="rating"
+                min="0"
+                max="10"
+                class="input-avis"
+                required
+              />
+            </div>
+            <div class="container-btn-avis">
+              <button class="btn-avis" data-add="annuler">Annuler</button>
+              <button class="btn-avis" data-add="ajouter">Ajouter</button>
+            </div>
           </form>
         </div>
       </section>
