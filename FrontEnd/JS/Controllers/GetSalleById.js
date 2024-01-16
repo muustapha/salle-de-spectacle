@@ -106,6 +106,10 @@ const displayAvis = ({ listeAvis }) => {
   }
 };
 //*************************************************************//
+//********************Ajouter Avis*****************************//
+const btnAjoutAvis = document.getElementById("ajout-avis");
+btnAjoutAvis.addEventListener("click", () => {});
+//*************************************************************//
 
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
