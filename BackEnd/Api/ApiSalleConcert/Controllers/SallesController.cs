@@ -121,7 +121,7 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
 		}
 
-		[HttpPut("{id}/{no}")]
+		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
 			var book = await _sallesService.GetAsync(id);

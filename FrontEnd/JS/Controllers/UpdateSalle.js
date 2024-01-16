@@ -14,14 +14,7 @@ let idSalle = paramsSalle.get("id");
 
 //************Event sur les btn du formulaire*******************//
 const sectionFormAvis = document.getElementById("page-ajout-avis");
-const inputNote = document.querySelector(".input-avis");
 const btnAvis = document.querySelectorAll("[data-add]");
-
-inputNote.addEventListener("input", (e) => {
-  console.log(e.target.value);
-});
-
-console.log(btnAvis);
 
 btnAvis.forEach((btn) => {
   btn.addEventListener("click", (e) => {
@@ -31,5 +24,7 @@ btnAvis.forEach((btn) => {
     }
   });
 });
+//**************************************************************//
+//*******Création de l'Objet pour Salle pour le PUT*************//
 
 //**************************************************************//

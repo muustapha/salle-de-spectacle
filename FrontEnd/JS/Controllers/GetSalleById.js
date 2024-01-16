@@ -9,31 +9,21 @@ const fetchData = async () => {
     .then((data) => {
       displayDescriptionSalle(data);
       displayAvis(data);
+      //*******************Affichage de la map***********************//
       var lat = data.adresseSalle.localisationAdresse.coordinates[0];
       var lon = data.adresseSalle.localisationAdresse.coordinates[1];
-
       // utiliser les coordonnées pour définir la vue de la carte
       var map = L.map("map").setView([lat, lon], 13);
-
       // Ajouter une couche de carte (par exemple, OpenStreetMap)
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap contributors",
       }).addTo(map);
-
       // Ajouter un marqueur à la position
       L.marker([lat, lon]).addTo(map);
+      //*************************************************************//
     })
     .catch((err) => console.log("Pas de GetAllSalle", err));
 };
-// pour afficher les styles
-const displayElementBoucle = (data) => {
-  let style = "";
-  data.forEach((element) => {
-    style += element + " ";
-  });
-  return style;
-};
-
 //*******************Dispolay info*****************************//
 const displayDescriptionSalle = ({
   nom,
@@ -78,8 +68,17 @@ const displayDescriptionSalle = ({
     }
   }
 };
+
+// pour afficher les styles
+const displayElementBoucle = (data) => {
+  let style = "";
+  data.forEach((element) => {
+    style += element + " ";
+  });
+  return style;
+};
 //*************************************************************//
-//*******************Avis*************************************//
+//*******************Display Avis******************************//
 const displayAvis = ({ listeAvis }) => {
   let containerAvis = document.querySelector(".container-avis");
   if (listeAvis != null) {
