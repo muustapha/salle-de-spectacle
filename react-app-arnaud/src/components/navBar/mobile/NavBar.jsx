@@ -13,7 +13,7 @@ const NavBar = ({menu}) => {
 
 }
 NavBar.propTypes = {
-    menu: PropTypes.bool.isRequired,
+    menu: PropTypes.bool.isRequired ,
   };
  
 export default NavBar;
