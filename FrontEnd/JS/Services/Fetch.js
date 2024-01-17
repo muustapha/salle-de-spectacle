@@ -36,3 +36,14 @@ export const serviceGetSalleById = async (id) => {
   return dataID;
 };
 //**************************************************************//
+//*********************Fetch PUT Salle**************************//
+export const serviceUpdateSalle = async (id, newData) => {
+  await fetch(`https://localhost:44371/api/Salles/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newData),
+  })
+    .then((res) => res)
+    .catch((err) => console.log("Pas de GetAllSalle", err));
+};
+//**************************************************************//

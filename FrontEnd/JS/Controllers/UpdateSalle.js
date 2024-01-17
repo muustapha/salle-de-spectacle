@@ -1,17 +1,16 @@
 // Importation des différentes class pour effectuer l'ajout de l'avis => un PUT de la salle
 import { Avis } from "../Models/Data/Avis.js";
-import { Adresse } from "../Models/Data/Adresse.js";
-import { Contact } from "../Models/Data/Contact.js";
-import { Localisation } from "../Models/Data/Localisation.js";
-import { Salle } from "../Models/Data/Salle.js";
-import { serviceGetSalleById } from "../Services/Fetch.js";
+import { serviceGetSalleById, serviceUpdateSalle } from "../Services/Fetch.js";
 
-// Récupération de la Date + Heure actuelle
-let date = new Date().toISOString();
+const fetchDataId = async () => {
+  // Récup de l'ID dans l'URL
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+  let data = await serviceGetSalleById(id);
 
-// // Récup de l'ID dans l'URL
-let paramsSalle = new URLSearchParams(document.location.search);
-let idSalle = paramsSalle.get("id");
+  data.listeAvis.push(newAvis);
+  await serviceUpdateSalle(data.id, data);
+};
 
 //************Event sur les btn du formulaire*******************//
 const sectionFormAvis = document.getElementById("page-ajout-avis");
@@ -23,16 +22,16 @@ let newAvis = new Avis();
 
 // Ajout des données dans l'objet
 inputNoteAvis.addEventListener("input", (e) => {
-  newAvis.Date = date;
+  newAvis.Date = new Date().toISOString();
   newAvis.Note = e.target.value;
   return newAvis;
 });
 
 // Event quand on click sur le btn "Ajouter"
 btnAvis.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", async (e) => {
     if (e.target.dataset.add == "ajouter") {
-      console.log(newAvis);
+      await fetchDataId();
     } else {
       sectionFormAvis.classList.add("visivility-hidden");
     }
