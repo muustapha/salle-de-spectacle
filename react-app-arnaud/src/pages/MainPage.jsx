@@ -1,10 +1,12 @@
 import Footer from "../components/footer/Footer";
-import HeaderMobile from "../components/header/mobile/HeaderMobile";
+import Header from "../components/header/Header";
+import Main from "../components/mainPage/Main";
 
 const MainPage = () => {
     return (
         <>
-            <HeaderMobile />
+            <Header />
+            <Main />
             <Footer />
         </>
 

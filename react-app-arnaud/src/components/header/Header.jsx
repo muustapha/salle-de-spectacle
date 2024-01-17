@@ -1,10 +1,10 @@
-import style from "./HeaderMobile.module.css";
+import style from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
-import NavBar from "../navBar/mobile/NavBar";
+import NavBar from "./navBar/NavBar";
 
-const HeaderMobile = () => {
+const Header = () => {
 
   const [menu, setMenu] = useState(false);
 
@@ -21,4 +21,4 @@ const HeaderMobile = () => {
     );
 }
  
-export default HeaderMobile;
+export default Header;
