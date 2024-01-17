@@ -16,7 +16,7 @@ const HeaderMobile = () => {
                     {!menu ? <FontAwesomeIcon icon={faBars} className={style.icon} /> : <FontAwesomeIcon icon={faTimes} className={style.icon} />}
                 </button>
             </header>
-            {menu && <NavBar />}
+            <NavBar menu={menu} />
         </>
     );
 }

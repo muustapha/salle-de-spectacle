@@ -1,4 +1,4 @@
-.nav {
+.navDisplay {
   position: absolute;
   height: 100vh;
   width: 100vw;
@@ -9,6 +9,35 @@
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  transform: translateY(-100%);
+  /* transition: transform 1s; */
+  animation: animationDisplayNavBar 1s forwards;
+}
+@keyframes animationDisplayNavBar {
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.navHide {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  /* transform: translateY(-100%); */
+  /* transition: transform 1s; */
+  animation: animationHideNavBar 1s forwards;
+}
+@keyframes animationHideNavBar {
+  to {
+    transform: translateY(-100%);
+  }
 }
 
 .a {
