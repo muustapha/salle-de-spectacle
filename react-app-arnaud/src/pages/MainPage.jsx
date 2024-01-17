@@ -1,5 +1,12 @@
+import HeaderMobile from "../components/header/mobile/HeaderMobile";
+
 const MainPage = () => {
-    return (<h1>Main page</h1>  );
+    return (
+        <>
+            <HeaderMobile />
+        </>
+
+      );
 }
  
 export default MainPage;

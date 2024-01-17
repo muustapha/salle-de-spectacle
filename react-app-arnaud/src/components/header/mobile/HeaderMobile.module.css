@@ -1,0 +1,23 @@
+.header {
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 4px 0 black;
+}
+
+.h1 {
+  padding-left: 10%;
+  font-size: 34px;
+}
+
+.btn {
+  padding-right: 10%;
+  background: none;
+  height: 20vw;
+  width: 10vh;
+}
+
+.icon {
+  height: 45%;
+}
