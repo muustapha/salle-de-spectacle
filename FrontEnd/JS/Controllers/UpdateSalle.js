@@ -4,6 +4,7 @@ import { Adresse } from "../Models/Data/Adresse.js";
 import { Contact } from "../Models/Data/Contact.js";
 import { Localisation } from "../Models/Data/Localisation.js";
 import { Salle } from "../Models/Data/Salle.js";
+import { serviceGetSalleById } from "../Services/Fetch.js";
 
 // Récupération de la Date + Heure actuelle
 let date = new Date().toISOString();

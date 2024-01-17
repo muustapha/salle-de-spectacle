@@ -1,12 +1,12 @@
 // Importation du fetch
-import { fetchDataById } from "../Services/Fetch.js";
+import { serviceGetSalleById } from "../Services/Fetch.js";
 
 // Récup les données de L'Api (GetAllSalle)
 const fetchDataId = async () => {
   // Récup de l'ID dans l'URL
   let params = new URLSearchParams(document.location.search);
   let id = params.get("id");
-  let data = await fetchDataById(id);
+  let data = await serviceGetSalleById(id);
   // fonction display
   displayDescriptionSalle(data);
   displayAvis(data);

@@ -1,5 +1,5 @@
 //***********************Fetch All data**************************//
-export const fetchAllData = async () => {
+export const serviceGetAllSalle = async () => {
   let allData;
   await fetch("https://localhost:44371/api/Salles/GetAllResearched")
     .then((res) => res.json())
@@ -11,7 +11,7 @@ export const fetchAllData = async () => {
 };
 //**************************************************************//
 //**************Fetch data by Name/City/Style*******************//
-export const fetchDataByNameCityStyle = async (nom, ville, style) => {
+export const serviceGetAllSalleByNomVilleStyle = async (nom, ville, style) => {
   let searchData;
   await fetch(
     `https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${style}`
@@ -25,7 +25,7 @@ export const fetchDataByNameCityStyle = async (nom, ville, style) => {
 };
 //**************************************************************//
 //*********************Fetch data by Id*************************//
-export const fetchDataById = async (id) => {
+export const serviceGetSalleById = async (id) => {
   let dataID;
   await fetch(`https://localhost:44371/api/Salles/id?id=${id}`)
     .then((res) => res.json())

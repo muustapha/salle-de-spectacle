@@ -1,8 +1,11 @@
 // Importation des différents fetch
-import { fetchAllData, fetchDataByNameCityStyle } from "../Services/Fetch.js";
+import {
+  serviceGetAllSalle,
+  serviceGetAllSalleByNomVilleStyle,
+} from "../Services/Fetch.js";
 
 const fetch = async () => {
-  let data = await fetchAllData();
+  let data = await serviceGetAllSalle();
   createAllCard(data);
 };
 
@@ -122,7 +125,7 @@ allInput.forEach((elemnt) => {
 
 // fonction pour fetch ave la recherche
 const fetchSearchData = async (nom, ville, style) => {
-  let data = await fetchDataByNameCityStyle(nom, ville, style);
+  let data = await serviceGetAllSalleByNomVilleStyle(nom, ville, style);
   createAllCard(data);
 };
 
