@@ -24,29 +24,29 @@ namespace ApiSalleConcert.Controllers
 		public async Task<List<SalleRecherche>> Get()
 		{
 			var listeSalle = await _sallesService.GetAsync();
-            return _mapper.Map<List<SalleRecherche>>(listeSalle);
+			return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}
 
-        [HttpGet("GetAllNotDelete")]
-        public async Task<List<SalleRecherche>> GetAllNotDelete()
-        {
-            List<Salle> listeSalle = await _sallesService.GetAsync();
+		[HttpGet("GetAllNotDelete")]
+		public async Task<List<SalleRecherche>> GetAllNotDelete()
+		{
+			List<Salle> listeSalle = await _sallesService.GetAsync();
 
-            if (listeSalle == null || listeSalle.Count == 0)
-                return _mapper.Map<List<SalleRecherche>>(listeSalle);
+			if (listeSalle == null || listeSalle.Count == 0)
+				return _mapper.Map<List<SalleRecherche>>(listeSalle);
 
-            List<Salle> sallesActive = new();
+			List<Salle> sallesActive = new();
 
-            for (int i = 0; i < listeSalle.Count; i++)
-            {
-                if (!listeSalle[i].IsDelete)
-                    sallesActive.Add(listeSalle[i]);
-            }
+			for (int i = 0; i < listeSalle.Count; i++)
+			{
+				if (!listeSalle[i].IsDelete)
+					sallesActive.Add(listeSalle[i]);
+			}
 
-            return _mapper.Map<List<SalleRecherche>>(sallesActive);
-        }
+			return _mapper.Map<List<SalleRecherche>>(sallesActive);
+		}
 
-        [HttpGet("id")]
+		[HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
 			var salle = await _sallesService.GetAsync(id);
@@ -59,59 +59,59 @@ namespace ApiSalleConcert.Controllers
 			return salle;
 		}
 
-        [HttpGet("GetAllResearched")]
-        public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
-        {
-            List<SalleRecherche> listeSalle = await GetAllNotDelete();
+		[HttpGet("GetAllResearched")]
+		public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
+		{
+			List<SalleRecherche> listeSalle = await GetAllNotDelete();
 
-            if (listeSalle == null || listeSalle.Count == 0 || (nomRecherche == "" && villeRecherchee == "" && styleRecherche == ""))
-                return _mapper.Map<List<SalleRecherche>>(listeSalle);
+			if (listeSalle == null || listeSalle.Count == 0 || (nomRecherche == "" && villeRecherchee == "" && styleRecherche == ""))
+				return _mapper.Map<List<SalleRecherche>>(listeSalle);
 
-            List<SalleRecherche> sallesRecherchees = new();
+			List<SalleRecherche> sallesRecherchees = new();
 
-            if (nomRecherche != "")
-            {
-                nomRecherche = nomRecherche.ToLower();
+			if (nomRecherche != "")
+			{
+				nomRecherche = nomRecherche.ToLower();
 
-                for (int i = 0; i < listeSalle.Count; i++)
-                {
-                    if (listeSalle[i].Nom != null && listeSalle[i].Nom!.ToLower().StartsWith(nomRecherche))
-                        sallesRecherchees.Add(listeSalle[i]);
-                }
+				for (int i = 0; i < listeSalle.Count; i++)
+				{
+					if (listeSalle[i].Nom != null && listeSalle[i].Nom!.ToLower().StartsWith(nomRecherche))
+						sallesRecherchees.Add(listeSalle[i]);
+				}
 
-                listeSalle = sallesRecherchees;
-            }
+				listeSalle = sallesRecherchees;
+			}
 
-            if (villeRecherchee != "")
-            {
-                sallesRecherchees = new();
+			if (villeRecherchee != "")
+			{
+				sallesRecherchees = new();
 
-                for (int i = 0; i < listeSalle.Count; i++)
-                {
-                    if (listeSalle[i].Ville != null && listeSalle[i].Ville!.ToLower().StartsWith(villeRecherchee))
-                        sallesRecherchees.Add(listeSalle[i]);
-                }
+				for (int i = 0; i < listeSalle.Count; i++)
+				{
+					if (listeSalle[i].Ville != null && listeSalle[i].Ville!.ToLower().StartsWith(villeRecherchee))
+						sallesRecherchees.Add(listeSalle[i]);
+				}
 
-                listeSalle = sallesRecherchees;
-            }
+				listeSalle = sallesRecherchees;
+			}
 
-            if (styleRecherche != "")
-            {
-                sallesRecherchees = new();
+			if (styleRecherche != "")
+			{
+				sallesRecherchees = new();
 
-                for (int i = 0; i < listeSalle.Count; i++)
-                {
-                    if (listeSalle[i].Styles != null && listeSalle[i].Styles!.Count > 0)
-                        foreach (string style in listeSalle[i].Styles!)
-                        {
-                            if (style.ToLower().StartsWith(styleRecherche))
-                                sallesRecherchees.Add(listeSalle[i]);
-                        }
-                }
-            }
+				for (int i = 0; i < listeSalle.Count; i++)
+				{
+					if (listeSalle[i].Styles != null && listeSalle[i].Styles!.Count > 0)
+						foreach (string style in listeSalle[i].Styles!)
+						{
+							if (style.ToLower().StartsWith(styleRecherche))
+								sallesRecherchees.Add(listeSalle[i]);
+						}
+				}
+			}
 
-            return _mapper.Map<List<SalleRecherche>>(sallesRecherchees);
-        }
+			return _mapper.Map<List<SalleRecherche>>(sallesRecherchees);
+		}
 
 		[HttpPost]
 		public async Task<IActionResult> Post(Salle newSalles)
@@ -121,11 +121,7 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
 		}
 
-<<<<<<< HEAD
-		[HttpPut("id")]
-=======
 		[HttpPut("{id}")]
->>>>>>> arnaudBranch
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
 			var book = await _sallesService.GetAsync(id);
@@ -142,23 +138,23 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-        [HttpDelete("id")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var salle = await _sallesService.GetAsync(id);
+		[HttpDelete("id")]
+		public async Task<IActionResult> Delete(int id)
+		{
+			var salle = await _sallesService.GetAsync(id);
 
-            if (salle is null)
-            {
-                return NotFound();
-            }
+			if (salle is null)
+			{
+				return NotFound();
+			}
 
-            Salle deletedSalle = salle;
+			Salle deletedSalle = salle;
 			deletedSalle.Supprimer();
 
-            await _sallesService.UpdateAsync(id, deletedSalle);
+			await _sallesService.UpdateAsync(id, deletedSalle);
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
 
 		//[HttpDelete("id")]
