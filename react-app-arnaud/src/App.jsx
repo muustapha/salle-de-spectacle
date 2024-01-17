@@ -1,8 +1,10 @@
+import Navigation from "./components/Navigation"
+
 function App() {
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <Navigation />
     </>
   )
 }
