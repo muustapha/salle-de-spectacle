@@ -9,7 +9,14 @@ const fetchDataId = async () => {
   let data = await serviceGetSalleById(id);
 
   data.listeAvis.push(newAvis);
-  await serviceUpdateSalle(data.id, data);
+
+  if (newAvis.Date != null && newAvis.Note != null) {
+    await serviceUpdateSalle(data.id, data);
+    alert("Avis ajouté !!");
+    location.reload();
+  } else {
+    alert("Veuillez mettre une note !");
+  }
 };
 
 //************Event sur les btn du formulaire*******************//
