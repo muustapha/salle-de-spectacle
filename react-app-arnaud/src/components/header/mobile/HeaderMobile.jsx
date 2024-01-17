@@ -2,7 +2,7 @@ import style from "./HeaderMobile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
-import NavBar from "./NavBar";
+import NavBar from "../../navBar/mobile/NavBar";
 
 const HeaderMobile = () => {
 
