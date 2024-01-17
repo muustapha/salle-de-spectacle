@@ -1,18 +1,18 @@
-// Récup de l'ID dans l'URL
-let params = new URLSearchParams(document.location.search);
-let id = params.get("id");
+// Importation du fetch
+import { fetchDataById } from "../Services/Fetch.js";
 
 // Récup les données de L'Api (GetAllSalle)
-const fetchData = async () => {
-  await fetch(`https://localhost:44371/api/Salles/id?id=${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      displayDescriptionSalle(data);
-      displayAvis(data);
-      displayMap(data);
-    })
-    .catch((err) => console.log("Pas de GetAllSalle", err));
+const fetchDataId = async () => {
+  // Récup de l'ID dans l'URL
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+  let data = await fetchDataById(id);
+  // fonction display
+  displayDescriptionSalle(data);
+  displayAvis(data);
+  displayMap(data);
 };
+
 //*******************Dispolay info*****************************//
 const displayDescriptionSalle = ({
   nom,
@@ -117,5 +117,5 @@ const displayMap = ({ adresseSalle }) => {
 
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
-  await fetchData();
+  await fetchDataId();
 });

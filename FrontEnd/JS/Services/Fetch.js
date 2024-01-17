@@ -26,11 +26,13 @@ export const fetchDataByNameCityStyle = async (nom, ville, style) => {
 //**************************************************************//
 //*********************Fetch data by Id*************************//
 export const fetchDataById = async (id) => {
+  let dataID;
   await fetch(`https://localhost:44371/api/Salles/id?id=${id}`)
     .then((res) => res.json())
     .then((data) => {
-      return data;
+      return (dataID = data);
     })
     .catch((err) => console.log("Pas de GetAllSalle", err));
+  return dataID;
 };
 //**************************************************************//
