@@ -60,7 +60,26 @@
           <!-- <p class="avis-date"></p> -->
           <!-- </div> -->
         </div>
-        <button class="btn-ajout-avis">Ajouter avis</button>
+        <button id="ajout-avis" class="btn-ajout-avis">Ajouter avis</button>
+      </section>
+      <section id="page-ajout-avis" class="visivility-hidden">
+        <div class="container-input-avis">
+          <div class="div-form">
+            <label for="rating" class="labelAvis">Note (0-10):</label>
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              min="0"
+              max="10"
+              class="input-avis"
+            />
+          </div>
+          <div class="container-btn-avis">
+            <button class="btn-avis" data-add="annuler">Annuler</button>
+            <button class="btn-avis" data-add="ajouter">Ajouter</button>
+          </div>
+        </div>
       </section>
     </main>
     <footer class="footer-section">
@@ -73,5 +92,6 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""
   ></script>
-  <script src="../JS/Controllers/GetSalleById.js"></script>
+  <script type="module" src="../JS/Controllers/GetSalleById.js"></script>
+  <script type="module" src="../JS/Controllers/UpdateSalle.js"></script>
 </html>

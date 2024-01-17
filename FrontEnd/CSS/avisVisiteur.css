@@ -1,7 +1,0 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'font-title', sans-serif; /* Changer la police d'écriture ici */
-}

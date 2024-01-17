@@ -1,8 +1,6 @@
-class Avis
-{
-    constructor(date, note)
-    {
-        this.Date = date;
-        this.Note = note;
-    }
+export class Avis {
+  constructor(date, note) {
+    this.Date = date;
+    this.Note = note;
+  }
 }

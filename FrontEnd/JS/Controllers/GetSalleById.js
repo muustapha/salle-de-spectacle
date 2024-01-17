@@ -1,37 +1,16 @@
-// Récup de l'ID dans l'URL
-let params = new URLSearchParams(document.location.search);
-let id = params.get("id");
+// Importation du fetch
+import { serviceGetSalleById } from "../Services/Fetch.js";
 
 // Récup les données de L'Api (GetAllSalle)
-const fetchData = async () => {
-  await fetch(`https://localhost:44371/api/Salles/id?id=${id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      displayDescriptionSalle(data);
-      displayAvis(data);
-      var lat = data.adresseSalle.localisationAdresse.coordinates[0];
-      var lon = data.adresseSalle.localisationAdresse.coordinates[1];
-
-      // utiliser les coordonnées pour définir la vue de la carte
-      var map = L.map("map").setView([lat, lon], 13);
-
-      // Ajouter une couche de carte (par exemple, OpenStreetMap)
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap contributors",
-      }).addTo(map);
-
-      // Ajouter un marqueur à la position
-      L.marker([lat, lon]).addTo(map);
-    })
-    .catch((err) => console.log("Pas de GetAllSalle", err));
-};
-// pour afficher les styles
-const displayElementBoucle = (data) => {
-  let style = "";
-  data.forEach((element) => {
-    style += element + " ";
-  });
-  return style;
+const fetchDataId = async () => {
+  // Récup de l'ID dans l'URL
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+  let data = await serviceGetSalleById(id);
+  // fonction display
+  displayDescriptionSalle(data);
+  displayAvis(data);
+  displayMap(data);
 };
 
 //*******************Dispolay info*****************************//
@@ -78,13 +57,21 @@ const displayDescriptionSalle = ({
     }
   }
 };
+
+// pour afficher les styles
+const displayElementBoucle = (data) => {
+  let style = "";
+  data.forEach((element) => {
+    style += element + " ";
+  });
+  return style;
+};
 //*************************************************************//
-//*******************Avis*************************************//
+//*******************Display Avis******************************//
 const displayAvis = ({ listeAvis }) => {
   let containerAvis = document.querySelector(".container-avis");
   if (listeAvis != null) {
     listeAvis.forEach((a) => {
-      console.log(a.date);
       const divAvis = document.createElement("div");
       divAvis.classList.add("avis");
 
@@ -106,8 +93,29 @@ const displayAvis = ({ listeAvis }) => {
   }
 };
 //*************************************************************//
+//********************Ajouter Avis*****************************//
+const btnAjoutAvis = document.getElementById("ajout-avis");
+btnAjoutAvis.addEventListener("click", () => {
+  const sectionFormAvis = document.getElementById("page-ajout-avis");
+  sectionFormAvis.classList.remove("visivility-hidden");
+});
+//*************************************************************//
+//*******************Display Map*******************************//
+const displayMap = ({ adresseSalle }) => {
+  var lat = adresseSalle.localisationAdresse.coordinates[0];
+  var lon = adresseSalle.localisationAdresse.coordinates[1];
+  // utiliser les coordonnées pour définir la vue de la carte
+  var map = L.map("map").setView([lat, lon], 13);
+  // Ajouter une couche de carte (par exemple, OpenStreetMap)
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+  }).addTo(map);
+  // Ajouter un marqueur à la position
+  L.marker([lat, lon]).addTo(map);
+};
+//*************************************************************//
 
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
-  await fetchData();
+  await fetchDataId();
 });
