@@ -18,7 +18,9 @@ const SearchBar = () => {
                     <option></option>
                 </select>
             </div>
-
+            <div className={style.divBtn}>
+                <button className={style.btn}>Reset</button>
+            </div>
         </div>
     </>
     );

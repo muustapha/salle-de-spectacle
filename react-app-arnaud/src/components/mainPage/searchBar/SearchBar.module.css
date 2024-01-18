@@ -7,7 +7,7 @@
 .SearchBarContainerLabelInput {
   display: flex;
   justify-content: space-between;
-  margin: 4%;
+  margin: 6%;
 }
 
 .label {
@@ -20,4 +20,19 @@
   width: 65%;
   font-size: 20px;
   padding: 2%;
+}
+
+.divBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 8%;
+}
+
+.btn {
+  padding: 5% 15%;
+  width: 90%;
+  background-color: var(--color3);
+  font-size: 24px;
+  border-radius: 15px;
 }

@@ -7,6 +7,9 @@ const Main = () => {
         <section className={style.sectionSearch}>
             <SearchBar />
         </section>
+        <section className={style.sectionDisplaySalle}>
+
+        </section>
     </> 
     );
 }
