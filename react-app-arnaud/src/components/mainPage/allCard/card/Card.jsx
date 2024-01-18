@@ -1,23 +1,33 @@
 import style from './Card.module.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
-const Card = () => {
+
+const Card = ({nom, ville, capacite, styles}) => {
+
+    const displayStyle = () => {
+        let s ="";
+        styles.forEach(element => {
+            s += element + " ";
+        });
+        return s;
+    }
+
     return ( 
     <>
         <div className={style.div}>
-            <button className={style.btnAdd}>
-            <FontAwesomeIcon icon={faPlus} className={style.icon}/>
-            </button>
-        </div>
-        <div className={style.div}>
-            <h3 className={style.h3}>AJMI Jazz Club</h3>
-            <p className={style.p}>Localisation : Avignon</p>
-            <p className={style.p}>Style(s) : jazz soul blues</p>
-            <p className={style.p}>Capacités : 400 personnes</p>
+            <h3 className={style.h3}>{nom}</h3>
+            <p className={style.p}>Localisation : {ville}</p>
+            <p className={style.p}>Style(s) : {displayStyle()}</p>
+            <p className={style.p}>Capacités : {capacite} personnes</p>
             <button className={style.btn}>Détails</button>
         </div>
     </> );
 }
- 
+Card.propTypes = {
+    nom: PropTypes.string.isRequired,
+    ville: PropTypes.string.isRequired,
+    capacite: PropTypes.number.isRequired,
+    styles : PropTypes.array.isRequired,
+  }; 
+
 export default Card;
