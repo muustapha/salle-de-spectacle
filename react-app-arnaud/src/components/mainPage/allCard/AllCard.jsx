@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import style from './AllCard.module.css';
 import Card from './card/Card';
+import { SearchContext } from '../../context/SearchContext';
 
 const AllCard = () => {
-
+    //Récup du context
+    let { nom, ville, styles } = useContext(SearchContext);
+    
     const [allSalle, setAllSalle] = useState([]);
-
+    
     useEffect(() => {
         axios
             .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/GetAllResearched`)
