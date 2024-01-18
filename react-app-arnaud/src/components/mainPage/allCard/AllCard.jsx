@@ -11,13 +11,16 @@ const AllCard = () => {
     let { nom, ville, styles } = useContext(SearchContext);
     
     const [allSalle, setAllSalle] = useState([]);
-    
+
     useEffect(() => {
         axios
-            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/GetAllResearched`)
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${styles}`)
             .then((res) => setAllSalle(res.data))
             .catch((err) => console.log('Pas de GetAll' + err))
-    }, [])
+    }, [allSalle])
+       
+            
+    // console.log(searchData);
 
 
     return ( 
