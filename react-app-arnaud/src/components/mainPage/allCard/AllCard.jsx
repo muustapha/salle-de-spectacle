@@ -17,7 +17,8 @@ const AllCard = () => {
             .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${styles}`)
             .then((res) => setAllSalle(res.data))
             .catch((err) => console.log('Pas de GetAll' + err))
-    }, [allSalle])
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [allSalle])     
        
             
     // console.log(searchData);

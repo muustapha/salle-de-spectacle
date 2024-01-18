@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import style from './Card.module.css'
 import PropTypes from 'prop-types';
 
@@ -12,6 +13,13 @@ const Card = ({id, nom, ville, capacite, styles}) => {
         return s;
     }
 
+    let navigate = useNavigate();
+
+    const test = (e) => {
+        let path = `/detail-salle/id?=${e.target.dataset.salle}`;
+        navigate(path);
+    }
+
     return ( 
     <>
         <div className={style.div}>
@@ -19,7 +27,7 @@ const Card = ({id, nom, ville, capacite, styles}) => {
             <p className={style.p}>Localisation : {ville}</p>
             <p className={style.p}>Style(s) : {displayStyle()}</p>
             <p className={style.p}>Capacités : {capacite} personnes</p>
-            <button className={style.btn} data-salle={id}>Détails</button>
+            <button className={style.btn} data-salle={id} onClick={test}>Détails</button>
         </div>
     </> );
 }
