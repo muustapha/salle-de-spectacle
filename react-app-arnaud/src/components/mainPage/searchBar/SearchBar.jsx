@@ -1,6 +1,12 @@
 import style from "./SearchBar.module.css"
 
 const SearchBar = () => {
+
+    const allStyle = ["jazz", "blues", "rock", "soul", "funk"];
+
+    
+
+
     return (
     <>
         <div className={style.SearchBarContainer}>
@@ -16,6 +22,11 @@ const SearchBar = () => {
                 <label htmlFor="style" className={style.label}>Style(s) :</label>
                 <select id="style" className={style.input}>
                     <option></option>
+                    {
+                        allStyle.map((s, index) => {
+                           return <option key={index}>{s}</option>
+                        })
+                    }
                 </select>
             </div>
             <div className={style.divBtn}>
