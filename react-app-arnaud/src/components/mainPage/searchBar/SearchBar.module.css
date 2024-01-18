@@ -1,0 +1,23 @@
+.SearchBarContainer {
+  padding: 5% 2%;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.SearchBarContainerLabelInput {
+  display: flex;
+  justify-content: space-between;
+  margin: 4%;
+}
+
+.label {
+  font-size: 20px;
+  text-align: right;
+  width: 35%;
+  padding: 2%;
+}
+.input {
+  width: 65%;
+  font-size: 20px;
+  padding: 2%;
+}

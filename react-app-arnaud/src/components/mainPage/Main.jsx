@@ -1,10 +1,12 @@
 import SearchBar from "./searchBar/SearchBar";
+import style from "./Main.module.css"
 
 const Main = () => {
     return ( 
     <>
-        
-        <SearchBar />
+        <section className={style.sectionSearch}>
+            <SearchBar />
+        </section>
     </> 
     );
 }
