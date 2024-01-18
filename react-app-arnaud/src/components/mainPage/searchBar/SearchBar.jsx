@@ -4,9 +4,6 @@ const SearchBar = () => {
 
     const allStyle = ["jazz", "blues", "rock", "soul", "funk"];
 
-    
-
-
     return (
     <>
         <div className={style.SearchBarContainer}>

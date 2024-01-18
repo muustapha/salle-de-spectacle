@@ -11,7 +11,7 @@ const AllCard = () => {
 
     useEffect(() => {
         axios
-            .get("https://localhost:44371/api/Salles/GetAllResearched")
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/GetAllResearched`)
             .then((res) => setAllSalle(res.data))
             .catch((err) => console.log('Pas de GetAll' + err))
     }, [])
@@ -34,6 +34,5 @@ const AllCard = () => {
         </div>
     </> );
 }
-//nom={salle.nom} ville={salle.ville} capacite={salle.capacite} styles={salle.styles}
  
 export default AllCard;
