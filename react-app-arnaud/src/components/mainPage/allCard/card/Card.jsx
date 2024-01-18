@@ -2,7 +2,7 @@ import style from './Card.module.css'
 import PropTypes from 'prop-types';
 
 
-const Card = ({nom, ville, capacite, styles}) => {
+const Card = ({id, nom, ville, capacite, styles}) => {
 
     const displayStyle = () => {
         let s ="";
@@ -19,11 +19,12 @@ const Card = ({nom, ville, capacite, styles}) => {
             <p className={style.p}>Localisation : {ville}</p>
             <p className={style.p}>Style(s) : {displayStyle()}</p>
             <p className={style.p}>Capacités : {capacite} personnes</p>
-            <button className={style.btn}>Détails</button>
+            <button className={style.btn} data-salle={id}>Détails</button>
         </div>
     </> );
 }
 Card.propTypes = {
+    id: PropTypes.number.isRequired,
     nom: PropTypes.string.isRequired,
     ville: PropTypes.string.isRequired,
     capacite: PropTypes.number.isRequired,
