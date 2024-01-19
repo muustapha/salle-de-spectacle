@@ -14,6 +14,14 @@ window.addEventListener('resize', () => {
    }
 })
 
+
+if (menu) {
+    document.body.style.overflowY = "hidden";
+} else {
+    document.body.style.overflowY = "auto";
+}
+
+
     return ( 
         <>
             <header className={style.header}>
