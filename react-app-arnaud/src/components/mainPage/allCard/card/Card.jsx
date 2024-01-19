@@ -15,9 +15,8 @@ const Card = ({id, nom, ville, capacite, styles}) => {
 
     let navigate = useNavigate();
 
-    const handelClick = (e) => {
+    const handelClickNav = (e) => {
         let path = `/detail-salle/id?${e.target.dataset.salle}`;
-
         navigate(path);
     }
 
@@ -28,7 +27,7 @@ const Card = ({id, nom, ville, capacite, styles}) => {
             <p className={style.p}>Localisation : {ville}</p>
             <p className={style.p}>Style(s) : {displayStyle()}</p>
             <p className={style.p}>Capacités : {capacite} personnes</p>
-            <button className={style.btn} data-salle={id} onClick={handelClick}>Détails</button>
+            <button className={style.btn} data-salle={id} onClick={handelClickNav}>Détails</button>
         </div>
     </> );
 }
