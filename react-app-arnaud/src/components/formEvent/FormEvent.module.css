@@ -1,0 +1,27 @@
+button{
+    font-size:xx-large;
+    background-color: var(--color3);
+    padding-top: 3%;
+    border-radius: 8px;
+    padding: 5% 15%;
+    margin: 5% auto;
+}
+
+.formList{
+    padding: 10% 5% 10% 5%;
+    margin: 5% 5% 30% 5%;
+    width: 90%;
+    height: auto;
+    border-width: 2px;
+    box-shadow: 0 0 4px 0 black;
+    border-radius: 15px;
+}
+
+label{
+    padding: 0% 0% 0% 5%;
+}
+
+input{
+    padding: 5% 0% 0% 0%;
+    width: 100%;
+}
