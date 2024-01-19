@@ -17,7 +17,7 @@ const Navigation = () => {
                 <Route path="/detail-salle/id" exact element={<DetailPage />} />
                 <Route path="/form-event/id" exact element={<FormEvent />} />
                 <Route path="/connexion" exact element={<ConnectionPage />} />
-                <Route path="/profil/id" exact element={<ProfilePage />} />
+                <Route path="/profil" exact element={<ProfilePage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>
