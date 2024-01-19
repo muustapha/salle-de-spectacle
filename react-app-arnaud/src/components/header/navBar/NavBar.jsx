@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const NavBar = ({menu}) => {
 
     let navigate = useNavigate();
+    
 
     const test = (e) => {
         let path;

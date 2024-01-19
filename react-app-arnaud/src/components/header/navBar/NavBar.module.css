@@ -10,7 +10,6 @@
   justify-content: space-around;
   flex-direction: column;
   transform: translateY(-100%);
-  /* transition: transform 1s; */
   animation: animationDisplayNavBar 1s forwards;
 }
 @keyframes animationDisplayNavBar {
@@ -30,8 +29,6 @@
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  /* transform: translateY(-100%); */
-  /* transition: transform 1s; */
   animation: animationHideNavBar 1s forwards;
 }
 @keyframes animationHideNavBar {
@@ -43,4 +40,29 @@
 .a {
   font-size: 32px;
   text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .navDisplay {
+    position: initial;
+    z-index: 1;
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    animation: none;
+    transform: none;
+    margin-right: 3%;
+  }
+
+  .a {
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .a:hover {
+    color: var(--color3);
+  }
 }
