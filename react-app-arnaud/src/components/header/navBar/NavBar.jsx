@@ -31,11 +31,11 @@ const NavBar = ({menu}) => {
 
     return ( 
     <>
-        <div className={menu ? style.navDisplay :  style.navHide }>
+        <nav className={menu ? style.navDisplay :  style.navHide }>
             <a className={style.a} data-menu="accueil" onClick={test}>Accueil</a>
             <a className={style.a} data-menu="connexion" onClick={test}>Connexion</a>
             <a className={style.a} data-menu="profile" onClick={test}>Profile</a>
-        </div>
+        </nav>
     </> );
 
 }
