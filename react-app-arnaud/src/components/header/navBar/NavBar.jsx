@@ -1,7 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import style from "./NavBar.module.css"
 import PropTypes from "prop-types";
 
 const NavBar = ({menu}) => {
+
+    let navigate = useNavigate();
+
     return ( 
     <>
         <div className={menu ? style.navDisplay :  style.navHide }>
