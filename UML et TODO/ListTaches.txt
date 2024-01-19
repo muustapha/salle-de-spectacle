@@ -32,3 +32,9 @@ react =>
 
 - install node
 - npm create vite@latest react-app-test -- --template react
+
+
+Breckpoint CSS:
+petit : 576px
+moyen : 768px
+large  1200px
