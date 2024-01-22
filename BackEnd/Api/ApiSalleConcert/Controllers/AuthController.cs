@@ -45,13 +45,14 @@ namespace ApiSalleConcert.Controllers
 				string hashPassword = Security.Hash(newAuth.Password);
 
 				// On reforme l'auth avec le password hash
-				Auth hashAuth = new Auth(newAuth.Pseudo, newAuth.Mail, hashPassword);
+				Auth hashAuth = new Auth(newAuth.Pseudo, newAuth.Mail, hashPassword, newAuth.IsAdmin);
 
 				// On ajout en BDD
 				await _authService.CreateAsync(hashAuth);
 
-				return CreatedAtAction(nameof(Get), new { id = hashAuth.Id }, hashAuth);	
-			} else
+				return CreatedAtAction(nameof(Get), new { id = hashAuth.Id }, hashAuth);
+			}
+			else
 			{
 				return BadRequest();
 			}
