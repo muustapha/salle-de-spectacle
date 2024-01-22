@@ -24,7 +24,10 @@ namespace ApiSalleConcert.Models.Services
 		await _authCollection.Find(_ => true).ToListAsync();
 
 		public async Task<Auth?> GetAsync(string id) =>
-			await _authCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+			await _authCollection.Find(x => x.Id == id).FirstOrDefaultAsync(); 
+		
+		public async Task<Auth?> GetAsyncMail(string mail) =>
+			await _authCollection.Find(x => x.Mail == mail).FirstOrDefaultAsync();
 
 		public async Task CreateAsync(Auth newAuth) =>
 			await _authCollection.InsertOneAsync(newAuth);

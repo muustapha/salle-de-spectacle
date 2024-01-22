@@ -38,16 +38,24 @@ namespace ApiSalleConcert.Controllers
 		[HttpPost("createUser")]
 		public async Task<IActionResult> createUser(Auth newAuth)
 		{
-			// Hash du password
-			string hashPassword = Security.Hash(newAuth.Password);
+			// Avant findByMail pour vérifier si mail unique
+			if (await _authService.GetAsyncMail(newAuth.Mail) == null)
+			{
+				// Hash du password
+				string hashPassword = Security.Hash(newAuth.Password);
 
-			// On reforme l'auth avec le password hash
-			Auth hashAuth = new Auth(newAuth.Pseudo, newAuth.mail, hashPassword);
+				// On reforme l'auth avec le password hash
+				Auth hashAuth = new Auth(newAuth.Pseudo, newAuth.Mail, hashPassword);
 
-			// On ajout en BDD
-			await _authService.CreateAsync(hashAuth);
+				// On ajout en BDD
+				await _authService.CreateAsync(hashAuth);
 
-			return CreatedAtAction(nameof(Get), new { id = hashAuth.Id }, hashAuth);
+				return CreatedAtAction(nameof(Get), new { id = hashAuth.Id }, hashAuth);	
+			} else
+			{
+				return BadRequest();
+			}
+
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace ApiSalleConcert.Models.Data
 		public Auth(string pseudo, string mail, string password)
 		{
 			Pseudo = pseudo;
-			this.mail = mail;
+			Mail = mail;
 			Password = password;
 		}
 
@@ -20,7 +20,7 @@ namespace ApiSalleConcert.Models.Data
 		public string Pseudo { get; set; }
 
 		[BsonElement("mail")]
-		public string mail { get; set; }
+		public string Mail { get; set; }
 
 		[BsonElement("password")]
 		public string Password { get; set; }

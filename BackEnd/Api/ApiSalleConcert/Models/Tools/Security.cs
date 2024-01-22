@@ -37,5 +37,6 @@ namespace ApiSalleConcert.Models.Tools
 		}
 
 		// Methode pour vérifier que l'adresse mail est unique
+
 	}
 }
