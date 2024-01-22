@@ -5,14 +5,6 @@ namespace ApiSalleConcert.Models.Data
 {
 	public class Auth
 	{
-		public Auth(string pseudo, string mail, string password, bool isAdmin)
-		{
-			Pseudo = pseudo;
-			Mail = mail;
-			Password = password;
-			IsAdmin = isAdmin;
-		}
-
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; }
@@ -27,6 +19,6 @@ namespace ApiSalleConcert.Models.Data
 		public string Password { get; set; }
 
 		[BsonElement("isAdmin")]
-		public bool IsAdmin { get; set; } = false;
+		public bool? IsAdmin { get; set; } = false;
 	}
 }

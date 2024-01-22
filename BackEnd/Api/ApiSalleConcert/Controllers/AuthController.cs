@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiSalleConcert.Models.Tools;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models;
+using AutoMapper;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -13,10 +14,13 @@ namespace ApiSalleConcert.Controllers
 	public class AuthController : ControllerBase
 	{
 		private readonly AuthService _authService;
+		private readonly IMapper _mapper;
 
-		private const int SalteSize = 32;
-
-		public AuthController(AuthService authService) => _authService = authService;
+		public AuthController(AuthService authService, IMapper mapper)
+		{
+			_authService = authService;
+			_mapper = mapper;
+		}
 
 		[HttpGet]
 		public async Task<List<Auth>> Get() =>
@@ -37,21 +41,23 @@ namespace ApiSalleConcert.Controllers
 
 
 		[HttpPost("createUser")]
-		public async Task<IActionResult> createUser(Auth newAuth)
+		public async Task<IActionResult> createUser(AuthDtosIn newAuth)
 		{
 			// Avant findByMail pour vérifier si mail unique
 			if (await _authService.GetAsyncMail(newAuth.Mail) == null)
 			{
+				Auth user = _mapper.Map<Auth>(newAuth);
+
 				// Hash du password
 				string hashPassword = Security.Hash(newAuth.Password);
 
 				// On reforme l'auth avec le password hash
-				Auth hashAuth = new Auth(newAuth.Pseudo, newAuth.Mail, hashPassword, newAuth.IsAdmin);
+				user.Password = hashPassword;
 
 				// On ajout en BDD
-				await _authService.CreateAsync(hashAuth);
+				await _authService.CreateAsync(user);
 
-				return CreatedAtAction(nameof(Get), new { id = hashAuth.Id }, hashAuth);
+				return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
 			}
 			else
 			{
@@ -70,6 +76,11 @@ namespace ApiSalleConcert.Controllers
 			}
 
 			updateAuth.Id = auth.Id;
+
+			string hashPassword = Security.Hash(updateAuth.Password);
+
+			// On reforme l'auth avec le password hash
+			updateAuth.Password = hashPassword;
 
 			await _authService.UpdateAsync(id, updateAuth);
 
