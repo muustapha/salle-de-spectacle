@@ -18,17 +18,17 @@ button{
 }
 
 label{
-    padding: 0% 0% 0% 5%;
+    font-size: x-large
 }
 
 input{
     width: 100%;
-    padding-bottom: 5%;
     margin-bottom: 5%;
+    font-size: x-large;
 }
 
 select{
     width: 100%;
-    padding-bottom: 5%;
     margin-bottom: 5%;
+    font-size: x-large;
 }
