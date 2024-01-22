@@ -5,6 +5,11 @@ using ApiSalleConcert.Models.Tools;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models;
 using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -15,16 +20,12 @@ namespace ApiSalleConcert.Controllers
 	{
 		private readonly AuthService _authService;
 		private readonly IMapper _mapper;
-
+		private readonly string key = "test";
 		public AuthController(AuthService authService, IMapper mapper)
 		{
 			_authService = authService;
 			_mapper = mapper;
 		}
-
-		[HttpGet]
-		public async Task<List<Auth>> Get() =>
-		await _authService.GetAsync();
 
 		[HttpGet("{id:length(24)}")]
 		public async Task<ActionResult<Auth>> Get(string id)
@@ -39,9 +40,8 @@ namespace ApiSalleConcert.Controllers
 			return book;
 		}
 
-
-		[HttpPost("createUser")]
-		public async Task<IActionResult> createUser(AuthDtosIn newAuth)
+		[HttpPost("SignUp")]
+		public async Task<IActionResult> SignUp(AuthDtosSignUp newAuth)
 		{
 			// Avant findByMail pour vérifier si mail unique
 			if (await _authService.GetAsyncMail(newAuth.Mail) == null)
@@ -65,41 +65,38 @@ namespace ApiSalleConcert.Controllers
 			}
 		}
 
-		[HttpPut("{id:length(24)}")]
-		public async Task<IActionResult> Update(string id, Auth updateAuth)
+		[HttpPost("SignIn")]
+		public async Task<string> SignIn(AuthDtosSignIn user)
 		{
-			var auth = await _authService.GetAsync(id);
+			Auth u = await _authService.GetAsyncMail(user.Mail);
 
-			if (auth is null)
+			if (u != null && Security.CompareHash(user.Password, u.Password))
 			{
-				return NotFound();
+				var tokenHandler = new JwtSecurityTokenHandler();
+				var tokenKey = Encoding.ASCII.GetBytes(key);
+				var tokenDescription = new SecurityTokenDescriptor()
+				{
+					Subject = new ClaimsIdentity(new Claim[]
+					{
+						new Claim(ClaimTypes.Email, user.Mail),
+					}),
+
+					Expires = DateTime.UtcNow.AddHours(1),
+
+					SigningCredentials = new SigningCredentials(
+						new SymmetricSecurityKey(tokenKey),
+						SecurityAlgorithms.HmacSha256Signature
+						)
+				};
+
+				var token = tokenHandler.CreateToken(tokenDescription);
+
+				return tokenHandler.WriteToken(token);
 			}
-
-			updateAuth.Id = auth.Id;
-
-			string hashPassword = Security.Hash(updateAuth.Password);
-
-			// On reforme l'auth avec le password hash
-			updateAuth.Password = hashPassword;
-
-			await _authService.UpdateAsync(id, updateAuth);
-
-			return NoContent();
-		}
-
-		[HttpDelete("{id:length(24)}")]
-		public async Task<IActionResult> Delete(string id)
-		{
-			var auth = await _authService.GetAsync(id);
-
-			if (auth is null)
+			else
 			{
-				return NotFound();
+				return null;
 			}
-
-			await _authService.RemoveAsync(id);
-
-			return NoContent();
 		}
 
 	}

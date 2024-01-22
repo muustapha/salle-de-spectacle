@@ -3,7 +3,7 @@ using MongoDB.Bson;
 
 namespace ApiSalleConcert.Models.Dtos
 {
-	public class AuthDtosIn
+	public class AuthDtosSignUp
 	{
 		public string Pseudo { get; set; }
 
@@ -12,5 +12,13 @@ namespace ApiSalleConcert.Models.Dtos
 		public string Password { get; set; }
 
 		public bool? IsAdmin { get; set; } = false;
+	}
+
+	public class AuthDtosSignIn
+	{
+		public string Mail { get; set; }
+
+		public string Password { get; set; }
+
 	}
 }

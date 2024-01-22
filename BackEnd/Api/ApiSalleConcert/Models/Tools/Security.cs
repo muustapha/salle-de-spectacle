@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Security.Policy;
 
 namespace ApiSalleConcert.Models.Tools
 {
@@ -36,7 +37,18 @@ namespace ApiSalleConcert.Models.Tools
 			return HashPassword(password, SaltSize);
 		}
 
-		// Methode pour vérifier que l'adresse mail est unique
+		// Methode pour vérifier que le password
+		public static bool CompareHash(string password, string hash)
+		{
+			bool equal = false;
+
+			string p = Hash(password);
+			if (p == hash)
+			{
+				equal = true;
+			}
+			return equal;
+		}
 
 	}
 }

@@ -8,8 +8,11 @@ namespace ApiSalleConcert.Models.Profiles
 	{
 		public AuthProfile()
 		{
-			CreateMap<Auth, AuthDtosIn>();
-			CreateMap<AuthDtosIn, Auth>();
+			CreateMap<Auth, AuthDtosSignUp>();
+			CreateMap<AuthDtosSignUp, Auth>();
+
+			CreateMap<Auth, AuthDtosSignIn>();
+			CreateMap<AuthDtosSignIn, Auth>();
 		}
 
 	}
