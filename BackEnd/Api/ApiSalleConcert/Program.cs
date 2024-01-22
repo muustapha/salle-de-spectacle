@@ -13,13 +13,15 @@ namespace ApiSalleConcert
 			builder.Services.Configure<SalleDatabaseSettings>(
 			builder.Configuration.GetSection("SallesStoreDatabase"));
 			builder.Services.AddSingleton<SallesService>();
+			builder.Services.AddSingleton<AuthService>();
 			// Add services to the container.
 
 			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 			builder.Services.AddCors(options =>
 			{
-				options.AddPolicy(name: MyAllowSpecificOrigins, policy => {
+				options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+				{
 					policy
 					.WithOrigins("*") // Remplacez avec l'origine réelle de votre frontend
 					.AllowAnyMethod() // Ou spécifiez explicitement les méthodes que vous autorisez, par exemple, .WithMethods("GET", "POST", "PUT", "DELETE")
