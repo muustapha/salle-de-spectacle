@@ -3,6 +3,7 @@ using ApiSalleConcert.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using ApiSalleConcert.Models.Tools;
 using ApiSalleConcert.Models.Dtos;
+using ApiSalleConcert.Models;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -56,7 +57,39 @@ namespace ApiSalleConcert.Controllers
 			{
 				return BadRequest();
 			}
-
 		}
+
+		[HttpPut("{id:length(24)}")]
+		public async Task<IActionResult> Update(string id, Auth updateAuth)
+		{
+			var auth = await _authService.GetAsync(id);
+
+			if (auth is null)
+			{
+				return NotFound();
+			}
+
+			updateAuth.Id = auth.Id;
+
+			await _authService.UpdateAsync(id, updateAuth);
+
+			return NoContent();
+		}
+
+		[HttpDelete("{id:length(24)}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			var auth = await _authService.GetAsync(id);
+
+			if (auth is null)
+			{
+				return NotFound();
+			}
+
+			await _authService.RemoveAsync(id);
+
+			return NoContent();
+		}
+
 	}
 }

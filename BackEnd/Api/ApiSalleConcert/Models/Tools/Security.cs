@@ -27,7 +27,6 @@ namespace ApiSalleConcert.Models.Tools
 			// Convert TO base64
 			var base64Hash = Convert.ToBase64String(hashBytes);
 
-			//return string.Format("$MYHASH$V1${0}${1}", iterations, base64Hash);
 			return base64Hash;
 		}
 
