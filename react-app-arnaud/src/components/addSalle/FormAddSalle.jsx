@@ -51,7 +51,8 @@ const FormAddSalle = () => {
     }
 
     const checkAdresseNum = (num) => {
-        if (REGEX_CHECK_INT.test(num)) {
+        if (REGEX_CHECK_INT.test(num) && num != "") {
+            console.log(num);
             console.log('bonNum');
         } else {
             console.log('aieNum')
@@ -59,7 +60,7 @@ const FormAddSalle = () => {
     }
 
     const checkAdresseVoie = (voie) => {
-        if (REGEX_CHECK_LETTRE_SPACE.test(voie)) {
+        if (REGEX_CHECK_LETTRE_SPACE.test(voie) && voie != "") {
             console.log('bonVoie');
         } else {
             console.log('aieVoie')
@@ -75,7 +76,7 @@ const FormAddSalle = () => {
     }
 
     const checkAdresseVille = (ville) => {
-        if (REGEX_CHECK_LETTRE_SPACE.test(ville)) {
+        if (REGEX_CHECK_LETTRE_SPACE.test(ville) && ville != "") {
             console.log('bonVille');
         } else {
             console.log('aieVille')
@@ -99,7 +100,7 @@ const FormAddSalle = () => {
     }
 
     const checkCapacite = (cap) => {
-        if (REGEX_CHECK_INT.test(cap)) {
+        if (REGEX_CHECK_INT.test(cap) && cap != "") {
             console.log('bonCap');
         } else {
             console.log('aieCap')
