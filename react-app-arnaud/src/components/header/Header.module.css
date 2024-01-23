@@ -14,11 +14,26 @@
 .btn {
   background: none;
   height: 10vw;
-  /* width: 5vh; */
   margin-right: 10%;
   z-index: 3;
 }
 
 .icon {
   height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    height: 6vw;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .btn {
+    display: none;
+  }
+
+  .h1 {
+    padding-left: 5%;
+  }
 }
