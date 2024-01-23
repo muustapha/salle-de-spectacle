@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Policy;
+using System.Text;
 
 namespace ApiSalleConcert.Models.Tools
 {
@@ -10,12 +11,8 @@ namespace ApiSalleConcert.Models.Tools
 		private const int HashSize = 20;
 
 		// Methode pour hash le password
-		private static string HashPassword(string password, int iterations)
-		{
-			// Création du salage pour le password
-			byte[] salt;
-			new RNGCryptoServiceProvider().GetBytes(salt = new byte[SaltSize]);
-
+		private static string HashPassword(string password, byte[] salt,int iterations)
+		{	
 			// Création du hashage
 			var key = new Rfc2898DeriveBytes(password, salt, iterations);
 			var hash = key.GetBytes(HashSize);
@@ -34,19 +31,30 @@ namespace ApiSalleConcert.Models.Tools
 		// Methode qui retourne le password hash
 		public static string Hash(string password)
 		{
-			return HashPassword(password, SaltSize);
+			byte[] salt;
+			new RNGCryptoServiceProvider().GetBytes(salt = new byte[SaltSize]);
+
+			return HashPassword(password, salt,SaltSize);
 		}
 
 		// Methode pour vérifier que le password
 		public static bool CompareHash(string password, string hash)
 		{
-			bool equal = false;
+			// Convertir le hash stocké en bytes
+			byte[] storedHashBytes = Convert.FromBase64String(hash);
 
-			string p = Hash(password);
-			if (p == hash)
-			{
-				equal = true;
-			}
+			// Extraire le sel du hash stocké
+			byte[] salt = new byte[SaltSize];
+			Array.Copy(storedHashBytes, 0, salt, 0, SaltSize);
+
+			// Utiliser le sel stocké pour recalculer le hash du mot de passe fourni
+			string newHash = HashPassword(password, salt, SaltSize);
+			byte[] newHashBytes = Convert.FromBase64String(newHash);
+
+
+			// Comparer les deux hashes
+			bool equal = storedHashBytes.SequenceEqual(newHashBytes);
+
 			return equal;
 		}
 

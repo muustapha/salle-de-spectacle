@@ -3,13 +3,8 @@ using ApiSalleConcert.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using ApiSalleConcert.Models.Tools;
 using ApiSalleConcert.Models.Dtos;
-using ApiSalleConcert.Models;
 using AutoMapper;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -20,7 +15,7 @@ namespace ApiSalleConcert.Controllers
 	{
 		private readonly AuthService _authService;
 		private readonly IMapper _mapper;
-		private readonly string key = "test";
+
 		public AuthController(AuthService authService, IMapper mapper)
 		{
 			_authService = authService;
@@ -65,38 +60,25 @@ namespace ApiSalleConcert.Controllers
 			}
 		}
 
+		[AllowAnonymous]
 		[HttpPost("SignIn")]
-		public async Task<string> SignIn(AuthDtosSignIn user)
+		public async Task<IActionResult> SignIn([FromBody] AuthDtosSignIn user)
 		{
 			Auth u = await _authService.GetAsyncMail(user.Mail);
 
 			if (u != null && Security.CompareHash(user.Password, u.Password))
 			{
-				var tokenHandler = new JwtSecurityTokenHandler();
-				var tokenKey = Encoding.ASCII.GetBytes(key);
-				var tokenDescription = new SecurityTokenDescriptor()
+				var token = _authService.Authenticate(user);
+				Console.WriteLine(token);
+
+				if (token != null)
 				{
-					Subject = new ClaimsIdentity(new Claim[]
-					{
-						new Claim(ClaimTypes.Email, user.Mail),
-					}),
+					return Unauthorized();
+				}
 
-					Expires = DateTime.UtcNow.AddHours(1),
-
-					SigningCredentials = new SigningCredentials(
-						new SymmetricSecurityKey(tokenKey),
-						SecurityAlgorithms.HmacSha256Signature
-						)
-				};
-
-				var token = tokenHandler.CreateToken(tokenDescription);
-
-				return tokenHandler.WriteToken(token);
+				return Ok(new { token, user });
 			}
-			else
-			{
-				return null;
-			}
+			return BadRequest();
 		}
 
 	}

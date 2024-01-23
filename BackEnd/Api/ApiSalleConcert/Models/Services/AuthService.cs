@@ -1,6 +1,12 @@
 ﻿using ApiSalleConcert.Models.Data;
+using ApiSalleConcert.Models.Dtos;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ApiSalleConcert.Models.Services
 
@@ -8,6 +14,7 @@ namespace ApiSalleConcert.Models.Services
 	public class AuthService
 	{
 		private readonly IMongoCollection<Auth> _authCollection;
+		private readonly string key = "test";
 
 		public AuthService(IOptions<SalleDatabaseSettings> salleStoreDatabaseSettings)
 		{
@@ -24,8 +31,8 @@ namespace ApiSalleConcert.Models.Services
 		await _authCollection.Find(_ => true).ToListAsync();
 
 		public async Task<Auth?> GetAsync(string id) =>
-			await _authCollection.Find(x => x.Id == id).FirstOrDefaultAsync(); 
-		
+			await _authCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
 		public async Task<Auth?> GetAsyncMail(string mail) =>
 			await _authCollection.Find(x => x.Mail == mail).FirstOrDefaultAsync();
 
@@ -37,5 +44,28 @@ namespace ApiSalleConcert.Models.Services
 
 		public async Task RemoveAsync(string id) =>
 			await _authCollection.DeleteOneAsync(x => x.Id == id);
+
+		public string Authenticate(AuthDtosSignIn user)
+		{
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var tokenKey = Encoding.ASCII.GetBytes(key);
+			var tokenDescription = new SecurityTokenDescriptor()
+			{
+				Subject = new ClaimsIdentity(new Claim[]
+				{
+						new Claim(ClaimTypes.Email, user.Mail),
+				}),
+
+				Expires = DateTime.UtcNow.AddHours(1),
+
+				SigningCredentials = new SigningCredentials(
+					new SymmetricSecurityKey(tokenKey),
+					SecurityAlgorithms.HmacSha256Signature
+					)
+			};
+
+			var token = tokenHandler.CreateToken(tokenDescription);
+			return tokenHandler.WriteToken(token);
+		}
 	}
 }
