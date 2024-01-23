@@ -18,7 +18,7 @@ namespace ApiSalleConcert.Models.Services
 				salleStoreDatabaseSettings.Value.DatabaseName);
 
 			_eventCollection = mongoDatabase.GetCollection<Event>(
-				salleStoreDatabaseSettings.Value.);
+				salleStoreDatabaseSettings.Value.EventsCollectionName);
 		}
 
 		public async Task<List<Event>> GetAsync() =>

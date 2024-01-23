@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-
-namespace ApiSalleConcert.Models.Dtos
+﻿namespace ApiSalleConcert.Models.Dtos
 {
 	public class AuthDtosSignUp
 	{
