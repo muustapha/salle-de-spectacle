@@ -15,11 +15,11 @@
   height: 100%;
 }
 
-label {
+.label {
   font-size: 20px;
 }
 
-input {
+.input {
   font-size: 20px;
   padding: 2%;
   width: 100%;
