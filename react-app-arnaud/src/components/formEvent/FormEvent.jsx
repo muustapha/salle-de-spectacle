@@ -65,16 +65,16 @@ const FormEvent = () =>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="artiste" className={style.label}>Artiste :</label>
-                <br/><input type="text" id="artiste" onChange={checkInputs} ref={artisteRef}/>
+                <br/><input type="text" id="artiste" onChange={checkInputs} ref={artisteRef} className={style.input}/>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="prix" className={style.label}>Prix (€) :</label>
-                <br/><input type="number" id="prix" onChange={checkInputs} ref={prixRef}/>
+                <br/><input type="number" id="prix" onChange={checkInputs} ref={prixRef} className={style.input}/>
                 <br/><label className={style.warning} hidden={!prixWarn}>Veuillez entrer un prix correct</label>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="style" className={style.label}>Style :</label>
-                <br/><select type="text" id="style" onChange={checkInputs} ref={styleRef}>
+                <br/><select type="text" id="style" onChange={checkInputs} ref={styleRef} className={style.select}>
                     <option value="">Choisir le style de musique</option>
                     {
                         allStyle.map((s, index) => {
@@ -85,7 +85,7 @@ const FormEvent = () =>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="date" className={style.label}>Date :</label>
-                <br/><input type="date" id="date" onChange={checkInputs} ref={dateRef}/>
+                <br/><input type="date" id="date" onChange={checkInputs} ref={dateRef} className={style.input}/>
             </div>
             <div>
                 <button id="btnAjouter" disabled={!enableSubmit} onClick={onSubmit} className={style.buttonAjouter}>Ajouter</button>
