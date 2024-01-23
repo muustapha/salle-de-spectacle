@@ -1,6 +1,36 @@
+import { useRef } from "react";
 import style from "./FormAddSalle.module.css";
+// import Adresse from '../../Models/Adresse';
+// import Contact from '../../Models/Contact';
+// import Localisation from '../../Models/Localisation';
+// import Salle from '../../Models/Salle';
+
 
 const FormAddSalle = () => {
+
+    const nomSalle = useRef(null);
+
+    const adresseNum = useRef(null);
+    const adresseVoie = useRef(null);
+    const adresseCodePostal = useRef(null);
+    const adresseVille = useRef(null);
+
+    const localisationX = useRef(null)
+    const localisationY = useRef(null)
+
+    const contactTel = useRef(null)
+
+    const capacite = useRef(null)
+
+    const smac = useRef(null)
+
+    const styles = useRef([])
+    
+
+    const handelClick = (e) => {
+        e.preventDefault();
+    }
+
     return ( 
     <>
         <section className={style.section}>
@@ -71,7 +101,7 @@ const FormAddSalle = () => {
                     <input type="text" name="style" id="style" />
                 </div>
                 <div className={style.divBtn}>
-                    <button className={style.btn}>Validé</button>
+                    <button onClick={(e) => handelClick(e)} className={style.btn}>Validé</button>
                 </div>
 
             </form>
