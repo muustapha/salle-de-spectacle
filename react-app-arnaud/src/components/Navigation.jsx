@@ -5,6 +5,7 @@ import FormEvent from "../pages/FormEvent";
 import ErrorPage from "../pages/ErrorPage";
 import ConnectionPage from "../pages/ConnectionPage";
 import ProfilePage from "../pages/ProfilePage"
+import AddSallePage from "../pages/AddSallePage";
 
 
 const Navigation = () => {
@@ -14,6 +15,7 @@ const Navigation = () => {
         <Router>
             <Routes>
                 <Route path="/" exact element={<MainPage />} />
+                <Route path="/add-salle/id" exact element={<AddSallePage />} />
                 <Route path="/detail-salle/id" exact element={<DetailPage />} />
                 <Route path="/form-event/id" exact element={<FormEvent />} />
                 <Route path="/connexion" exact element={<ConnectionPage />} />
