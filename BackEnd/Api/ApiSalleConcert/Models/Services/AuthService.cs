@@ -14,7 +14,7 @@ namespace ApiSalleConcert.Models.Services
 	public class AuthService
 	{
 		private readonly IMongoCollection<Auth> _authCollection;
-		private readonly string key = "test";
+		private readonly string key = "eO5wRvXmynTMVdxXjZVmOAmX2wgoxMmieDvEIomx";
 
 		public AuthService(IOptions<SalleDatabaseSettings> salleStoreDatabaseSettings)
 		{

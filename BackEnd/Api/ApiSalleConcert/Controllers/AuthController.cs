@@ -69,9 +69,8 @@ namespace ApiSalleConcert.Controllers
 			if (u != null && Security.CompareHash(user.Password, u.Password))
 			{
 				var token = _authService.Authenticate(user);
-				Console.WriteLine(token);
 
-				if (token != null)
+				if (token == null)
 				{
 					return Unauthorized();
 				}
