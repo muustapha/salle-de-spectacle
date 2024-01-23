@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import style from "./FormEvent.module.css"
-
+import axios from "axios";
 
 const FormEvent = () => 
 {
+    let nomSalle = localStorage.getItem("nomSalle")
     const [enableSubmit, setEnableSubmit] = useState(false);
     const [prixWarn, setprixWarn] = useState(false);
-    const nomRef = useRef(null);
     const artisteRef = useRef(null);
     const prixRef = useRef(null);
     const styleRef = useRef(null);
     const dateRef = useRef(null);
-    const arrayRef = [nomRef, artisteRef, prixRef, styleRef, dateRef];
+    const arrayRef = [artisteRef, prixRef, styleRef, dateRef];
+    const allStyle = ["jazz", "blues", "rock", "soul", "funk"];
 
     function checkInputs()
     {
@@ -29,7 +30,6 @@ const FormEvent = () =>
     {
         const regex = new RegExp('^(\\d{1,})($|\\.\\d{2}$)', 'gm')
         const output = prixRef.current.value.match(regex)
-        console.log(output)
 
         if(output == null)
         {
@@ -38,7 +38,22 @@ const FormEvent = () =>
         else
         {
             setprixWarn(false)
+            createEvent()
         }
+    }
+
+    function createEvent()
+    {
+        axios.post("https://localhost:44371/api/Event",
+        {
+            idSalle: localStorage.getItem("idSalle"),
+            artiste: artisteRef.current.value,
+            prix: prixRef.current.value,
+            style: styleRef.current.value,
+            date: dateRef.current.value
+        }).then((response) => {
+         console.log(response);
+        });
     }
 
     return (
@@ -46,7 +61,7 @@ const FormEvent = () =>
         <div className={style.formList}>
             <div className={style.formDiv}>
                 <label htmlFor="nom" className={style.label}>Nom salle :</label>
-                <br/><input type="text" id="nomSalle" onChange={checkInputs} ref={nomRef}/>
+                <br/><input type="text" id="nomSalle" onChange={checkInputs} readOnly="true" value={nomSalle} className={style.readOnly}/>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="artiste" className={style.label}>Artiste :</label>
@@ -61,7 +76,11 @@ const FormEvent = () =>
                 <label htmlFor="style" className={style.label}>Style :</label>
                 <br/><select type="text" id="style" onChange={checkInputs} ref={styleRef}>
                     <option value="">Choisir le style de musique</option>
-                    <option value="Jazz">Jazz</option>
+                    {
+                        allStyle.map((s, index) => {
+                           return <option key={index}>{s}</option>
+                        })
+                    }
                 </select>
             </div>
             <div className={style.formDiv}>

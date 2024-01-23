@@ -17,6 +17,10 @@ button{
     border-radius: 15px;
 }
 
+.readOnly{
+    background-color: gainsboro;
+}
+
 .formDiv{
     margin-bottom: 5%;
 }
