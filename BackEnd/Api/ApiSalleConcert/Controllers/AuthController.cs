@@ -75,7 +75,7 @@ namespace ApiSalleConcert.Controllers
 					return Unauthorized();
 				}
 
-				return Ok(new { token, user });
+				return Ok(new { token, u.IsAdmin });
 			}
 			return BadRequest();
 		}
