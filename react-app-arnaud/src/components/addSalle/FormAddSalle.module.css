@@ -5,7 +5,7 @@
   padding: 3%;
   box-shadow: 0 0 4px 0 black;
   border-radius: 15px;
-  height: 110vh;
+  height: 155vh;
 }
 
 .form {
@@ -22,21 +22,13 @@ label {
 input {
   font-size: 20px;
   padding: 2%;
+  width: 100%;
+  margin-top: 2%;
 }
-.dicColumn {
+.divColumn {
   display: flex;
   flex-direction: column;
-}
-
-.divRowCenter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 2% 0%;
-}
-
-.inputName {
-  width: 55%;
+  margin-top: 3%;
 }
 
 .partie {
@@ -45,23 +37,34 @@ input {
   margin-bottom: 2%;
 }
 
-.inputNumAdresse {
-  width: 70%;
-}
-
-.inputCodePostal {
-  width: 60%;
-}
-
 .divSep {
   margin: 3% 0%;
 }
 
-.inputCoord {
-  width: 100%;
+.divSepSmac {
+  margin: 3% 0%;
+  display: flex;
+  justify-content: space-around;
 }
 
-.inputTel {
-  width: 100%;
-  margin-top: 3%;
+.divRowCenter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.labelSmac {
+  margin-right: 50%;
+}
+
+.btn {
+  padding: 5% 10%;
+  background-color: var(--color3);
+  border-radius: 15px;
+  font-size: 20px;
+}
+.divBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
