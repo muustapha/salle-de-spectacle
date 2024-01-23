@@ -5,6 +5,7 @@ import style from "./FormEvent.module.css"
 const FormEvent = () => 
 {
     const [enableSubmit, setEnableSubmit] = useState(false);
+    const [prixWarn, setprixWarn] = useState(false);
     const nomRef = useRef(null);
     const artisteRef = useRef(null);
     const prixRef = useRef(null);
@@ -14,12 +15,6 @@ const FormEvent = () =>
 
     function checkInputs()
     {
-        console.log(nomRef.current.value.length)
-        console.log(artisteRef.current.value.length)
-        console.log(prixRef.current.value.length)
-        console.log(styleRef.current.value.length)
-        console.log(dateRef.current.value.length)
-
         let enable = true;
 
         arrayRef.forEach(element => {
@@ -32,32 +27,44 @@ const FormEvent = () =>
 
     function onSubmit()
     {
+        const regex = new RegExp('^(\\d{1,})($|\\.\\d{2}$)', 'gm')
+        const output = prixRef.current.value.match(regex)
+        console.log(output)
 
+        if(output == null)
+        {
+            setprixWarn(true)
+        }
+        else
+        {
+            setprixWarn(false)
+        }
     }
 
     return (
     <>
         <div className={style.formList}>
-            <div>
+            <div className={style.formDiv}>
                 <label htmlFor="nom" className={style.label}>Nom salle :</label>
                 <br/><input type="text" id="nomSalle" onChange={checkInputs} ref={nomRef}/>
             </div>
-            <div>
+            <div className={style.formDiv}>
                 <label htmlFor="artiste" className={style.label}>Artiste :</label>
                 <br/><input type="text" id="artiste" onChange={checkInputs} ref={artisteRef}/>
             </div>
-            <div>
+            <div className={style.formDiv}>
                 <label htmlFor="prix" className={style.label}>Prix (€) :</label>
                 <br/><input type="number" id="prix" onChange={checkInputs} ref={prixRef}/>
+                <br/><label className={style.warning} hidden={!prixWarn}>Veuillez entrer un prix correct</label>
             </div>
-            <div>
+            <div className={style.formDiv}>
                 <label htmlFor="style" className={style.label}>Style :</label>
                 <br/><select type="text" id="style" onChange={checkInputs} ref={styleRef}>
                     <option value="">Choisir le style de musique</option>
                     <option value="Jazz">Jazz</option>
                 </select>
             </div>
-            <div>
+            <div className={style.formDiv}>
                 <label htmlFor="date" className={style.label}>Date :</label>
                 <br/><input type="date" id="date" onChange={checkInputs} ref={dateRef}/>
             </div>

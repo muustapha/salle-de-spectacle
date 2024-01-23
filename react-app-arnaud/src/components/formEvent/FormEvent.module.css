@@ -17,18 +17,25 @@ button{
     border-radius: 15px;
 }
 
+.formDiv{
+    margin-bottom: 5%;
+}
+
 label{
     font-size: x-large
 }
 
+.warning{
+    color: red;
+    font-size: medium;
+}
+
 input{
     width: 100%;
-    margin-bottom: 5%;
     font-size: x-large;
 }
 
 select{
     width: 100%;
-    margin-bottom: 5%;
     font-size: x-large;
 }
