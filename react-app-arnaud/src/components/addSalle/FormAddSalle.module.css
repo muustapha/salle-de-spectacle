@@ -5,25 +5,26 @@
   padding: 3%;
   box-shadow: 0 0 4px 0 black;
   border-radius: 15px;
-  height: 130vh;
+  height: 190vh;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 100%;
 }
 
 .label {
   font-size: 20px;
+  margin-top: 2%;
 }
 
 .input {
   font-size: 20px;
   padding: 2%;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 5%;
 }
 .divColumn {
   display: flex;
@@ -72,4 +73,8 @@
 
 .badInput {
   border: 2px solid red !important;
+}
+.badText {
+  margin: 2% 0;
+  color: red !important;
 }
