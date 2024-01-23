@@ -62,7 +62,7 @@ const FormAddSalle = () => {
                         </div>
                         <div className={style.divSepSmac}>
                             <label className={style.labelSmac} htmlFor="smac-non">Non</label>
-                            <input type="radio" name="sm" id="smac" />
+                            <input type="radio" name="sm" id="smac-non" />
                         </div>
                     </div>
                 </div>
