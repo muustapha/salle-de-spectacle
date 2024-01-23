@@ -88,7 +88,7 @@ const FormEvent = () =>
                 <br/><input type="date" id="date" onChange={checkInputs} ref={dateRef}/>
             </div>
             <div>
-                <button id="btnAjouter" disabled={!enableSubmit} onClick={onSubmit}>Ajouter</button>
+                <button id="btnAjouter" disabled={!enableSubmit} onClick={onSubmit} className={style.buttonAjouter}>Ajouter</button>
             </div>
         </div>
     </>

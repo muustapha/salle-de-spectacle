@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .button {
   font-size: xx-large;
   background-color: var(--color3);
@@ -5,6 +6,15 @@
   border-radius: 8px;
   padding: 5% 15%;
   margin: 5% 20%;
+=======
+.buttonAjouter{
+    font-size:xx-large;
+    background-color: var(--color3);
+    padding-top: 3%;
+    border-radius: 8px;
+    padding: 5% 15%;
+    margin: 5% 20%;
+>>>>>>> Florian
 }
 
 .formList {
