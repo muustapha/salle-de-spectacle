@@ -1,0 +1,67 @@
+.section {
+  background: white;
+  width: 80%;
+  margin: 10% auto;
+  padding: 3%;
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 15px;
+  height: 110vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+label {
+  font-size: 20px;
+}
+
+input {
+  font-size: 20px;
+  padding: 2%;
+}
+.dicColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.divRowCenter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2% 0%;
+}
+
+.inputName {
+  width: 55%;
+}
+
+.partie {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.inputNumAdresse {
+  width: 70%;
+}
+
+.inputCodePostal {
+  width: 60%;
+}
+
+.divSep {
+  margin: 3% 0%;
+}
+
+.inputCoord {
+  width: 100%;
+}
+
+.inputTel {
+  width: 100%;
+  margin-top: 3%;
+}
