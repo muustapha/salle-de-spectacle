@@ -17,6 +17,7 @@ namespace ApiSalleConcert
 			builder.Configuration.GetSection("SallesStoreDatabase"));
 			builder.Services.AddSingleton<SallesService>();
 			builder.Services.AddSingleton<AuthService>();
+			builder.Services.AddSingleton<EventService>();
 			// Add services to the container.
 
 			var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
