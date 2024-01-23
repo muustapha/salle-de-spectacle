@@ -14,16 +14,11 @@ const Navigation = () => {
         <Router>
             <Routes>
                 <Route path="/" exact element={<MainPage />} />
-<<<<<<< HEAD
                 <Route path="/add-salle/id" exact element={<AddSallePage />} />
                 <Route path="/detail-salle/id" exact element={<DetailPage />} />
-                <Route path="/form-event/id" exact element={<FormEvent />} />
                 <Route path="/connexion" exact element={<ConnectionPage />} />
                 <Route path="/profil" exact element={<ProfilePage />} />
-=======
-                <Route path="/detail-salle" exact element={<DetailPage />} />
-                <Route path="/form-event" exact element={<FormPage />} />
->>>>>>> 57097bba048cec1c1eb7e66f3cd38929b7c43f7d
+                <Route path="/formEvent" exact element={<FormPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>

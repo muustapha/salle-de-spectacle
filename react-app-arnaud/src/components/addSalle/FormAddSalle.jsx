@@ -1,4 +1,4 @@
-import { useRef } from "react";
+// import { useRef } from "react";
 import style from "./FormAddSalle.module.css";
 // import Adresse from '../../Models/Adresse';
 // import Contact from '../../Models/Contact';
@@ -8,23 +8,23 @@ import style from "./FormAddSalle.module.css";
 
 const FormAddSalle = () => {
 
-    const nomSalle = useRef(null);
+    // const nomSalle = useRef(null);
 
-    const adresseNum = useRef(null);
-    const adresseVoie = useRef(null);
-    const adresseCodePostal = useRef(null);
-    const adresseVille = useRef(null);
+    // const adresseNum = useRef(null);
+    // const adresseVoie = useRef(null);
+    // const adresseCodePostal = useRef(null);
+    // const adresseVille = useRef(null);
 
-    const localisationX = useRef(null)
-    const localisationY = useRef(null)
+    // const localisationX = useRef(null)
+    // const localisationY = useRef(null)
 
-    const contactTel = useRef(null)
+    // const contactTel = useRef(null)
 
-    const capacite = useRef(null)
+    // const capacite = useRef(null)
 
-    const smac = useRef(null)
+    // const smac = useRef(null)
 
-    const styles = useRef([])
+    // const styles = useRef([])
     
 
     const handelClick = (e) => {
