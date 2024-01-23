@@ -69,3 +69,7 @@
   justify-content: center;
   align-items: center;
 }
+
+.badInput {
+  border: 2px solid red !important;
+}
