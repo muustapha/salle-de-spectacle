@@ -12,7 +12,15 @@ const FormEvent = () =>
     const styleRef = useRef(null);
     const dateRef = useRef(null);
     const arrayRef = [artisteRef, prixRef, styleRef, dateRef];
-    const allStyle = ["jazz", "blues", "rock", "soul", "funk"];
+    
+    const [allStyle, setAllStyle] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
+            .then((res) =>  setAllStyle(res.data[0].types))
+            .catch((err) => console.log(err))
+    }, [])
 
     function checkInputs()
     {
