@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./FormAddSalle.module.css";
-// import Adresse from '../../Models/Adresse';
-// import Contact from '../../Models/Contact';
-// import Localisation from '../../Models/Localisation';
-// import Salle from '../../Models/Salle';
+import { Adresse } from '../../Models/Adresse';
+import { Contact } from '../../Models/Contact';
+import { Localisation } from '../../Models/Localisation';
+import { Salle } from '../../Models/Salle';
 
 
 const FormAddSalle = () => {
@@ -35,8 +35,8 @@ const FormAddSalle = () => {
       adresseVoie: true,
       adresseCodePostal: true,
       adresseVille: true,
-      localisationX: false,
-      localisationY: false,
+      localisationX: true,
+      localisationY: true,
       contactTel: true,
       capacite: true,
       smac: true,
@@ -75,15 +75,38 @@ const FormAddSalle = () => {
     }
    }, [isClickSmac])
 
-    
+    // Pour ajouter une salle : Créer les différents objets (adresse, contact, localisation) et faire un objets salle
  
-
+   
 
   
     const handelClick = (e) => {
       e.preventDefault();       
+    
+      const newSalle = new Salle();
+        
+      if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
+        let params = new URLSearchParams(document.location.search);
+        let id = params.get("id");
+        console.log(params);
 
-    //   checkValidityRadio();
+        // Ajout localisation
+        const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
+
+        // Ajout Adresse
+        const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
+
+        // Ajout Contact
+        const newContact = new Contact(contactTel)
+
+        //Création de la salle
+        const newSalle = new Salle(id,nomSalle, newAdresse, styles, capacite, smac, newContact)
+
+        console.log(newSalle);
+      } else {
+        console.log("non");
+      }
+        
         
     };
   
@@ -163,7 +186,7 @@ const FormAddSalle = () => {
                     </div>
                 </div>
                 <div>
-                    <p className={style.partie}>Localisation</p>
+                    <p className={style.partie}>Localisation*</p>
                     <div>
                         <div className={style.divSep}>
                             <label className={style.label}  htmlFor="coordonnées-x">Coordonnée x:</label>
