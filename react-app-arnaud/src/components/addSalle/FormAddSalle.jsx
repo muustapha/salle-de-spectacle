@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./FormAddSalle.module.css";
 // import Adresse from '../../Models/Adresse';
 // import Contact from '../../Models/Contact';
@@ -17,75 +17,74 @@ const FormAddSalle = () => {
     const [localisationY, setLocalisationY] = useState(null);
     const [contactTel, setContactTel] = useState("");
     const [capacite, setCapacite] = useState("");
-    const [smac, setSmac] = useState(false);
+    const [smac, setSmac] = useState("");
     const [styles, setStyles] = useState("");
-  
-    const [errors, setErrors] = useState({
-      nomSalle: false,
-      adresseNum: false,
-      adresseVoie: false,
-      adresseCodePostal: false,
-      adresseVille: false,
-      localisationX: false,
-      localisationY: false,
-      contactTel: false,
-      capacite: false,
-      smac: false,
-      styles: false,
-    });
-  
-    const REGEX_CHECK_LETTRE_SPACE = /^[a-zA-Z\s]*$/;
+    const [isClickSubmit, setIsClickSubmit] = useState(false);
+    const [isClickSmac, setIsClickSmac] = useState(false);
+
+    const REGEX_CHECK_LETTRE_SPACE = /^[a-zA-Z\s].{3,20}$/;
     const REGEX_CHECK_PHONE = /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
     const REGEX_CHECK_DOUBLE = /(\d+(?:\.\d+)?)/;
     const REGEX_CHECK_INT = /^[0-9]*$/;
     const REGEX_CHECK_CODE_POSTAL = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
     const REGEX_CHECK_STYLES = /^([a-zA-Z0-9]+\/)+[a-zA-Z0-9]+$/;
   
-    const validateInput = (value, regex) => {
-      return regex.test(value) && value !== "";
-    };
-  
-    const handleInputChange = (setter, value, regex, fieldName) => {
-      setter(value);
-      setErrors((prevErrors) => ({...prevErrors, [fieldName]: !validateInput(value, regex), }));
-    };
+    const [errors, setErrors] = useState({
+      nomSalle: true,
+      adresseNum: true,
+      adresseVoie: true,
+      adresseCodePostal: true,
+      adresseVille: true,
+      localisationX: false,
+      localisationY: false,
+      contactTel: true,
+      capacite: true,
+      smac: true,
+      styles: true,
+    });
 
-    const checkSmac = () => {
-        const radioOui = document.getElementById('smac');
-        const radioNon = document.getElementById('smac-non');
-      
-        if (radioOui.checked || radioNon.checked) {
-          return true;
+    const checkInput = (value, regex) => {
+        return regex.test(value) && value != "";
+    }
+
+    const checkValidity = (value, regex, node) => {
+        if (checkInput(value, regex)) {
+            setErrors((elemnt) => ({
+                ...elemnt,
+                [node]: false
+            }));
         } else {
-          return false;
+            setErrors((elemnt) => ({
+                ...elemnt,
+                [node]: true
+            }));
         }
-      };
+    }
+
+   useEffect(() => {
+    if (isClickSmac) {
+        setErrors((elemnt) => ({
+            ...elemnt,
+            smac: false
+        }));
+    } else {
+        setErrors((elemnt) => ({
+            ...elemnt,
+            smac: true
+        }));
+    }
+   }, [isClickSmac])
+
+    
+ 
+
+
   
     const handelClick = (e) => {
-      e.preventDefault();
-  
-      setErrors({
-        nomSalle: !validateInput(nomSalle, REGEX_CHECK_LETTRE_SPACE),
-        adresseNum: !validateInput(adresseNum, REGEX_CHECK_INT),
-        adresseVoie: !validateInput(adresseVoie, REGEX_CHECK_LETTRE_SPACE),
-        adresseCodePostal: !validateInput(
-          adresseCodePostal,
-          REGEX_CHECK_CODE_POSTAL
-        ),
-        adresseVille: !validateInput(adresseVille, REGEX_CHECK_LETTRE_SPACE),
-        localisationX: localisationX !== null && !validateInput(localisationX, REGEX_CHECK_DOUBLE),
-        localisationY: localisationY !== null && !validateInput(localisationY, REGEX_CHECK_DOUBLE),
-        contactTel: !validateInput(contactTel, REGEX_CHECK_PHONE),
-        capacite: !validateInput(capacite, REGEX_CHECK_INT),
-        smac: !checkSmac(), 
-        styles: !validateInput(styles, REGEX_CHECK_STYLES),
-      });
+      e.preventDefault();       
 
-      if (errors) {
-        console.log('bon');
-      } else {
-        console.log("aie");
-      }
+    //   checkValidityRadio();
+        
     };
   
 
@@ -102,10 +101,10 @@ const FormAddSalle = () => {
                         type="text" 
                         name="name" 
                         id="name"  
-                        onChange={(e) => handleInputChange(setNomSalle, e.target.value, REGEX_CHECK_LETTRE_SPACE,"nomSalle")
+                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "nomSalle"); setNomSalle(e.target.value)}
                     }/>
                     {
-                        errors.nomSalle && (<p className={style.badText}>Veuillez entrer un nom valide.</p>)
+                        (errors.nomSalle && isClickSubmit) && (<p className={style.badText}>Veuillez entrer un nom valide.</p>)
                     }
                 </div>
                 <div className={style.div}>
@@ -117,10 +116,10 @@ const FormAddSalle = () => {
                             type="text" 
                             name="" 
                             id="num" 
-                            onChange={(e) => handleInputChange(setAdresseNum, e.target.value, REGEX_CHECK_INT, "adresseNum")}
+                            onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_INT, "adresseNum"); setAdresseNum(e.target.value)}}
                         />
                         {
-                            errors.adresseNum && (<p className={style.badText}>Veuillez entrer un numéro valide.</p>)
+                            (errors.adresseNum  && isClickSubmit) && (<p className={style.badText}>Veuillez entrer un numéro valide.</p>)
                         }
                     </div>
                     <div className={style.divColumn}>
@@ -130,10 +129,10 @@ const FormAddSalle = () => {
                         type="text" 
                         name="voie" 
                         id="voie" 
-                        onChange={(e) => handleInputChange(setAdresseVoie, e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVoie")} 
+                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVoie"); setAdresseVoie(e.target.value)}} 
                         />
                         {
-                            errors.adresseVoie && (<p className={style.badText}>Veuillez entrer une voie valide.</p>)
+                            (errors.adresseVoie  && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une voie valide.</p>)
                         }
                     </div>
                     <div className={style.divColumn}>
@@ -143,10 +142,10 @@ const FormAddSalle = () => {
                             type="number" 
                             name="postal" 
                             id="postal"  
-                            onChange={(e) => handleInputChange(setAdresseCodePostal, e.target.value, REGEX_CHECK_CODE_POSTAL, "adresseCodePostal")}
+                            onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_CODE_POSTAL, "adresseCodePostal"); setAdresseCodePostal(e.target.value)}}
                         />
                         {
-                            errors.adresseCodePostal && (<p className={style.badText}>Veuillez entrer un code postal valide.</p>)
+                            (errors.adresseCodePostal && isClickSubmit) && (<p className={style.badText}>Veuillez entrer un code postal valide.</p>)
                         }
                     </div>                    
                     <div className={style.divColumn}>
@@ -156,10 +155,10 @@ const FormAddSalle = () => {
                             type="text" 
                             name="ville" 
                             id="ville" 
-                            onChange={(e) => handleInputChange(setAdresseVille, e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVille")}
+                            onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVille"); setAdresseVille(e.target.value)}}
                         />
                         {
-                            errors.adresseVille && (<p className={style.badText}>Veuillez entrer une ville valide.</p>)
+                            (errors.adresseVille && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une ville valide.</p>)
                         }
                     </div>
                 </div>
@@ -173,10 +172,10 @@ const FormAddSalle = () => {
                                  type="text" 
                                  name="coordonnees-x" 
                                  id="coordonnees-x" 
-                                 onChange={(e) => handleInputChange(setLocalisationX, e.target.value, REGEX_CHECK_DOUBLE, "localisationX")}
+                                 onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_DOUBLE, "localisationX"); setLocalisationX(e.target.value)}}
                             />
                         {
-                            errors.localisationX && (<p className={style.badText}>Veuillez entrer une coordonnée X valide.</p>)
+                            (errors.localisationX && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une coordonnée X valide.</p>)
                         }
                         </div>
                         <div className={style.divSep}>
@@ -186,10 +185,10 @@ const FormAddSalle = () => {
                                 type="text" 
                                 name="coordonnees-y" 
                                 id="coordonnees-y" 
-                                onChange={(e) => handleInputChange(setLocalisationY, e.target.value, REGEX_CHECK_DOUBLE, "localisationY")}
+                                onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_DOUBLE, "localisationY"); setLocalisationY(e.target.value)}}
                             />
                         {
-                            errors.localisationX && (<p className={style.badText}>Veuillez entrer une coordonnée Y valide.</p>)
+                            (errors.localisationY && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une coordonnée Y valide.</p>)
                         }
                         </div>
                     </div>
@@ -204,10 +203,10 @@ const FormAddSalle = () => {
                             type="tel" 
                             name="tel" 
                             id="tel" 
-                            onChange={(e) => handleInputChange(setContactTel, e.target.value, REGEX_CHECK_PHONE, "contactTel")}
+                            onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_PHONE, "contactTel"); setContactTel(e.target.value)}}
                         />
                         {
-                            errors.contactTel && (<p className={style.badText}>Veuillez entrer un téléphone valide.</p>)
+                            (errors.contactTel && isClickSubmit) && (<p className={style.badText}>Veuillez entrer un téléphone valide.</p>)
                         }
                     </div>
                 </div>
@@ -218,10 +217,10 @@ const FormAddSalle = () => {
                         type="number" 
                         name="capacite" 
                         id="capacite" 
-                        onChange={(e) => handleInputChange(setCapacite, e.target.value, REGEX_CHECK_INT, "capacite")}
+                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_INT, "capacite"); setCapacite(e.target.value)}}
                     />
                     {
-                        errors.capacite && (<p className={style.badText}>Veuillez entrer une capacitée valide.</p>)
+                        (errors.capacite && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une capacitée valide.</p>)
                     }
                 </div>
                 <div className={style.div}>
@@ -229,15 +228,15 @@ const FormAddSalle = () => {
                     <div className={style.divRowCenter}>
                         <div className={style.divSepSmac}>
                             <label data-smac="" className={`${style.labelSmac} ${style.label}`} htmlFor="smac">Oui</label>
-                            <input className={style.input} type="radio" name="sm" id="smac" onChange={(e) => setSmac(true)}/>
+                            <input className={style.input} type="radio" name="sm" id="smac" data-radio="oui" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
                         </div>
                         <div className={style.divSepSmac}>
                             <label data-smac="" className={`${style.labelSmac} ${style.label}`} htmlFor="smac-non">Non</label>
-                            <input className={style.input} type="radio" name="sm" id="smac-non" onChange={(e) => setSmac(true)}/>
+                            <input className={style.input} type="radio" name="sm" id="smac-non" data-radio="non" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
                         </div>
                     </div>
                     {
-                        errors.smac && (<p className={style.badText}>Veuillez entrer une capacitée valide.</p>)
+                        (errors.smac && isClickSubmit) && (<p className={style.badText}>Veuillez entrer une capacitée valide.</p>)
                     }
                 </div>
                 <div>
@@ -247,14 +246,14 @@ const FormAddSalle = () => {
                         type="text" 
                         name="style" 
                         id="style" 
-                        onChange={(e) => handleInputChange(setStyles, e.target.value, REGEX_CHECK_STYLES, "styles")}
+                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_STYLES, "styles"); setStyles(e.target.value)}}
                     />
                     {
-                        errors.styles && (<p className={style.badText}>Veuillez respecter l'écriture valide.</p>)
+                        (errors.styles && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
                     }
                 </div>
                 <div className={style.divBtn}>
-                    <button onClick={handelClick} className={style.btn}>Validé</button>
+                    <button onClick={(e) => {handelClick(e); setIsClickSubmit(true)}} className={style.btn}>Validé</button>
                 </div>
 
             </form>
