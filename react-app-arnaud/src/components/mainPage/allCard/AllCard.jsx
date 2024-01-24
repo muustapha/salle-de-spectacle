@@ -31,7 +31,7 @@ const AllCard = () => {
     }, [])
 
     const handelClickNav = () => {
-        let path = `/add-salle/id?${allSalle.length}`
+        let path = `/add-salle/${allSalle.length}`
         navigate(path);        
     }
 

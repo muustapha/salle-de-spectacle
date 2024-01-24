@@ -4,9 +4,12 @@ import { Adresse } from '../../Models/Adresse';
 import { Contact } from '../../Models/Contact';
 import { Localisation } from '../../Models/Localisation';
 import { Salle } from '../../Models/Salle';
+import { useParams } from "react-router-dom";
 
 
 const FormAddSalle = () => {
+
+    const id = Number(useParams().id);
 
     const [nomSalle, setNomSalle] = useState("");
     const [adresseNum, setAdresseNum] = useState("");
@@ -61,7 +64,7 @@ const FormAddSalle = () => {
         }
     }
 
-   useEffect(() => {
+    useEffect(() => {
     if (isClickSmac) {
         setErrors((elemnt) => ({
             ...elemnt,
@@ -73,22 +76,14 @@ const FormAddSalle = () => {
             smac: true
         }));
     }
-   }, [isClickSmac])
-
-    // Pour ajouter une salle : Créer les différents objets (adresse, contact, localisation) et faire un objets salle
- 
-   
-
+    }, [isClickSmac])
   
     const handelClick = (e) => {
       e.preventDefault();       
     
-      const newSalle = new Salle();
-        
+      
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
-        let params = new URLSearchParams(document.location.search);
-        let id = params.get("id");
-        console.log(params);
+       let newId = id + 1;
 
         // Ajout localisation
         const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
@@ -100,7 +95,7 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new Salle(id,nomSalle, newAdresse, styles, capacite, smac, newContact)
+        const newSalle = new Salle(newId,nomSalle, newAdresse, styles, capacite, smac, newContact)
 
         console.log(newSalle);
       } else {
