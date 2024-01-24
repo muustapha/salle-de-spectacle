@@ -2,6 +2,7 @@
 using ApiSalleConcert.Models.Services;
 using ApiSalleConcert.Models.Tools;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiSalleConcert.Controllers
@@ -17,11 +18,13 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
+        [Authorize]
+        [HttpGet]
 		public async Task<List<Auth>> Get() =>
 		await _authService.GetAsync();
 
-		[HttpGet("{id:length(24)}")]
+        [Authorize]
+        [HttpGet("{id:length(24)}")]
 		public async Task<ActionResult<Auth>> Get(string id)
 		{
 			var user = await _authService.GetAsync(id);
@@ -34,8 +37,8 @@ namespace ApiSalleConcert.Controllers
 			return user;
 		}
 
-
-		[HttpPut("{id:length(24)}")]
+        [Authorize]
+        [HttpPut("{id:length(24)}")]
 		public async Task<IActionResult> Update(string id, Auth updateAuth)
 		{
 			var auth = await _authService.GetAsync(id);
@@ -57,7 +60,8 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("{id:length(24)}")]
+        [Authorize]
+        [HttpDelete("{id:length(24)}")]
 		public async Task<IActionResult> Delete(string id)
 		{
 			var auth = await _authService.GetAsync(id);

@@ -22,7 +22,8 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet("{id:length(24)}")]
+        [Authorize]
+        [HttpGet("{id:length(24)}")]
 		public async Task<ActionResult<Auth>> Get(string id)
 		{
 			var book = await _authService.GetAsync(id);
@@ -35,6 +36,7 @@ namespace ApiSalleConcert.Controllers
 			return book;
 		}
 
+		[Authorize]
 		[HttpPost("SignUp")]
 		public async Task<IActionResult> SignUp(AuthDtosSignUp newAuth)
 		{

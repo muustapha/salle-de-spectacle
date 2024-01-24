@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiSalleConcert.Models.Data;
 using AutoMapper;
 using ApiSalleConcert.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -23,7 +24,8 @@ namespace ApiSalleConcert.Controllers
 		}
 
 
-		[HttpGet]
+        [AllowAnonymous]
+        [HttpGet]
 		public async Task<List<Event>> Get()
 		{
 			var listEvents = await _eventService.GetAsync();
@@ -31,7 +33,8 @@ namespace ApiSalleConcert.Controllers
 		}
 
 
-		[HttpGet("{id:length(24)}")]
+        [AllowAnonymous]
+        [HttpGet("{id:length(24)}")]
 		public async Task<ActionResult<Event>> Get(string id)
 		{
 			var e = await _eventService.GetAsync(id);
@@ -44,9 +47,13 @@ namespace ApiSalleConcert.Controllers
 			return e;
 		}
 
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> Post(EventDtosIn newEvent)
 		{
+			var re = Request;
+			var headers = re.Headers;
+
 			Event e = _mapper.Map<Event>(newEvent);
 
 			await _eventService.CreateAsync(e);
@@ -54,7 +61,8 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = e.Id }, e);
 		}
 
-		[HttpPut("{id:length(24)}")]
+        [Authorize]
+        [HttpPut("{id:length(24)}")]
 		public async Task<IActionResult> Update(string id, Event updatedEvent)
 		{
 			var e = await _eventService.GetAsync(id);
@@ -71,7 +79,8 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("{id:length(24)}")]
+        [Authorize]
+        [HttpDelete("{id:length(24)}")]
 		public async Task<IActionResult> Delete(string id)
 		{
 			var e = await _eventService.GetAsync(id);

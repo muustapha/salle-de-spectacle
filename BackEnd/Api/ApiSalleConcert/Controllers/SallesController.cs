@@ -3,6 +3,7 @@ using ApiSalleConcert.Models;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -20,14 +21,16 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
+        [Authorize]
+        [HttpGet]
 		public async Task<List<SalleRecherche>> Get()
 		{
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}
 
-		[HttpGet("GetAllNotDelete")]
+        [AllowAnonymous]
+        [HttpGet("GetAllNotDelete")]
 		public async Task<List<SalleRecherche>> GetAllNotDelete()
 		{
 			List<Salle> listeSalle = await _sallesService.GetAsync();
@@ -46,7 +49,8 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesActive);
 		}
 
-		[HttpGet("id")]
+        [AllowAnonymous]
+        [HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
 			var salle = await _sallesService.GetAsync(id);
@@ -58,8 +62,8 @@ namespace ApiSalleConcert.Controllers
 
 			return salle;
 		}
-
-		[HttpGet("GetAllResearched")]
+        [AllowAnonymous]
+        [HttpGet("GetAllResearched")]
 		public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
 		{
 			List<SalleRecherche> listeSalle = await GetAllNotDelete();
@@ -113,7 +117,8 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesRecherchees);
 		}
 
-		[HttpPost]
+        [Authorize]
+        [HttpPost]
 		public async Task<IActionResult> Post(Salle newSalles)
 		{
 			await _sallesService.CreateAsync(newSalles);
@@ -121,7 +126,8 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
 		}
 
-		[HttpPut("{id}")]
+        [Authorize]
+        [HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
 			var book = await _sallesService.GetAsync(id);
@@ -138,7 +144,8 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("id")]
+        [Authorize]
+        [HttpDelete("id")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var salle = await _sallesService.GetAsync(id);
