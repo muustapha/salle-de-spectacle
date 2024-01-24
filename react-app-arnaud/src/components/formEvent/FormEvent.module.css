@@ -2,7 +2,6 @@
 .buttonAjouter{
     font-size:xx-large;
     background-color: var(--color3);
-    padding-top: 3%;
     border-radius: 8px;
     padding: 5% 15%;
     margin: 5% 20%;
@@ -40,8 +39,6 @@
 .select {
     width: 100%;
     font-size: x-large;
-    padding: 2%;
-    margin-top: 1%;
 }
 
 .input {

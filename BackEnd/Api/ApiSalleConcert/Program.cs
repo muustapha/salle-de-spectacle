@@ -48,8 +48,8 @@ namespace ApiSalleConcert
 				x.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtKey").ToString())),
-					ValidateIssuer = false,
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtKey").ToString()!)),
+					ValidateIssuer = true,
 					ValidateAudience = false,
 				};
 			}
