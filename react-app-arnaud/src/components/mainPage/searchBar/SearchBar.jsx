@@ -1,13 +1,22 @@
 import style from "./SearchBar.module.css"
-import { useContext  } from "react";
+import { useContext, useEffect, useState  } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import axios from "axios";
 
 // onInputChange
 const SearchBar = () => {
     // récup du context (mais que la partie fonction)
     const { updateSearch } = useContext(SearchContext);
+    const [allStyle, setAllStyle] = useState([]);
 
-    const allStyle = ["jazz", "blues", "rock", "soul", "funk"];
+    useEffect(() => {
+        axios
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
+            .then((res) =>  setAllStyle(res.data[0].types))
+            .catch((err) => console.log(err))
+    }, [])
+
+    
 
     // on joue la fonction du context pour le mettre a jour
     const handleInputChange = (field, value) => {
@@ -21,7 +30,6 @@ const SearchBar = () => {
         })
         updateSearch({nom:"", ville:"", styles: ""})
     }
-
     return (
     <>
         <div className={style.SearchBarContainer}>

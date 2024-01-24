@@ -36,6 +36,7 @@ const AllCard = () => {
     }
 
 
+
     return ( 
     <>
         <div className={style.div}>

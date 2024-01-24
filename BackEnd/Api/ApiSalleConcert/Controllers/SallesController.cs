@@ -23,7 +23,7 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[Authorize]
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<List<SalleRecherche>> Get()
 		{

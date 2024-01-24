@@ -94,7 +94,6 @@ const FormAddSalle = () => {
       
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
         let newId = id + 1;
-        let listAvis = null
         // Ajout localisation
         const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
 
