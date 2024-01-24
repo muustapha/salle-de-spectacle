@@ -3,6 +3,7 @@ using ApiSalleConcert.Models;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models.Services;
 using AutoMapper;
+using ApiSalleConcert.Models.Data;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -114,11 +115,13 @@ namespace ApiSalleConcert.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Post(Salle newSalles)
+		public async Task<IActionResult> Post(SalleDtoIn newSalles)
 		{
-			await _sallesService.CreateAsync(newSalles);
+			Salle s = _mapper.Map<Salle>(newSalles);
 
-			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
+			await _sallesService.CreateAsync(s);
+
+			return CreatedAtAction(nameof(Get), new { id = s.Id }, s);
 		}
 
 		[HttpPut("{id}")]

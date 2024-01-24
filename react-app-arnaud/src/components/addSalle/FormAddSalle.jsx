@@ -3,8 +3,9 @@ import style from "./FormAddSalle.module.css";
 import { Adresse } from '../../Models/Adresse';
 import { Contact } from '../../Models/Contact';
 import { Localisation } from '../../Models/Localisation';
-import { Salle } from '../../Models/Salle';
+import { SalleIn } from '../../Models/Salle';
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 
 const FormAddSalle = () => {
@@ -77,16 +78,26 @@ const FormAddSalle = () => {
         }));
     }
     }, [isClickSmac])
+
+    const createArrayStyle = (string) => {
+        const a = string.split('/');
+        return a;
+    }
+
+    const boolSmac = (s) => {
+       return s == "true" ? true : false 
+    } 
   
-    const handelClick = (e) => {
+    const handelClick = async(e) => {
       e.preventDefault();       
     
       
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
-       let newId = id + 1;
-
+        let newId = id + 1;
+        let listAvis = null
         // Ajout localisation
         const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
+
 
         // Ajout Adresse
         const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
@@ -95,9 +106,14 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new Salle(newId,nomSalle, newAdresse, styles, capacite, smac, newContact)
-
+        const newSalle = new SalleIn(newId,nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
         console.log(newSalle);
+
+
+        await axios
+                .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err + "pas de post"))
       } else {
         console.log("non");
       }
@@ -246,11 +262,11 @@ const FormAddSalle = () => {
                     <div className={style.divRowCenter}>
                         <div className={style.divSepSmac}>
                             <label data-smac="" className={`${style.labelSmac} ${style.label}`} htmlFor="smac">Oui</label>
-                            <input className={style.input} type="radio" name="sm" id="smac" data-radio="oui" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
+                            <input className={style.input} type="radio" name="sm" id="smac" data-radio="true" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
                         </div>
                         <div className={style.divSepSmac}>
                             <label data-smac="" className={`${style.labelSmac} ${style.label}`} htmlFor="smac-non">Non</label>
-                            <input className={style.input} type="radio" name="sm" id="smac-non" data-radio="non" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
+                            <input className={style.input} type="radio" name="sm" id="smac-non" data-radio="false" onChange={(e) => {setSmac(e.target.dataset.radio); setIsClickSmac(true)}}/>
                         </div>
                     </div>
                     {
