@@ -3,11 +3,9 @@ using ApiSalleConcert.Models;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models.Services;
 using AutoMapper;
-<<<<<<< HEAD
 using ApiSalleConcert.Models.Data;
-=======
 using Microsoft.AspNetCore.Authorization;
->>>>>>> 8d2d99a5348e785e8ae2425e926b2711db6e710b
+
 
 namespace ApiSalleConcert.Controllers
 {
@@ -25,16 +23,16 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-        [Authorize]
-        [HttpGet]
+		[Authorize]
+		[HttpGet]
 		public async Task<List<SalleRecherche>> Get()
 		{
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}
 
-        [AllowAnonymous]
-        [HttpGet("GetAllNotDelete")]
+		[AllowAnonymous]
+		[HttpGet("GetAllNotDelete")]
 		public async Task<List<SalleRecherche>> GetAllNotDelete()
 		{
 			List<Salle> listeSalle = await _sallesService.GetAsync();
@@ -53,8 +51,8 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesActive);
 		}
 
-        [AllowAnonymous]
-        [HttpGet("id")]
+		[AllowAnonymous]
+		[HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
 			var salle = await _sallesService.GetAsync(id);
@@ -66,8 +64,8 @@ namespace ApiSalleConcert.Controllers
 
 			return salle;
 		}
-        [AllowAnonymous]
-        [HttpGet("GetAllResearched")]
+		[AllowAnonymous]
+		[HttpGet("GetAllResearched")]
 		public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
 		{
 			List<SalleRecherche> listeSalle = await GetAllNotDelete();
@@ -121,14 +119,10 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesRecherchees);
 		}
 
-<<<<<<< HEAD
+
+		[Authorize]
 		[HttpPost]
 		public async Task<IActionResult> Post(SalleDtoIn newSalles)
-=======
-        [Authorize]
-        [HttpPost]
-		public async Task<IActionResult> Post(Salle newSalles)
->>>>>>> 8d2d99a5348e785e8ae2425e926b2711db6e710b
 		{
 			Salle s = _mapper.Map<Salle>(newSalles);
 
@@ -137,8 +131,8 @@ namespace ApiSalleConcert.Controllers
 			return CreatedAtAction(nameof(Get), new { id = s.Id }, s);
 		}
 
-        [Authorize]
-        [HttpPut("{id}")]
+		[Authorize]
+		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
 			var book = await _sallesService.GetAsync(id);
@@ -155,8 +149,8 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-        [Authorize]
-        [HttpDelete("id")]
+		[Authorize]
+		[HttpDelete("id")]
 		public async Task<IActionResult> Delete(int id)
 		{
 			var salle = await _sallesService.GetAsync(id);
