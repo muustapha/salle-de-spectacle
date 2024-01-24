@@ -30,9 +30,7 @@ db.salles.insertMany(
         },
         "avis": [
             {
-                "date": {
-                    "$date": "2019-07-06T00:00:00.000Z"
-                },
+                "date": new ISODate("2019-07-06T00:00:00.000Z"),
                 "note": 10
             }
         ],
@@ -83,6 +81,22 @@ db.users.insertMany(
         "password": "OhGvjEIgRpU5kMvA2YxUP7VtoLzXTWJu2XH24/Dq//GJOTFR",
         "isAdmin": false
     }]
+)
+
+db.styles.insertMany(
+    [{
+        "types": [
+            "blues",
+            "rock",
+            "jazz",
+            "techno",
+            "reggae",
+            "metal",
+            "eurobeat",
+            "electro"
+        ]
+    }
+    ]
 )
 
 db.events.insertMany(
