@@ -1,0 +1,27 @@
+.div {
+  padding: 5%;
+  border-radius: 15px;
+  box-shadow: 0 0 4px 0 black;
+  background-color: var(--color2);
+  margin-bottom: 5%;
+}
+
+.h3 {
+  font-size: 30px;
+  padding: 10% 3%;
+}
+
+.p {
+  padding: 4% 3%;
+  font-size: 20px;
+}
+
+.btn {
+  text-align: center;
+  width: 100%;
+  margin: 10% auto 3%;
+  padding: 5%;
+  font-size: 20px;
+  background: var(--color3);
+  border-radius: 15px;
+}

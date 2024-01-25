@@ -7,6 +7,20 @@ import NavBar from "./navBar/NavBar";
 const Header = () => {
 
   const [menu, setMenu] = useState(false);
+  
+window.addEventListener('resize', () => {
+   if (window.innerWidth >= 1200) {
+    setMenu(true);
+   }
+})
+
+
+if (menu) {
+    document.body.style.overflowY = "hidden";
+} else {
+    document.body.style.overflowY = "auto";
+}
+
 
     return ( 
         <>
@@ -15,8 +29,8 @@ const Header = () => {
                 <button className={style.btn} onClick={() => !menu ? setMenu(true) : setMenu(false)}>
                     {!menu ? <FontAwesomeIcon icon={faBars} className={style.icon} /> : <FontAwesomeIcon icon={faTimes} className={style.icon} />}
                 </button>
+                <NavBar menu={menu} />
             </header>
-            <NavBar menu={menu} />
         </>
     );
 }

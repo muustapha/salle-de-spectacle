@@ -3,6 +3,9 @@ using ApiSalleConcert.Models;
 using ApiSalleConcert.Models.Dtos;
 using ApiSalleConcert.Models.Services;
 using AutoMapper;
+using ApiSalleConcert.Models.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -20,13 +23,17 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
+		[HttpGet, Authorize]
 		public async Task<List<SalleRecherche>> Get()
 		{
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetAllNotDelete")]
 		public async Task<List<SalleRecherche>> GetAllNotDelete()
 		{
@@ -46,6 +53,7 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesActive);
 		}
 
+		[AllowAnonymous]
 		[HttpGet("id")]
 		public async Task<ActionResult<Salle>> Get(int id)
 		{
@@ -58,7 +66,7 @@ namespace ApiSalleConcert.Controllers
 
 			return salle;
 		}
-
+		[AllowAnonymous]
 		[HttpGet("GetAllResearched")]
 		public async Task<List<SalleRecherche>> GetAllResearched(string nomRecherche = "", string villeRecherchee = "", string styleRecherche = "")
 		{
@@ -113,14 +121,19 @@ namespace ApiSalleConcert.Controllers
 			return _mapper.Map<List<SalleRecherche>>(sallesRecherchees);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Post(Salle newSalles)
-		{
-			await _sallesService.CreateAsync(newSalles);
 
-			return CreatedAtAction(nameof(Get), new { id = newSalles.Id }, newSalles);
+		[Authorize]
+		[HttpPost]
+		public async Task<IActionResult> Post(SalleDtoIn newSalles)
+		{
+			Salle s = _mapper.Map<Salle>(newSalles);
+
+			await _sallesService.CreateAsync(s);
+
+			return CreatedAtAction(nameof(Get), new { id = s.Id }, s);
 		}
 
+		[Authorize]
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
@@ -138,6 +151,7 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
+		[Authorize]
 		[HttpDelete("id")]
 		public async Task<IActionResult> Delete(int id)
 		{
