@@ -5,9 +5,8 @@ import Main from "../components/mainPage/Main";
 const MainPage = () => {
     return (
         <>
-            <Header />
             <Main />
-            <Footer />
+            
         </>
 
       );

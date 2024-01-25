@@ -10,7 +10,7 @@ import AddSallePage from "../pages/AddSallePage";
 const Navigation = () => {
 
     return ( 
-    <>
+    <><Header/>
         <Router>
             <Routes>
                 <Route path="/" exact element={<MainPage />} />
@@ -22,6 +22,7 @@ const Navigation = () => {
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>
+        <Footer/>
     </> );
 }
  
