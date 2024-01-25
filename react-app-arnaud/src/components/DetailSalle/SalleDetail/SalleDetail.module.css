@@ -1,0 +1,94 @@
+.container__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items:left ;
+    width: 80%;
+    height: 30vh;
+    padding: 0 1rem;
+    overflow: auto;  
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 4px 0 black;
+    transition: all 0.3s ease-in-out;
+    margin: 0 auto;
+    
+}
+.h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-top:2.5vh;
+}
+.h3{
+    font-size: 1.2rem;
+    font-weight: 200;
+    color: #3d3d3d;
+    margin-bottom: 0.25rem;
+    text-align: left;
+}
+.h4{
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+    margin-bottom: 0.25rem;
+}
+.h5{
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+    margin-bottom: 0.25rem;
+}
+.h6{
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+    margin-bottom: 0.25rem;
+}
+.adresse {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;    
+    text-align: left;
+    
+}
+.smac{
+    font-size: 1rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.capacite {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.styles{
+    font-size: 1rem;
+    font-weight: 300;
+    color: #3d3d3d;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+.ecart {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 50px; /* C'est l'espace entre la ville et le code postal */
+    margin-top:-0.7rem;
+    color: #3d3d3d;
+    margin-bottom: auto;
+}

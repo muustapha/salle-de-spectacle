@@ -1,0 +1,14 @@
+.MapContainer {
+    height: 35vh;
+    width: 37vh;
+    margin: auto; /* Centrer la carte horizontalement */
+    display: flex; /* Utiliser flexbox pour centrer la carte verticalement */
+    justify-content: center; /* Centrer les éléments horizontalement dans le conteneur flex */
+    align-items: center; /* Centrer les éléments verticalement dans le conteneur flex */
+    margin-top: 1.2rem;
+    
+    border-radius: 15px;
+    box-shadow: 0 0 4px 0 black;
+    transition: all 0.3s ease-in-out;
+}
+ 

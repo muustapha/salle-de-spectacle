@@ -1,0 +1,27 @@
+.title{
+    font-size: 3vh;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: #3d3d3d;
+    margin: 3rem;
+    text-align: left;
+}
+
+.listeAvis{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Crée deux colonnes de taille égale */
+    grid-gap: 0.1rem; /* Ajustez comme nécessaire */
+    justify-items: start; /* Equivalent de justify-content pour grid */
+    align-items: start; /* Equivalent de align-items pour grid */
+    width: 90%;
+    height: 55vh;
+    padding: 0 1rem;
+    /* overflow: auto; */
+    background-color:#fdfdfb; 
+    border-radius: 15px;  
+    /* box-shadow: 0 0 4px 0 black; */
+    transition: all 0.3s ease-in-out; 
+    margin: 0 auto;
+    margin-top: -2rem; 
+}
