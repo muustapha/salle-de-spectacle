@@ -5,7 +5,7 @@ using ApiSalleConcert.Models.Services;
 using AutoMapper;
 using ApiSalleConcert.Models.Data;
 using Microsoft.AspNetCore.Authorization;
-
+using System.Security.Claims;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -23,10 +23,12 @@ namespace ApiSalleConcert.Controllers
 			_mapper = mapper;
 		}
 
-		[AllowAnonymous]
-		[HttpGet]
+		[HttpGet, Authorize]
 		public async Task<List<SalleRecherche>> Get()
 		{
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
 		}

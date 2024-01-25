@@ -106,7 +106,6 @@ const FormAddSalle = () => {
 
         //Création de la salle
         const newSalle = new SalleIn(newId,nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
-        console.log(newSalle);
 
 
         await axios

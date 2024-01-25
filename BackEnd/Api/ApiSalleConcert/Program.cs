@@ -41,6 +41,7 @@ namespace ApiSalleConcert
 			{
 				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
 			})
 			.AddJwtBearer(x =>
 			{
@@ -49,8 +50,9 @@ namespace ApiSalleConcert
 				x.TokenValidationParameters = new TokenValidationParameters
 				{
 					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtKey").ToString()!)),
-					ValidateIssuer = true,
+					//IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtKey").ToString()!)),
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtKey").Value)),
+					ValidateIssuer = false,
 					ValidateAudience = false,
 				};
 			}

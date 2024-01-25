@@ -1,5 +1,6 @@
 ﻿using ApiSalleConcert.Models.Data;
 using ApiSalleConcert.Models.Dtos;
+using AutoMapper;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -15,9 +16,11 @@ namespace ApiSalleConcert.Models.Services
 	{
 		private readonly IMongoCollection<Auth> _authCollection;
 		private readonly string key = "eO5wRvXmynTMVdxXjZVmOAmX2wgoxMmieDvEIomx";
+		private readonly IMapper _mapper;
 
-		public AuthService(IOptions<SalleDatabaseSettings> salleStoreDatabaseSettings)
+		public AuthService(IOptions<SalleDatabaseSettings> salleStoreDatabaseSettings, IMapper mapper)
 		{
+			_mapper = mapper;
 			var mongoClient = new MongoClient(salleStoreDatabaseSettings.Value.ConnectionString);
 
 			var mongoDatabase = mongoClient.GetDatabase(
@@ -45,8 +48,10 @@ namespace ApiSalleConcert.Models.Services
 		public async Task RemoveAsync(string id) =>
 			await _authCollection.DeleteOneAsync(x => x.Id == id);
 
-		public string Authenticate(AuthDtosSignIn user)
+		public string Authenticate(AuthDtosSignIn u)
 		{
+			Auth user = _mapper.Map<Auth>(u);
+
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var tokenKey = Encoding.ASCII.GetBytes(key);
 			var tokenDescription = new SecurityTokenDescriptor()
@@ -54,6 +59,7 @@ namespace ApiSalleConcert.Models.Services
 				Subject = new ClaimsIdentity(new Claim[]
 				{
 						new Claim(ClaimTypes.Email, user.Mail),
+						new Claim(ClaimTypes.Role, user.IsAdmin.ToString()),
 				}),
 
 				Expires = DateTime.UtcNow.AddHours(1),
