@@ -24,10 +24,15 @@ namespace ApiSalleConcert.Controllers
 		}
 
 		[HttpGet, Authorize]
-		public async Task<List<SalleRecherche>> Get()
+		public async Task<ActionResult<List<SalleRecherche>>> Get()
 		{
 			var principal = HttpContext.User as ClaimsPrincipal;
 			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+			if(role == "False")
+			{
+				return Unauthorized();
+			}			
 
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
@@ -126,7 +131,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(SalleDtoIn newSalles)
 		{
-			Salle s = _mapper.Map<Salle>(newSalles);
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            Salle s = _mapper.Map<Salle>(newSalles);
 
 			await _sallesService.CreateAsync(s);
 
@@ -137,7 +150,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, Salle updatedSalle)
 		{
-			var book = await _sallesService.GetAsync(id);
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            var book = await _sallesService.GetAsync(id);
 
 			if (book is null)
 			{
@@ -155,7 +176,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpDelete("id")]
 		public async Task<IActionResult> Delete(int id)
 		{
-			var salle = await _sallesService.GetAsync(id);
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            var salle = await _sallesService.GetAsync(id);
 
 			if (salle is null)
 			{

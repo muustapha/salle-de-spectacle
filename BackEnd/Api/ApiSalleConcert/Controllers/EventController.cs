@@ -5,6 +5,7 @@ using ApiSalleConcert.Models.Data;
 using AutoMapper;
 using ApiSalleConcert.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ApiSalleConcert.Controllers
 {
@@ -51,7 +52,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(EventDtosIn newEvent)
 		{
-			var re = Request;
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            var re = Request;
 			var headers = re.Headers;
 
 			Event e = _mapper.Map<Event>(newEvent);
@@ -65,7 +74,15 @@ namespace ApiSalleConcert.Controllers
         [HttpPut("{id:length(24)}")]
 		public async Task<IActionResult> Update(string id, Event updatedEvent)
 		{
-			var e = await _eventService.GetAsync(id);
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            var e = await _eventService.GetAsync(id);
 
 			if (e is null)
 			{
@@ -83,7 +100,15 @@ namespace ApiSalleConcert.Controllers
         [HttpDelete("{id:length(24)}")]
 		public async Task<IActionResult> Delete(string id)
 		{
-			var e = await _eventService.GetAsync(id);
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            var e = await _eventService.GetAsync(id);
 
 			if (e is null)
 			{
