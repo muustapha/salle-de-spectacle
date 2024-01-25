@@ -1,0 +1,53 @@
+:root {
+  --color1: #fdfdfb;
+  --color2: #e8eacc;
+  --color3: #8c9c7c;
+  --color4: #232826;
+  --color5: #131114;
+}
+
+@font-face {
+  font-family: "font-text";
+  src: url(../../assets/font/Almarai-Regular.ttf);
+}
+
+@font-face {
+  font-family: "font-title";
+  src: url(../../assets/font/Viga-Regular.ttf);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "font-text";
+  font-size: 16px;
+}
+
+body {
+  background: var(--color1);
+}
+
+main {
+  height: 65vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "font-title";
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}

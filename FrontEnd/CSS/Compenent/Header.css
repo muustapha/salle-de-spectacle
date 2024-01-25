@@ -1,18 +1,19 @@
 .header-section {
-    height: 10vh;
-    width: 100%;
-    padding: 0 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 10vh;
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
 }
 
 .title-main-page {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 /* Btn de connexion administrateur */
 .login-btn {
-    background: none;
-    font-size: 24px;
+  background: none;
+  font-size: 24px;
 }

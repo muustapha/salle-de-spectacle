@@ -16,3 +16,25 @@ Créer un administrateur
 - Modifier une salle
 - Update une salle 
 - Supprimer une salle
+
+Création de concert (en react)
+
+
+new collection : 
+artiste
+datetime
+prixMin
+salle
+dejaPasse
+nbPlace
+
+react => 
+
+- install node
+- npm create vite@latest react-app-test -- --template react
+
+
+Breckpoint CSS:
+petit : 576px
+moyen : 768px
+large  1200px

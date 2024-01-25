@@ -1,0 +1,68 @@
+.navDisplay {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  transform: translateY(-100%);
+  animation: animationDisplayNavBar 1s forwards;
+}
+@keyframes animationDisplayNavBar {
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.navHide {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  animation: animationHideNavBar 1s forwards;
+}
+@keyframes animationHideNavBar {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.a {
+  font-size: 32px;
+  text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .navDisplay {
+    position: initial;
+    z-index: 1;
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    animation: none;
+    transform: none;
+    margin-right: 3%;
+  }
+
+  .a {
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .a:hover {
+    color: var(--color3);
+  }
+}

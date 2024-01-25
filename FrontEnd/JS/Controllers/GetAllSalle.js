@@ -1,14 +1,17 @@
+// Importation des différents fetch
+import {
+  serviceGetAllSalle,
+  serviceGetAllSalleByNomVilleStyle,
+} from "../Services/Fetch.js";
+
+const fetch = async () => {
+  let data = await serviceGetAllSalle();
+  createAllCard(data);
+};
+
 const sectionAffichage = document.getElementById("section-affichage");
 //*************** Récup les données de L'Api (GetAllSalle) ***************//
 //#region
-// Récup de la section
-// Fetch les données de l'API
-const fetchData = async () => {
-  await fetch("https://localhost:44371/api/Salles/GetAllResearched")
-    .then((res) => res.json())
-    .then((data) => createAllCard(data))
-    .catch((err) => console.log("Pas de GetAllSalle", err));
-};
 // Affiche le tableau des styles
 const displayElementBoucle = (data) => {
   let style = "";
@@ -122,12 +125,8 @@ allInput.forEach((elemnt) => {
 
 // fonction pour fetch ave la recherche
 const fetchSearchData = async (nom, ville, style) => {
-  await fetch(
-    `https://localhost:44371/api/Salles/GetAllResearched?nomRecherche=${nom}&villeRecherchee=${ville}&styleRecherche=${style}`
-  )
-    .then((res) => res.json())
-    .then((data) => createAllCard(data))
-    .catch((err) => console.log("petit problème" + err));
+  let data = await serviceGetAllSalleByNomVilleStyle(nom, ville, style);
+  createAllCard(data);
 };
 
 // Affichage
@@ -145,11 +144,11 @@ btnReset.addEventListener("click", () => {
       elemnt.value = "";
     }
   });
-  fetchData();
+  fetch();
 });
 
 // Pour que la fonction de l'API se lance au chargement de la page
 window.addEventListener("DOMContentLoaded", async () => {
-  await fetchData();
+  await fetch();
   displayStyleInSelect();
 });
