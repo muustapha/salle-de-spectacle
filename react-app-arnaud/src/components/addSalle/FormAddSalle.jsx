@@ -4,13 +4,10 @@ import { Adresse } from '../../Models/Adresse';
 import { Contact } from '../../Models/Contact';
 import { Localisation } from '../../Models/Localisation';
 import { SalleIn } from '../../Models/Salle';
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
 
 const FormAddSalle = () => {
-
-    const id = Number(useParams().id);
 
     const [nomSalle, setNomSalle] = useState("");
     const [adresseNum, setAdresseNum] = useState("");
@@ -25,6 +22,8 @@ const FormAddSalle = () => {
     const [styles, setStyles] = useState("");
     const [isClickSubmit, setIsClickSubmit] = useState(false);
     const [isClickSmac, setIsClickSmac] = useState(false);
+
+    const [allSalle, setAllSalle] = useState([]);
 
     const REGEX_CHECK_LETTRE_SPACE = /^[a-zA-Z\s].{3,20}$/;
     const REGEX_CHECK_PHONE = /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
@@ -46,6 +45,13 @@ const FormAddSalle = () => {
       smac: true,
       styles: true,
     });
+
+    useEffect(() => {
+        axios
+        .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`)
+        .then((res) => setAllSalle(res.data))
+        .catch((err) => console.log('Pas de GetAll' + err))
+    }, [])
 
     const checkInput = (value, regex) => {
         return regex.test(value) && value != "";
@@ -93,7 +99,7 @@ const FormAddSalle = () => {
     
       
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
-        let newId = id + 1;
+
         // Ajout localisation
         const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
 
@@ -105,7 +111,7 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new SalleIn(newId,nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
+        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
 
 
         await axios

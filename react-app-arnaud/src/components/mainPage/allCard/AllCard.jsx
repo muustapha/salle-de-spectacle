@@ -12,7 +12,7 @@ const AllCard = () => {
     let { nom, ville, styles } = useContext(SearchContext);
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
-    const [allSalle, setAllSalle] = useState([]);
+
 
     useEffect(() => {
         axios
@@ -22,20 +22,10 @@ const AllCard = () => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [salleNotDelete])     
 
-
-    useEffect(() => {
-        axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`)
-        .then((res) => setAllSalle(res.data))
-        .catch((err) => console.log('Pas de GetAll' + err))
-    }, [])
-
     const handelClickNav = () => {
-        let path = `/add-salle/${allSalle.length}`
+        let path = `/add-salle`
         navigate(path);        
     }
-
-
 
     return ( 
     <>
