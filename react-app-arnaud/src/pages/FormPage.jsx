@@ -5,9 +5,7 @@ import EventForm from "../components/formEvent/FormEvent";
 const FormulaireEvent = () => {
     return ( 
         <>
-            <Header />
             <EventForm/>
-            <Footer />
         </>
     );
 }

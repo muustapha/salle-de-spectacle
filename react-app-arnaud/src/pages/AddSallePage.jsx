@@ -6,9 +6,7 @@ import FormAddSalle from "../components/addSalle/FormAddSalle";
 const AddSallePage = () => {
     return ( 
     <>
-        <Header />
         <FormAddSalle />
-        <Footer />
     </> );
 }
  
