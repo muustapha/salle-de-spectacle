@@ -8,7 +8,7 @@ import './DetailPage.css';
 import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis';
 const DetailPage = () => {
   const [salle, setSalle] = useState({});
-  const url = 'http://localhost:27290/api/Salles/id?id=1';
+  const url = 'http://localhost:27290/api/Salles/id?id=2';
   console.log(salle)
   useEffect(() => {
     const fetchData = async () => {
