@@ -6,7 +6,7 @@ import Style from "./ConnectPage.module.css"
 const ConnectPage = () => {
 
     // Permet de changer le form (signIn/SignUp)
-    const [modal,setModal] = useState(true);
+    const [modal,setModal] = useState(false);
 
     const handelClick = () => {
         if (modal) {

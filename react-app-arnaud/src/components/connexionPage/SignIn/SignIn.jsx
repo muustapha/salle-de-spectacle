@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./SignIn.module.css";
 import axios from "axios";
 import { AuthSignIn } from "../../../Models/Auth";
+import { useNavigate } from "react-router-dom";
 
 
 const SignIn = () => {
@@ -12,6 +13,8 @@ const SignIn = () => {
 
     const [errors, setErrors] = useState (true)
 
+    const navigate = useNavigate();
+
     const handelClick = async (e) => {
         e.preventDefault();
 
@@ -21,7 +24,10 @@ const SignIn = () => {
             await axios
                     .post(`${import.meta.env.VITE_REACT_APP_API_URL}Auth/SignIn`, login)
                     .then((res) => {
+                        let path = "/";
                         setErrors(false);
+                        localStorage.setItem("UserRole", JSON.stringify(res.data.isAdmin));
+                        navigate(path);
                         console.log(res)})
                     .catch((err) => {
                         setErrors(true);
