@@ -14,11 +14,11 @@ const SalleDetail = ({nom, adresse, smac, capacite, musicStyles}) => {
                         <p>{adresse.ville}</p>
                         <p>{adresse.codePostal}</p>
                     </div>
-                    <h4 className={styles.h4}>SMAC :</h4>
+                    <h3 className={styles.h3}>SMAC :</h3>
                     <p className={styles.smac}> {smac ? "OUI" : "NON"}</p>
-                    <h5 className={styles.h5}>Capacité :</h5>
+                    <h3 className={styles.h3}>Capacité :</h3>
                     <p className={styles.capacite}>{capacite} Personnes</p>
-                    <h6 className={styles.h6}>Styles :</h6>
+                    <h3 className={styles.h3}>Styles :</h3>
                     <p className={styles.styles}>{musicStyles.toString()} </p>
                 </div>
             </div>
