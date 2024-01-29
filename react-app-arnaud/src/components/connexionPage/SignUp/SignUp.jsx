@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Style from "./SignUp.module.css"
-import { Auth } from "../../../Models/Auth";
+import { AuthSignUp } from "../../../Models/Auth";
 import axios from "axios";
 
 const SignUp = () => {
@@ -58,8 +58,7 @@ const SignUp = () => {
         e.preventDefault();
 
         if (!errors.errorPseudo && !errors.errorMail && !errors.errorPassword && !errors.errorComfirmPassword) {
-            const newUser = new Auth(pseudo, mail, password);
-            console.log(newUser);
+            const newUser = new AuthSignUp(pseudo, mail, password);
 
             await axios
                     .post(`${import.meta.env.VITE_REACT_APP_API_URL}Auth/SignUp`, newUser)
@@ -67,7 +66,7 @@ const SignUp = () => {
                     .catch((err) => console.log(err + "Pas d'inscription"))
             
         } else {
-            console.log("non");
+            console.log("Bad Request");
         }
     }
 

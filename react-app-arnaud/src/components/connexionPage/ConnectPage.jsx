@@ -6,7 +6,7 @@ import Style from "./ConnectPage.module.css"
 const ConnectPage = () => {
 
     // Permet de changer le form (signIn/SignUp)
-    const [modal,setModal] = useState(false);
+    const [modal,setModal] = useState(true);
 
     const handelClick = () => {
         if (modal) {
@@ -21,10 +21,10 @@ const ConnectPage = () => {
     <section className={Style.section}>
         <div className={Style.divBtn}>
             <button onClick={handelClick} 
-                className={!modal ? `${Style.btn} ${Style.btnSignUp} ${Style.isClick}` : `${Style.btn} ${Style.btnSignUp} ${Style.isClickOtherTrue}`}>Inscription
+                className={!modal ? `${Style.btn1} ${Style.btnSignUp} ${Style.isClick}` : `${Style.btn1} ${Style.btnSignUp} ${Style.isClickOtherTrue}`}>Inscription
             </button>
             <button onClick={handelClick} 
-                className={!modal ? `${Style.btn} ${Style.btnSignIn} ${Style.isClickOtherFalse}`: `${Style.btn} ${Style.isClick}`}>Connection
+                className={!modal ? `${Style.btn2} ${Style.btnSignIn} ${Style.isClickOtherFalse}`: `${Style.btn2} ${Style.isClick}`}>Connection
             </button>
         </div>
         <div>

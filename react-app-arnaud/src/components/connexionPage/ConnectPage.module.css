@@ -13,10 +13,17 @@
   align-items: center;
 }
 
-.btn {
+.btn1 {
   width: 100%;
   padding: 5% 0;
   font-size: 20px;
+  border-top-left-radius: 15px;
+}
+.btn2 {
+  width: 100%;
+  padding: 5% 0;
+  font-size: 20px;
+  border-top-right-radius: 15px;
 }
 
 .btnSignUp {
