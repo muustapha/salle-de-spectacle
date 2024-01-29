@@ -21,7 +21,7 @@ const FormAddSalle = () => {
     const [contactTel, setContactTel] = useState("");
     const [capacite, setCapacite] = useState("");
     const [smac, setSmac] = useState("");
-    const [stylesClick, setStylesClick] = useState(false);
+    const [arrayStyle, setArrayStyle] = useState([])
     const [getStyles, setGetStyles] = useState([])
     const [isClickSubmit, setIsClickSubmit] = useState(false);
     const [isClickSmac, setIsClickSmac] = useState(false);
@@ -102,15 +102,20 @@ const FormAddSalle = () => {
     }
     }, [isClickSmac])
 
-    let array = [];
-
     const createArrayStyle = (e) => {
-        if (array.includes(e.target.dataset.style)) {
-            array = array.filter((word) => word != e.target.dataset.style)
+        const style = e.target.dataset.style;
+
+        if (arrayStyle.includes(style)) {
+            setArrayStyle(arrayStyle.filter((word) => word !== style));
         } else {
-            array.push(e.target.dataset.style);
+            setArrayStyle([...arrayStyle, style]);
         }
-        return array;
+
+        if (arrayStyle.length > 0) {
+            errors.styles = false;
+          } else {
+            errors.styles = true
+          }
     }
 
     const boolSmac = (s) => {
@@ -119,7 +124,9 @@ const FormAddSalle = () => {
   
     const handelClick = async(e) => {
       e.preventDefault();       
-    
+
+      console.log(arrayStyle.length);
+
       
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
 
@@ -134,22 +141,18 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(), Number(capacite), boolSmac(smac), [newContact])
-        console.log(newSalle);
-        // if (token) {
-        //     await axios
-        //             .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
-        //             .then((res) => console.log(res))
-        //             .catch((err) => console.log(err + "pas de post"))
-        // }
+        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, arrayStyle, Number(capacite), boolSmac(smac), [newContact])
+        if (token) {
+            await axios
+                    .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err + "pas de post"))
+        }
       } else {
         console.log("non");
-      }
-        
-        
+      } 
     };
   
-
 
     return ( 
     <>
@@ -308,7 +311,7 @@ const FormAddSalle = () => {
                             getStyles.map((s, index) => {
                                 return (
                                     <div className={style.divMap} key={index}>
-                                        <input type="checkbox" data-style={s} onInput={(e) => {createArrayStyle(e);array.length != 0 ? setStylesClick(false) : setStylesClick(true);}} id={s}/>
+                                        <input type="checkbox" data-style={s} onInput={(e) => {createArrayStyle(e);}} id={s}/>
                                         <label className={style.labelStyle} htmlFor={s}>{s}</label>
                                     </div>
                                 )
@@ -316,7 +319,7 @@ const FormAddSalle = () => {
                         }
                     </div>
                     {
-                        (setStylesClick && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
+                        ((arrayStyle.length == 0) && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
                     }
                 </div>
                 <div className={style.divBtn}>

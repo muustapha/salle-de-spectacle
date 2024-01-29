@@ -13,6 +13,8 @@ const AllCard = () => {
     let { nom, ville, styles } = useContext(SearchContext);
     let { role } = useContext(UserContext);
 
+    console.log(role);
+
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
 
@@ -33,13 +35,13 @@ const AllCard = () => {
     <>
         <div className={style.div}>
             {
-                (role != "false") && (
+                (role != "false" || role == null) ? (
                     <div className={style.divCard}>
                         <button className={style.btnAdd}  onClick={handelClickNav}>
                             <FontAwesomeIcon icon={faPlus} className={style.icon}/>
                         </button>
-                    </div>
-                ) 
+                    </div>) : <></>
+                
             }
 
             {

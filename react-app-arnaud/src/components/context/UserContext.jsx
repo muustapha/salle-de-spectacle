@@ -2,15 +2,15 @@
 import { createContext, useState } from "react";
 
 export const UserContext = createContext({
-    token: "",
-    role: "",
+    token: null,
+    role: "false",
     updateUserContext: () => {}
 })
 
 const UserProvider= ({ children }) => {
     const [user, setUser] = useState({
-        token: "",
-        role: "",
+        token: null,
+        role: "false",
     });
 
     const updateUserContext = (field, value) => {
