@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: space-around;
   padding: 10% 3%;
+  background-color: white;
+  border-radius: 15px;
 }
 
 .div {
@@ -30,4 +32,9 @@
   border-radius: 15px;
   font-size: 24px;
   padding: 3% 3%;
+}
+
+.badText {
+  margin: 3% 0;
+  color: red !important;
 }
