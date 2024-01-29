@@ -27,8 +27,8 @@ const SignIn = () => {
                         let path = "/";
                         setErrors(false);
                         localStorage.setItem("UserRole", JSON.stringify(res.data.isAdmin));
-                        navigate(path);
-                        console.log(res)})
+                        localStorage.setItem("UserToken", JSON.stringify(res.data.token));
+                        navigate(path);})
                     .catch((err) => {
                         setErrors(true);
                         console.log("pas connecté" + err);
