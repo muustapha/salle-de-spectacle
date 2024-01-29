@@ -50,7 +50,7 @@ namespace ApiSalleConcert.Models.Services
 
 		public string Authenticate(AuthDtosSignIn u)
 		{
-			Auth user = _mapper.Map<Auth>(u);
+			Auth user = _authCollection.Find(x => x.Mail == u.Mail).FirstOrDefault();
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var tokenKey = Encoding.ASCII.GetBytes(key);

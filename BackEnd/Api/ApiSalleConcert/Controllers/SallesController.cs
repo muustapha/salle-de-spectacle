@@ -24,10 +24,15 @@ namespace ApiSalleConcert.Controllers
 		}
 
 		[HttpGet, Authorize]
-		public async Task<List<SalleRecherche>> Get()
+		public async Task<ActionResult<List<SalleRecherche>>> Get()
 		{
 			var principal = HttpContext.User as ClaimsPrincipal;
 			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+			if (role == "False")
+			{
+				return Unauthorized();
+			}
 
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
@@ -126,6 +131,13 @@ namespace ApiSalleConcert.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(SalleDtoIn newSalles)
 		{
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+			if (role == "False")
+			{
+				return Unauthorized();
+			}
 			Salle s = _mapper.Map<Salle>(newSalles);
 
 			await _sallesService.CreateAsync(s);
@@ -135,8 +147,16 @@ namespace ApiSalleConcert.Controllers
 
 		[Authorize]
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, Salle updatedSalle)
+		public async Task<ActionResult> Update(int id, Salle updatedSalle)
 		{
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+			if (role == "False")
+			{
+				return Unauthorized();
+			}
+
 			var book = await _sallesService.GetAsync(id);
 
 			if (book is null)
@@ -153,8 +173,16 @@ namespace ApiSalleConcert.Controllers
 
 		[Authorize]
 		[HttpDelete("id")]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<ActionResult> Delete(int id)
 		{
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+
+			if (role == "False")
+			{
+				return Unauthorized();
+			}
+
 			var salle = await _sallesService.GetAsync(id);
 
 			if (salle is null)
@@ -170,20 +198,5 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-
-		//[HttpDelete("id")]
-		//public async Task<IActionResult> Delete(int id)
-		//{
-		//	var book = await _sallesService.GetAsync(id);
-
-		//	if (book is null)
-		//	{
-		//		return NotFound();
-		//	}
-
-		//	await _sallesService.RemoveAsync(id);
-
-		//	return NoContent();
-		//}
 	}
 }
