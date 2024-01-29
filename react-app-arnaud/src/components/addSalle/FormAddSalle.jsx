@@ -21,7 +21,8 @@ const FormAddSalle = () => {
     const [contactTel, setContactTel] = useState("");
     const [capacite, setCapacite] = useState("");
     const [smac, setSmac] = useState("");
-    const [styles, setStyles] = useState("");
+    const [stylesClick, setStylesClick] = useState(false);
+    const [getStyles, setGetStyles] = useState([])
     const [isClickSubmit, setIsClickSubmit] = useState(false);
     const [isClickSmac, setIsClickSmac] = useState(false);
 
@@ -32,7 +33,6 @@ const FormAddSalle = () => {
     const REGEX_CHECK_DOUBLE = /(\d+(?:\.\d+)?)/;
     const REGEX_CHECK_INT = /^[0-9]*$/;
     const REGEX_CHECK_CODE_POSTAL = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
-    const REGEX_CHECK_STYLES = /^([a-zA-Z0-9]+\/)+[a-zA-Z0-9]+$/;
   
     const [errors, setErrors] = useState({
       nomSalle: true,
@@ -60,8 +60,15 @@ const FormAddSalle = () => {
              .then((res) => setAllSalle(res.data))
              .catch((err) => console.log('Pas de GetAll' + err))
         }
-        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
+
+    useEffect(() => {
+        axios
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
+            .then((res) => setGetStyles(res.data[0].types))
+            .catch((err) => console.log(err + "Pas de styles"))
+    }, [])
 
     const checkInput = (value, regex) => {
         return regex.test(value) && value != "";
@@ -95,9 +102,15 @@ const FormAddSalle = () => {
     }
     }, [isClickSmac])
 
-    const createArrayStyle = (string) => {
-        const a = string.split('/');
-        return a;
+    let array = [];
+
+    const createArrayStyle = (e) => {
+        if (array.includes(e.target.dataset.style)) {
+            array = array.filter((word) => word != e.target.dataset.style)
+        } else {
+            array.push(e.target.dataset.style);
+        }
+        return array;
     }
 
     const boolSmac = (s) => {
@@ -121,14 +134,14 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
-
-        if (token) {
-            await axios
-                    .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
-                    .then((res) => console.log(res))
-                    .catch((err) => console.log(err + "pas de post"))
-        }
+        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(), Number(capacite), boolSmac(smac), [newContact])
+        console.log(newSalle);
+        // if (token) {
+        //     await axios
+        //             .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
+        //             .then((res) => console.log(res))
+        //             .catch((err) => console.log(err + "pas de post"))
+        // }
       } else {
         console.log("non");
       }
@@ -289,16 +302,21 @@ const FormAddSalle = () => {
                     }
                 </div>
                 <div>
-                    <label className={style.partie} htmlFor="style">Styles* (../../..)</label>
-                    <input 
-                        className={style.input} 
-                        type="text" 
-                        name="style" 
-                        id="style" 
-                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_STYLES, "styles"); setStyles(e.target.value)}}
-                    />
+                    <label className={style.partie} htmlFor="style">Styles*</label>
+                    <div className={style.divStyles}>
+                        {
+                            getStyles.map((s, index) => {
+                                return (
+                                    <div className={style.divMap} key={index}>
+                                        <input type="checkbox" data-style={s} onInput={(e) => {createArrayStyle(e);array.length != 0 ? setStylesClick(false) : setStylesClick(true);}} id={s}/>
+                                        <label className={style.labelStyle} htmlFor={s}>{s}</label>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                     {
-                        (errors.styles && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
+                        (setStylesClick && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
                     }
                 </div>
                 <div className={style.divBtn}>

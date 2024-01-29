@@ -11,7 +11,7 @@ import { UserContext } from '../../context/UserContext';
 const AllCard = () => {
     //Récup du context
     let { nom, ville, styles } = useContext(SearchContext);
-    let { token, role } = useContext(UserContext);
+    let { role } = useContext(UserContext);
 
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
