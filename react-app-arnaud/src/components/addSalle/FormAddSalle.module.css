@@ -2,7 +2,7 @@
   background: white;
   width: 80%;
   margin: 10% auto;
-  padding: 3%;
+  padding: 4%;
   box-shadow: 0 0 4px 0 black;
   border-radius: 15px;
   height: 190vh;
@@ -29,7 +29,7 @@
 .divColumn {
   display: flex;
   flex-direction: column;
-  margin-top: 3%;
+  margin-top: 5%;
 }
 
 .partie {

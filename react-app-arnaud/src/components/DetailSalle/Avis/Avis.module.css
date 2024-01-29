@@ -1,0 +1,39 @@
+.avis{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items:left ;
+    width: 67%;
+    height: 11vh;
+    padding: 0 1rem;
+    overflow: auto;
+    background-color:#fdfdfb;
+    border-radius: 15px;
+    box-shadow: 0 0 4px 0 black;
+    transition: all 0.3s ease-in-out;
+    margin: 0 auto;
+margin-top: 1rem;
+
+}
+.title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin: auto;
+}
+
+.date{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+   
+}
+
+.note{
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}   
