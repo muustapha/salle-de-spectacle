@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./FormAddSalle.module.css";
 import { Adresse } from '../../Models/Adresse';
 import { Contact } from '../../Models/Contact';
 import { Localisation } from '../../Models/Localisation';
 import { SalleIn } from '../../Models/Salle';
 import axios from "axios";
-
+import { UserContext } from '../context/UserContext';
 
 const FormAddSalle = () => {
+
+    const { token } = useContext(UserContext)
 
     const [nomSalle, setNomSalle] = useState("");
     const [adresseNum, setAdresseNum] = useState("");
@@ -46,12 +48,20 @@ const FormAddSalle = () => {
       styles: true,
     });
 
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`},
+    }
+
     useEffect(() => {
-        axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`)
-        .then((res) => setAllSalle(res.data))
-        .catch((err) => console.log('Pas de GetAll' + err))
-    }, [])
+        if (token) {
+            axios
+             .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, config)
+             .then((res) => setAllSalle(res.data))
+             .catch((err) => console.log('Pas de GetAll' + err))
+        }
+        
+    }, [token])
 
     const checkInput = (value, regex) => {
         return regex.test(value) && value != "";
@@ -113,11 +123,12 @@ const FormAddSalle = () => {
         //Création de la salle
         const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
 
-
-        await axios
-                .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle)
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err + "pas de post"))
+        if (token) {
+            await axios
+                    .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err + "pas de post"))
+        }
       } else {
         console.log("non");
       }

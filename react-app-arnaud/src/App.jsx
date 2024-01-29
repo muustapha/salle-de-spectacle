@@ -10,14 +10,14 @@ function App() {
   useEffect(() => {
       const userRole = localStorage.getItem('UserRole');
       const userToken = localStorage.getItem('UserToken');
-  
+
       if (userRole && userToken) {
-        updateUserContext("token", userToken);
+        let token = userToken.substr(1)
+        token = token.slice(0,-1)
+        updateUserContext("token", token);
         updateUserContext("role", userRole);
       }
   }, []);
-
-
 
   return (
     <>   

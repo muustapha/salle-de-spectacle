@@ -28,15 +28,20 @@ const AllCard = () => {
         let path = `/add-salle`
         navigate(path);        
     }
-
+    
     return ( 
     <>
         <div className={style.div}>
-            <div className={style.divCard}>
-                <button className={style.btnAdd}  onClick={handelClickNav}>
-                    <FontAwesomeIcon icon={faPlus} className={style.icon}/>
-                 </button>
-            </div>
+            {
+                (role != "false") && (
+                    <div className={style.divCard}>
+                        <button className={style.btnAdd}  onClick={handelClickNav}>
+                            <FontAwesomeIcon icon={faPlus} className={style.icon}/>
+                        </button>
+                    </div>
+                ) 
+            }
+
             {
                 salleNotDelete.map((salle) => {
                     return <Card {...salle}  key={salle.id}/>
