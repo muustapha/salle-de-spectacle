@@ -11,7 +11,9 @@ import { UserContext } from '../../context/UserContext';
 const AllCard = () => {
     //Récup du context
     let { nom, ville, styles } = useContext(SearchContext);
-    let { token, role } = useContext(UserContext);
+    let { role } = useContext(UserContext);
+
+    console.log(role);
 
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
@@ -28,15 +30,20 @@ const AllCard = () => {
         let path = `/add-salle`
         navigate(path);        
     }
-
+    
     return ( 
     <>
         <div className={style.div}>
-            <div className={style.divCard}>
-                <button className={style.btnAdd}  onClick={handelClickNav}>
-                    <FontAwesomeIcon icon={faPlus} className={style.icon}/>
-                 </button>
-            </div>
+            {
+                (role != "false" || role == null) ? (
+                    <div className={style.divCard}>
+                        <button className={style.btnAdd}  onClick={handelClickNav}>
+                            <FontAwesomeIcon icon={faPlus} className={style.icon}/>
+                        </button>
+                    </div>) : <></>
+                
+            }
+
             {
                 salleNotDelete.map((salle) => {
                     return <Card {...salle}  key={salle.id}/>

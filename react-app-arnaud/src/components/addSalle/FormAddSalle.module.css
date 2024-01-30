@@ -78,3 +78,20 @@
   margin: 2% 0;
   color: red !important;
 }
+
+.divMap {
+  display: flex;
+  align-items: center;
+  margin: 5% 0;
+}
+
+.divStyles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 5%;
+}
+
+.labelStyle {
+  font-size: 24px;
+  margin-left: 5%;
+}
