@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./FormAddSalle.module.css";
 import { Adresse } from '../../Models/Adresse';
 import { Contact } from '../../Models/Contact';
 import { Localisation } from '../../Models/Localisation';
 import { SalleIn } from '../../Models/Salle';
 import axios from "axios";
-
+import { UserContext } from '../context/UserContext';
 
 const FormAddSalle = () => {
+
+    const { token } = useContext(UserContext)
 
     const [nomSalle, setNomSalle] = useState("");
     const [adresseNum, setAdresseNum] = useState("");
@@ -19,7 +21,8 @@ const FormAddSalle = () => {
     const [contactTel, setContactTel] = useState("");
     const [capacite, setCapacite] = useState("");
     const [smac, setSmac] = useState("");
-    const [styles, setStyles] = useState("");
+    const [arrayStyle, setArrayStyle] = useState([])
+    const [getStyles, setGetStyles] = useState([])
     const [isClickSubmit, setIsClickSubmit] = useState(false);
     const [isClickSmac, setIsClickSmac] = useState(false);
 
@@ -30,7 +33,6 @@ const FormAddSalle = () => {
     const REGEX_CHECK_DOUBLE = /(\d+(?:\.\d+)?)/;
     const REGEX_CHECK_INT = /^[0-9]*$/;
     const REGEX_CHECK_CODE_POSTAL = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
-    const REGEX_CHECK_STYLES = /^([a-zA-Z0-9]+\/)+[a-zA-Z0-9]+$/;
   
     const [errors, setErrors] = useState({
       nomSalle: true,
@@ -46,11 +48,26 @@ const FormAddSalle = () => {
       styles: true,
     });
 
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`},
+    }
+
+    useEffect(() => {
+        if (token) {
+            axios
+             .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, config)
+             .then((res) => setAllSalle(res.data))
+             .catch((err) => console.log('Pas de GetAll' + err))
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token])
+
     useEffect(() => {
         axios
-        .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`)
-        .then((res) => setAllSalle(res.data))
-        .catch((err) => console.log('Pas de GetAll' + err))
+            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
+            .then((res) => setGetStyles(res.data[0].types))
+            .catch((err) => console.log(err + "Pas de styles"))
     }, [])
 
     const checkInput = (value, regex) => {
@@ -85,9 +102,20 @@ const FormAddSalle = () => {
     }
     }, [isClickSmac])
 
-    const createArrayStyle = (string) => {
-        const a = string.split('/');
-        return a;
+    const createArrayStyle = (e) => {
+        const style = e.target.dataset.style;
+
+        if (arrayStyle.includes(style)) {
+            setArrayStyle(arrayStyle.filter((word) => word !== style));
+        } else {
+            setArrayStyle([...arrayStyle, style]);
+        }
+
+        if (arrayStyle.length > 0) {
+            errors.styles = false;
+          } else {
+            errors.styles = true
+          }
     }
 
     const boolSmac = (s) => {
@@ -96,7 +124,9 @@ const FormAddSalle = () => {
   
     const handelClick = async(e) => {
       e.preventDefault();       
-    
+
+      console.log(arrayStyle.length);
+
       
       if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
 
@@ -111,21 +141,18 @@ const FormAddSalle = () => {
         const newContact = new Contact(contactTel)
 
         //Création de la salle
-        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, createArrayStyle(styles), Number(capacite), boolSmac(smac), [newContact])
-
-
-        await axios
-                .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle)
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err + "pas de post"))
+        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, arrayStyle, Number(capacite), boolSmac(smac), [newContact])
+        if (token) {
+            await axios
+                    .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err + "pas de post"))
+        }
       } else {
         console.log("non");
-      }
-        
-        
+      } 
     };
   
-
 
     return ( 
     <>
@@ -278,16 +305,21 @@ const FormAddSalle = () => {
                     }
                 </div>
                 <div>
-                    <label className={style.partie} htmlFor="style">Styles* (../../..)</label>
-                    <input 
-                        className={style.input} 
-                        type="text" 
-                        name="style" 
-                        id="style" 
-                        onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_STYLES, "styles"); setStyles(e.target.value)}}
-                    />
+                    <label className={style.partie} htmlFor="style">Styles*</label>
+                    <div className={style.divStyles}>
+                        {
+                            getStyles.map((s, index) => {
+                                return (
+                                    <div className={style.divMap} key={index}>
+                                        <input type="checkbox" data-style={s} onInput={(e) => {createArrayStyle(e);}} id={s}/>
+                                        <label className={style.labelStyle} htmlFor={s}>{s}</label>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                     {
-                        (errors.styles && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
+                        ((arrayStyle.length == 0) && isClickSubmit) && (<p className={style.badText}>Veuillez respecter lécriture valide.</p>)
                     }
                 </div>
                 <div className={style.divBtn}>
