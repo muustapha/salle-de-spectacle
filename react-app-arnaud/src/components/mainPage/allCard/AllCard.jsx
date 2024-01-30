@@ -25,7 +25,8 @@ const AllCard = () => {
     }, [nom, ville, styles])     
 
     const handelClickNav = () => {
-        let path = `/add-salle`
+        let id = 0;
+        let path = `/formSalle/${id}`
         navigate(path);        
     }
     

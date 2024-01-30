@@ -6,8 +6,10 @@ import { Localisation } from '../../Models/Localisation';
 import { SalleIn } from '../../Models/Salle';
 import axios from "axios";
 import { UserContext } from '../context/UserContext';
+import { useParams } from "react-router-dom";
 
 const FormAddSalle = () => {
+    const { id } = useParams();
 
     const { token } = useContext(UserContext)
 
@@ -28,12 +30,13 @@ const FormAddSalle = () => {
 
     const [allSalle, setAllSalle] = useState([]);
 
+//#region regex
     const REGEX_CHECK_LETTRE_SPACE = /^[a-zA-Z\s].{3,20}$/;
     const REGEX_CHECK_PHONE = /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
     const REGEX_CHECK_DOUBLE = /(\d+(?:\.\d+)?)/;
     const REGEX_CHECK_INT = /^[0-9]*$/;
     const REGEX_CHECK_CODE_POSTAL = /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/;
-  
+//#endregion
     const [errors, setErrors] = useState({
       nomSalle: true,
       adresseNum: true,
@@ -48,11 +51,161 @@ const FormAddSalle = () => {
       styles: true,
     });
 
+        // Récup des styles disponibles
+        useEffect(() => {
+            axios
+                .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
+                .then((res) => setGetStyles(res.data[0].types))
+                .catch((err) => console.log(err + "Pas de styles"))
+        }, [])
+
+    const displayInfo = (data) => {
+        const allInputText = document.querySelectorAll("[data-input]");
+        const allInputRadio = document.querySelectorAll('[data-radio]');
+        const allInputStyles = document.querySelectorAll("[data-style]")
+
+        allInputText.forEach((input) => {
+            switch (input.dataset.input){
+                case "nom":
+                    if (data.nom != null) { 
+                        setNomSalle(data.nom);
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            nomSalle: false
+                        }));
+                    }
+                    break;
+                case "adresseNum":
+                    if (data.adresseSalle.numero != null) { 
+                        setAdresseNum(data.adresseSalle.numero)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            adresseNum: false
+                        }));
+                    }
+                    break;
+                case "adresseVoie": 
+                    if (data.adresseSalle.voie != null) { 
+                        setAdresseVoie(data.adresseSalle.voie)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            adresseVoie: false
+                        }));
+                    }
+                    break;
+                case "adresseCodePostal": 
+                    if (data.adresseSalle.codePostal != null) { 
+                        setAdresseCodePostal(data.adresseSalle.codePostal)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            adresseCodePostal: false
+                        }));
+                    }
+                    break;
+                case "adresseVille":
+                    if (data.adresseSalle.ville != null) { 
+                        setAdresseVille(data.adresseSalle.ville)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            adresseVille: false
+                        }));
+                    }
+                    break;
+                case "localisationX":
+                    if (data.adresseSalle.localisationAdresse.coordinates[0] != null) { 
+                        setLocalisationX(data.adresseSalle.localisationAdresse.coordinates[0])
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            localisationX: false
+                        }));
+                    }
+                    break;    
+                case "localisaiontY":
+                    if (data.adresseSalle.localisationAdresse.coordinates[1] != null) { 
+                        setLocalisationY(data.adresseSalle.localisationAdresse.coordinates[1])
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            localisationY: false
+                        }));
+                    }
+                    break;            
+                case "contactTel":
+                    if (data.contactSalle != null) { 
+                        setContactTel(data.contactSalle[0].telephone)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            contactTel: false
+                        }));
+                    }
+                    break;      
+                case "capacite":
+                    if (data.capacite != null) { 
+                        setCapacite(data.capacite)
+                        setErrors((elemnt) => ({
+                            ...elemnt,
+                            capacite: false
+                        }));
+                    }
+                    break;     
+                default:
+                    break;
+            }
+        })
+
+        allInputRadio.forEach((radio) => {
+            if (radio.dataset.radio == "true" && data.smac) {
+                radio.checked = true;
+                setErrors((elemnt) => ({
+                    ...elemnt,
+                    smac: false
+                }));
+            } else if (radio.dataset.radio == "false" && !data.smac) {
+                radio.checked = true;
+                setErrors((elemnt) => ({
+                    ...elemnt,
+                    smac: false
+                }));
+            } else {
+                radio.checked = false;
+            }
+        })
+
+        allInputStyles.forEach((style) => {
+            const styleIdLower = style.id.toLowerCase();
+            if (data.styles.includes(styleIdLower)) {
+                style.checked = true;
+                setErrors((elemnt) => ({
+                    ...elemnt,
+                    styles: false
+                }));
+                console.log('oui');
+            } else {
+                style.checked = false;
+                console.log('non');
+            }
+        });
+
+    }
+
+    useEffect(() => {
+            if (id != 0) {
+                axios
+                .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/id?id=${id}`)
+                .then((res) => {
+                    displayInfo(res.data)
+                })
+                .catch((err) => console.log('Pas de GetAll' + err))
+            }
+
+        }, [])
+
+
     const config = {
         headers: {
           Authorization: `Bearer ${token}`},
     }
 
+    // Récup du nombre de salle dans la bdd
     useEffect(() => {
         if (token) {
             axios
@@ -63,13 +216,9 @@ const FormAddSalle = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
-    useEffect(() => {
-        axios
-            .get(`${import.meta.env.VITE_REACT_APP_API_URL}Style`)
-            .then((res) => setGetStyles(res.data[0].types))
-            .catch((err) => console.log(err + "Pas de styles"))
-    }, [])
 
+
+    //Vérif des inputs
     const checkInput = (value, regex) => {
         return regex.test(value) && value != "";
     }
@@ -102,6 +251,11 @@ const FormAddSalle = () => {
     }
     }, [isClickSmac])
 
+    const boolSmac = (s) => {
+       return s == "true" ? true : false 
+    } 
+
+    // Création du tableau avec les styles
     const createArrayStyle = (e) => {
         const style = e.target.dataset.style;
 
@@ -118,42 +272,41 @@ const FormAddSalle = () => {
           }
     }
 
-    const boolSmac = (s) => {
-       return s == "true" ? true : false 
-    } 
-  
+    // Activation de la route POST / PUT /DELETE
     const handelClick = async(e) => {
       e.preventDefault();       
-
-      console.log(arrayStyle.length);
-
-      
-      if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
-
-        // Ajout localisation
-        const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
-
-
-        // Ajout Adresse
-        const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
-
-        // Ajout Contact
-        const newContact = new Contact(contactTel)
-
+        if (id == 0) {
+            console.log("Post");
+            // Check si tout est bon
+            if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
+                
+                // Ajout localisation
+                const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
+                
+                
+                // Ajout Adresse
+                const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
+                
+                // Ajout Contact
+                const newContact = new Contact(contactTel)
+                
         //Création de la salle
         const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, arrayStyle, Number(capacite), boolSmac(smac), [newContact])
         if (token) {
             await axios
-                    .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
-                    .then((res) => console.log(res))
-                    .catch((err) => console.log(err + "pas de post"))
+            .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err + "pas de post"))
         }
-      } else {
-        console.log("non");
-      } 
+        } else {
+        console.log("Post non effectuer");
+        } 
+        } else {
+        console.log('update');
+        }
     };
-  
-
+    
+    
     return ( 
     <>
         <section className={style.section}>
@@ -166,6 +319,8 @@ const FormAddSalle = () => {
                         type="text" 
                         name="name" 
                         id="name"  
+                        defaultValue={nomSalle}
+                        data-input="nom"
                         onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "nomSalle"); setNomSalle(e.target.value)}
                     }/>
                     {
@@ -179,8 +334,10 @@ const FormAddSalle = () => {
                         <input 
                             className={style.input}
                             type="text" 
-                            name="" 
+                            name="num" 
                             id="num" 
+                            defaultValue={adresseNum}
+                            data-input="adresseNum"
                             onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_INT, "adresseNum"); setAdresseNum(e.target.value)}}
                         />
                         {
@@ -194,6 +351,8 @@ const FormAddSalle = () => {
                         type="text" 
                         name="voie" 
                         id="voie" 
+                        defaultValue={adresseVoie}
+                        data-input="adresseVoie"
                         onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVoie"); setAdresseVoie(e.target.value)}} 
                         />
                         {
@@ -207,6 +366,8 @@ const FormAddSalle = () => {
                             type="number" 
                             name="postal" 
                             id="postal"  
+                            defaultValue={adresseCodePostal}
+                            data-input="adresseCodePostal"
                             onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_CODE_POSTAL, "adresseCodePostal"); setAdresseCodePostal(e.target.value)}}
                         />
                         {
@@ -220,6 +381,8 @@ const FormAddSalle = () => {
                             type="text" 
                             name="ville" 
                             id="ville" 
+                            defaultValue={adresseVille}
+                            data-input="adresseVille"
                             onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_LETTRE_SPACE, "adresseVille"); setAdresseVille(e.target.value)}}
                         />
                         {
@@ -237,6 +400,8 @@ const FormAddSalle = () => {
                                  type="text" 
                                  name="coordonnees-x" 
                                  id="coordonnees-x" 
+                                 defaultValue={localisationX}
+                                 data-input="localisationX"
                                  onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_DOUBLE, "localisationX"); setLocalisationX(e.target.value)}}
                             />
                         {
@@ -250,6 +415,8 @@ const FormAddSalle = () => {
                                 type="text" 
                                 name="coordonnees-y" 
                                 id="coordonnees-y" 
+                                defaultValue={localisationY}
+                                data-input="localisaiontY"
                                 onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_DOUBLE, "localisationY"); setLocalisationY(e.target.value)}}
                             />
                         {
@@ -268,6 +435,8 @@ const FormAddSalle = () => {
                             type="tel" 
                             name="tel" 
                             id="tel" 
+                            defaultValue={contactTel}
+                            data-input="contactTel"
                             onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_PHONE, "contactTel"); setContactTel(e.target.value)}}
                         />
                         {
@@ -282,6 +451,8 @@ const FormAddSalle = () => {
                         type="number" 
                         name="capacite" 
                         id="capacite" 
+                        defaultValue={capacite}
+                        data-input="capacite"
                         onChange={(e) => {checkValidity(e.target.value, REGEX_CHECK_INT, "capacite"); setCapacite(e.target.value)}}
                     />
                     {
