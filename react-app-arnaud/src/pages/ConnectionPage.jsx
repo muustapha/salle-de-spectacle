@@ -1,5 +1,11 @@
+import ConnectPage from '../components/connexionPage/ConnectPage'
+
 const ConnectionPage = () => {
-    return ( <><h1>connexion</h1></> );
+    return ( 
+        <>
+            <ConnectPage />
+        </>
+     );
 }
  
 export default ConnectionPage;

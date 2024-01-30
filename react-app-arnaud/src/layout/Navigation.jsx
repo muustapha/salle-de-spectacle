@@ -9,7 +9,10 @@ import AddSallePage from "../pages/AddSallePage";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 
+ 
 const Navigation = () => {
+
+
 
     return ( 
     <>

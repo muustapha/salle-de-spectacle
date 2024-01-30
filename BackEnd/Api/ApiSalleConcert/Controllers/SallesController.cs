@@ -148,17 +148,18 @@ namespace ApiSalleConcert.Controllers
 
 		[Authorize]
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, Salle updatedSalle)
+		public async Task<ActionResult> Update(int id, Salle updatedSalle)
 		{
-            var principal = HttpContext.User as ClaimsPrincipal;
-            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+			var principal = HttpContext.User as ClaimsPrincipal;
+			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
 
-            if (role == "False")
-            {
-                return Unauthorized();
-            }
+			if (role == "False")
+			{
+				return Unauthorized();
+			}
 
-            var book = await _sallesService.GetAsync(id);
+			var book = await _sallesService.GetAsync(id);
+
 
 			if (book is null)
 			{
@@ -174,7 +175,7 @@ namespace ApiSalleConcert.Controllers
 
 		[Authorize]
 		[HttpDelete("id")]
-		public async Task<IActionResult> Delete(int id)
+		public async Task<ActionResult> Delete(int id)
 		{
             var principal = HttpContext.User as ClaimsPrincipal;
             var role = principal.FindFirst(ClaimTypes.Role)?.Value;
@@ -199,20 +200,5 @@ namespace ApiSalleConcert.Controllers
 			return NoContent();
 		}
 
-
-		//[HttpDelete("id")]
-		//public async Task<IActionResult> Delete(int id)
-		//{
-		//	var book = await _sallesService.GetAsync(id);
-
-		//	if (book is null)
-		//	{
-		//		return NotFound();
-		//	}
-
-		//	await _sallesService.RemoveAsync(id);
-
-		//	return NoContent();
-		//}
 	}
 }

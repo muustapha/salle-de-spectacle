@@ -6,13 +6,15 @@ import style from './AllCard.module.css';
 import Card from './card/Card';
 import { SearchContext } from '../../context/SearchContext';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 const AllCard = () => {
     //Récup du context
     let { nom, ville, styles } = useContext(SearchContext);
+    let { token, role } = useContext(UserContext);
+
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
-
 
     useEffect(() => {
         axios
@@ -20,7 +22,7 @@ const AllCard = () => {
             .then((res) => setsalleNotDelete(res.data))
             .catch((err) => console.log('Pas de GetAll' + err))
             // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [salleNotDelete])     
+    }, [nom, ville, styles])     
 
     const handelClickNav = () => {
         let path = `/add-salle`

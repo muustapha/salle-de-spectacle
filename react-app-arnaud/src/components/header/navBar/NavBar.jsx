@@ -1,30 +1,27 @@
-import { useNavigate } from "react-router-dom";
 import style from "./NavBar.module.css"
 import PropTypes from "prop-types";
 
 const NavBar = ({menu}) => {
-
-    let navigate = useNavigate();
-    
+ 
 
     const test = (e) => {
         let path;
         switch(e.target.dataset.menu) {
             case "accueil":
                 path = "/";
-                navigate(path);
+                window.location = path;
                 break;
             case "connexion":
                 path = "/connexion";
-                navigate(path);
+                window.location = path;
                 break;
             case "profile":
                 path = "/profil"
-                navigate(path);
+                window.location = path;
                 break;
             default:
                 path = "/";
-                navigate(path);
+                window.location = path;
         }
         
     }

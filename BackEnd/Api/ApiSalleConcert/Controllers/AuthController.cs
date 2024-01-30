@@ -37,7 +37,7 @@ namespace ApiSalleConcert.Controllers
 			return auth;
 		}
 
-		[Authorize]
+		[AllowAnonymous]
 		[HttpPost("SignUp")]
 		public async Task<IActionResult> SignUp(AuthDtosSignUp newAuth)
 		{
