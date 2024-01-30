@@ -1,6 +1,6 @@
 
 import React from 'react';
-import styles from './AjouterAvis.module.css';
+import styles from './AjouterEvenement.module.css';
 
 function AjouterEvenement() {
     return (

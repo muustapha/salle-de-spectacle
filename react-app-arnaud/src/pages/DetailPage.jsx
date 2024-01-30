@@ -5,8 +5,7 @@ import CarteInteractive from '../components/DetailSalle/CarteInteractive/CarteIn
 import Calendrier from '../components/DetailSalle/Calendrier/Calendrier';
 import Avis from '../components/DetailSalle/Avis/Avis';
 import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis';
-import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis'; 
-
+import AjouterEvenement from '../components/DetailSalle/AjouterEvenement/AjouterEvenement';
 import './DetailPage.css';
 
 const DetailPage = () => {
@@ -55,9 +54,9 @@ const DetailPage = () => {
         salle.listeAvis.map((avis) => {return <Avis date={avis.date} note={avis.note} />})
 
        }</div>
-           <AjouterAvis />
-
+         <div className='boutton'>  <AjouterAvis />
            <AjouterEvenement />
+           </div>
     </>
   );
 }

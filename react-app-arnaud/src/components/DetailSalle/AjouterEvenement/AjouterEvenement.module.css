@@ -1,0 +1,30 @@
+.bouton {
+    background-color: var(--color3);
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .bouton:hover {
+    background-color:  #8c9c7c;;
+  }
+  
+  .bouton:active {
+    background-color:  var(--color3);
+    box-shadow: 0 0 4px 0 black;
+    transform: translateY(4px);
+  }
+  
+  .ajouterEvenement{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Ceci est juste un exemple, ajustez la hauteur comme vous le souhaitez */
+}
