@@ -10,7 +10,7 @@ function Avis({ date, note }) {
 
     return (
       <>         
-      {/* <p className={styles.title}>Avis : </p>  */}
+      
       
         <div className={styles.avis}>                      
                       <p className={styles.note}>Note : {note}/10 </p>           

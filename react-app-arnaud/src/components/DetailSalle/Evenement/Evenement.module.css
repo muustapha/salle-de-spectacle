@@ -1,0 +1,15 @@
+.evenement{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.Artiste{ 
+    font-size: 125%;
+}
+
+.date{
+    font-size: 125%;
+}
