@@ -178,10 +178,8 @@ const FormAddSalle = () => {
                     ...elemnt,
                     styles: false
                 }));
-                console.log('oui');
             } else {
                 style.checked = false;
-                console.log('non');
             }
         });
 
