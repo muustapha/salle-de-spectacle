@@ -170,16 +170,19 @@ const FormAddSalle = () => {
             }
         })
 
+
         allInputStyles.forEach((style) => {
             const styleIdLower = style.id.toLowerCase();
-            if (data.styles.includes(styleIdLower)) {
-                style.checked = true;
-                setErrors((elemnt) => ({
-                    ...elemnt,
-                    styles: false
-                }));
-            } else {
-                style.checked = false;
+            if (data.styles.length != 0) {
+                if (data.styles.includes(styleIdLower)) {
+                    style.checked = true;
+                    setErrors((elemnt) => ({
+                        ...elemnt,
+                        styles: false
+                    }));
+                } else {
+                    style.checked = false;
+                }
             }
         });
 
@@ -195,7 +198,7 @@ const FormAddSalle = () => {
                 .catch((err) => console.log('Pas de GetAll' + err))
             }
 
-        }, [])
+        }, [getStyles])
 
 
     const config = {
