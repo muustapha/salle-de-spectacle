@@ -3,6 +3,8 @@ import style from "./SignIn.module.css";
 import axios from "axios";
 import { AuthSignIn } from "../../../Models/Auth";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
 
 
 const SignIn = () => {
@@ -12,6 +14,8 @@ const SignIn = () => {
     const [isClick, setIsCLick] = useState(false);
 
     const [errors, setErrors] = useState (true)
+
+    const { updateUserContext } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -28,6 +32,7 @@ const SignIn = () => {
                         setErrors(false);
                         localStorage.setItem("UserRole", JSON.stringify(res.data.isAdmin));
                         localStorage.setItem("UserToken", JSON.stringify(res.data.token));
+                        putIntoContext();
                         navigate(path);})
                     .catch((err) => {
                         setErrors(true);
@@ -35,6 +40,18 @@ const SignIn = () => {
                     })
         } else {
             setErrors(true);
+        }
+    }
+
+    const putIntoContext = () => {
+        const userRole = localStorage.getItem('UserRole');
+        const userToken = localStorage.getItem('UserToken');
+        
+        if (userRole && userToken) {
+            let token = userToken.substr(1)
+            token = token.slice(0,-1)
+            updateUserContext("token", token);
+            updateUserContext("role", userRole);
         }
     }
 

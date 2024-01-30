@@ -13,8 +13,6 @@ const AllCard = () => {
     let { nom, ville, styles } = useContext(SearchContext);
     let { role } = useContext(UserContext);
 
-    console.log(role);
-
     let navigate = useNavigate();
     const [salleNotDelete, setsalleNotDelete] = useState([]);
 
