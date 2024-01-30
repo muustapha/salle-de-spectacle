@@ -4,8 +4,11 @@ import axios from 'axios';
 import CarteInteractive from '../components/DetailSalle/CarteInteractive/CarteInteractive';
 import Calendrier from '../components/DetailSalle/Calendrier/Calendrier';
 import Avis from '../components/DetailSalle/Avis/Avis';
-import './DetailPage.css';
 import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis';
+import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis'; 
+
+import './DetailPage.css';
+
 const DetailPage = () => {
   const [salle, setSalle] = useState({});
   const url = 'http://localhost:27290/api/Salles/id?id=2';
@@ -52,8 +55,9 @@ const DetailPage = () => {
         salle.listeAvis.map((avis) => {return <Avis date={avis.date} note={avis.note} />})
 
        }</div>
+           <AjouterAvis />
 
-<AjouterAvis />
+           <AjouterEvenement />
     </>
   );
 }
