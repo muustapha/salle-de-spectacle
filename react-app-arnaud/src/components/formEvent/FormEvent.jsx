@@ -1,10 +1,34 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import style from "./FormEvent.module.css"
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import { UserContext } from '../context/UserContext';
 
 const FormEvent = () => 
 {
-    let nomSalle = localStorage.getItem("nomSalle")
+    const [salle, setSalle] = useState({});
+
+    let {id} = useParams();
+    console.log(id)
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/id?id=${id}`);
+            console.log(response.data)
+            if (response.data) {
+              setSalle(response.data);
+            } else {
+              throw new Error('No data received');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+    
+        fetchData();
+    }, []);
+
     const [enableSubmit, setEnableSubmit] = useState(false);
     const [prixWarn, setprixWarn] = useState(false);
     const artisteRef = useRef(null);
@@ -14,6 +38,8 @@ const FormEvent = () =>
     const arrayRef = [artisteRef, prixRef, styleRef, dateRef];
     
     const [allStyle, setAllStyle] = useState([]);
+
+    console.log(salle)
 
     useEffect(() => {
         axios
@@ -49,17 +75,23 @@ const FormEvent = () =>
             createEvent()
         }
     }
+    const { token } = useContext(UserContext)
 
     function createEvent()
     {
+        const config = {
+            headers: {
+              Authorization: `Bearer ${token}`},
+        }
+
         axios.post("https://localhost:44371/api/Event",
         {
-            idSalle: localStorage.getItem("idSalle"),
+            idSalle: id,
             artiste: artisteRef.current.value,
             prix: prixRef.current.value,
             style: styleRef.current.value,
             date: dateRef.current.value
-        }).then((response) => {
+        }, config).then((response) => {
          console.log(response);
         });
     }
@@ -69,7 +101,7 @@ const FormEvent = () =>
         <div className={style.formList}>
             <div className={style.formDiv}>
                 <label htmlFor="nom" className={style.label}>Nom salle :</label>
-                <br/><input type="text" id="nomSalle" onChange={checkInputs} readOnly="true" value={nomSalle} className={style.readOnly}/>
+                <br/><input type="text" id="nomSalle" defaultValue={salle.nom} readOnly className={style.readOnly}/>
             </div>
             <div className={style.formDiv}>
                 <label htmlFor="artiste" className={style.label}>Artiste :</label>
@@ -85,9 +117,10 @@ const FormEvent = () =>
                 <br/><select type="text" id="style" onChange={checkInputs} ref={styleRef} className={style.select}>
                     <option value="">Choisir le style de musique</option>
                     {
-                        allStyle.map((s, index) => {
+                        (salle.styles != undefined) ? 
+                        salle.styles.map((s, index) => {
                            return <option key={index}>{s}</option>
-                        })
+                        }) : <></>                
                     }
                 </select>
             </div>
