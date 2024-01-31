@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const NavBar = ({menu, setMenu}) => {
  
     let { token } = useContext(UserContext)
+    const { updateUserContext } = useContext(UserContext);
 
     let navigate = useNavigate()
 
@@ -43,8 +44,9 @@ const NavBar = ({menu, setMenu}) => {
 
     const logOut = () => {
         localStorage.clear();
+        updateUserContext("token", null)
+        updateUserContext("role", "false")
     }
-
 
     return ( 
     <>
