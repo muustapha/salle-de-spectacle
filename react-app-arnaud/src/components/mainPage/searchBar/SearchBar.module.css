@@ -25,7 +25,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 8%;
+  background: white;
+  border-radius: 15px;
 }
 
 .btn {
@@ -34,4 +35,23 @@
   background-color: var(--color3);
   font-size: 24px;
   border-radius: 15px;
+  margin-bottom: 5%;
+}
+
+@media screen and (min-width: 768px) {
+  .SearchBarContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .SearchBarContainerLabelInput {
+    margin: 3%;
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    padding: 2%;
+    width: 70%;
+  }
 }

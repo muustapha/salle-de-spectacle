@@ -6,7 +6,7 @@ import Style from "./ConnectPage.module.css"
 const ConnectPage = () => {
 
     // Permet de changer le form (signIn/SignUp)
-    const [modal,setModal] = useState(false);
+    const [modal,setModal] = useState(true);
 
     const handelClick = () => {
         if (modal) {
@@ -28,7 +28,7 @@ const ConnectPage = () => {
             </button>
         </div>
         <div>
-            { modal ? <SignIn /> : <SignUp /> }
+            { modal ? <SignUp />  : <SignIn />}
         </div>
     </section>
     </>

@@ -52,10 +52,10 @@ const SearchBar = () => {
                     }
                 </select>
             </div>
+        </div>
             <div className={style.divBtn}>
                 <button className={style.btn} onClick={resetSearch}>Reset</button>
             </div>
-        </div>
     </>
     );
 }
