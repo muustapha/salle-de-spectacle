@@ -174,10 +174,8 @@ const FormAddSalle = () => {
 
 
         allInputStyles.forEach((style) => {
-            console.log(data.styles);
             if (data.styles.length != 0) {
                 if (data.styles.includes(style.id)) {
-                    console.log('ouui');
                     style.checked = true;
                     setErrors((elemnt) => ({
                         ...elemnt,
@@ -186,7 +184,6 @@ const FormAddSalle = () => {
                     setArrayStyle([...arrayStyle, style.id]);
                 } else {
                     style.checked = false;
-                    console.log('non');
                 }
             }
         });
@@ -283,36 +280,34 @@ const FormAddSalle = () => {
     // Activation de la route POST / PUT /DELETE
     const handelClick = async(e) => {
       e.preventDefault();       
-        if (id == 0) {
-            console.log("Post");
-            // Check si tout est bon
-            if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles) {
-                
-                // Ajout localisation
-                const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
-                
-                
-                // Ajout Adresse
-                const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
-                
-                // Ajout Contact
-                const newContact = new Contact(contactTel)
-                
-        //Création de la salle
-        const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, arrayStyle, Number(capacite), boolSmac(smac), [newContact])
-        if (token) {
+      if (!errors.nomSalle && !errors.adresseNum && !errors.adresseVoie && !errors.adresseCodePostal && !errors.adresseVille && !errors.localisationX && !errors.localisationY && !errors.contactTel && !errors.capacite && !errors.smac && !errors.styles && token) {      
+          
+          // Ajout localisation
+          const newLocalisation = new Localisation("Point", [localisationX, localisationY]);
+          
+          
+          // Ajout Adresse
+          const  newAdresse = new Adresse(adresseNum, adresseVoie, adresseCodePostal, adresseVille, newLocalisation)
+          
+          // Ajout Contact
+          const newContact = new Contact(contactTel)
+          
+          const newSalle = new SalleIn((Number(allSalle.length) + 1),nomSalle, newAdresse, arrayStyle, Number(capacite), boolSmac(smac), [newContact])
+          if (id == 0) {
+            //Création de la salle
             await axios
             .post(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, newSalle, config)
             .then((res) => console.log(res))
             .catch((err) => console.log(err + "pas de post"))
+
+        }  else {
+            await axios
+            .put(`${import.meta.env.VITE_REACT_APP_API_URL}Salles/${id}`, newSalle, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err + "pas de put"))
+
         }
-        } else {
-        console.log("Post non effectuer");
-        } 
-        } else {
-        console.log('update');
-        console.log(arrayStyle);
-        }
+    }
     };
     
     
