@@ -2,33 +2,41 @@ import { useContext } from "react";
 import style from "./NavBar.module.css"
 import PropTypes from "prop-types";
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from "react-router-dom";
 
-const NavBar = ({menu}) => {
+const NavBar = ({menu, setMenu}) => {
  
-let { token } = useContext(UserContext)
+    let { token } = useContext(UserContext)
+
+    let navigate = useNavigate()
 
     const handleClick = (e) => {
         let path;
         switch(e.target.dataset.menu) {
             case "accueil":
                 path = "/";
-                window.location = path;
+                navigate(path);
+                setMenu(false);
                 break;
             case "connexion":
                 path = "/connexion";
-                window.location = path;
+                navigate(path);
+                setMenu(false);
                 break;
-                case "profile":
-                    path = "/profil"
-                    window.location = path;
-                    break;            
-                case "deconnexion":
-                    path = "/"
-                    window.location = path;
-                    break;
+            case "profile":
+                path = "/profil"
+                navigate(path);
+                setMenu(false);
+                break;            
+            case "deconnexion":
+                path = "/"
+                navigate(path);
+                setMenu(false);
+                break;
             default:
                 path = "/";
-                window.location = path;
+                navigate(path);
+                setMenu(true);
         }
         
     }
@@ -40,7 +48,7 @@ let { token } = useContext(UserContext)
 
     return ( 
     <>
-        <nav className={menu ? style.navDisplay :  style.navHide }>
+        <nav className={menu  ? style.navDisplay :  style.navHide }>
             <a className={style.a} data-menu="accueil" onClick={(e) => handleClick(e)}>Accueil</a>
             {
                 (token == null) ? <a className={style.a} data-menu="connexion" onClick={(e) => handleClick(e)}>Connexion</a> : <a className={style.a} data-menu="deconnexion" onClick={(e) => {handleClick(e); logOut()}}>Déconnexion</a>
@@ -53,6 +61,7 @@ let { token } = useContext(UserContext)
 }
 NavBar.propTypes = {
     menu: PropTypes.bool.isRequired ,
+    setMenu: PropTypes.func.isRequired ,
   };
  
 export default NavBar;

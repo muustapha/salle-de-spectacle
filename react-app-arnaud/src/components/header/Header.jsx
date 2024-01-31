@@ -29,7 +29,7 @@ if (menu) {
                 <button className={style.btn} onClick={() => !menu ? setMenu(true) : setMenu(false)}>
                     {!menu ? <FontAwesomeIcon icon={faBars} className={style.icon} /> : <FontAwesomeIcon icon={faTimes} className={style.icon} />}
                 </button>
-                <NavBar menu={menu} />
+                <NavBar menu={menu} setMenu={setMenu} />
             </header>
         </>
     );

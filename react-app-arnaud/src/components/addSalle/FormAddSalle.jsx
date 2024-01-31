@@ -155,6 +155,7 @@ const FormAddSalle = () => {
         allInputRadio.forEach((radio) => {
             if (radio.dataset.radio == "true" && data.smac) {
                 radio.checked = true;
+                setSmac(data.smac)
                 setErrors((elemnt) => ({
                     ...elemnt,
                     smac: false
@@ -165,6 +166,7 @@ const FormAddSalle = () => {
                     ...elemnt,
                     smac: false
                 }));
+                setSmac(data.smac)
             } else {
                 radio.checked = false;
             }
@@ -172,20 +174,22 @@ const FormAddSalle = () => {
 
 
         allInputStyles.forEach((style) => {
-            const styleIdLower = style.id.toLowerCase();
+            console.log(data.styles);
             if (data.styles.length != 0) {
-                if (data.styles.includes(styleIdLower)) {
+                if (data.styles.includes(style.id)) {
+                    console.log('ouui');
                     style.checked = true;
                     setErrors((elemnt) => ({
                         ...elemnt,
                         styles: false
                     }));
+                    setArrayStyle([...arrayStyle, style.id]);
                 } else {
                     style.checked = false;
+                    console.log('non');
                 }
             }
         });
-
     }
 
     useEffect(() => {
@@ -208,11 +212,14 @@ const FormAddSalle = () => {
 
     // Récup du nombre de salle dans la bdd
     useEffect(() => {
-        if (token) {
-            axios
-             .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, config)
-             .then((res) => setAllSalle(res.data))
-             .catch((err) => console.log('Pas de GetAll' + err))
+        if(id == 0) {
+
+            if (token) {
+                axios
+                .get(`${import.meta.env.VITE_REACT_APP_API_URL}Salles`, config)
+                .then((res) => setAllSalle(res.data))
+                .catch((err) => console.log('Pas de GetAll' + err))
+            }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
@@ -304,6 +311,7 @@ const FormAddSalle = () => {
         } 
         } else {
         console.log('update');
+        console.log(arrayStyle);
         }
     };
     
