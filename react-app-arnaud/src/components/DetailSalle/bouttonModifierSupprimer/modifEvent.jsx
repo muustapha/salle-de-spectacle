@@ -1,15 +1,11 @@
 import React from 'react';
 import styles from './modifEvent.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 
-
-
-function ModifEvent() {
+function ModifEvent({ role }) {
     return (
-        <div className={styles.ModifEvent}>
-            
-            <button className={styles.bouton}>modifie évènement</button>
-        
-        </div>
+        role ? <button className={styles.bouton}> <FontAwesomeIcon icon={faPen} /></button> : null
     );
 }
 

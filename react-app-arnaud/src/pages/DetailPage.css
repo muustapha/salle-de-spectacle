@@ -10,26 +10,24 @@
 .listeAvis{
     display: grid;
     grid-template-columns: 1fr 1fr; /* Crée deux colonnes de taille égale */
-    grid-gap: 0.1rem; /* Ajustez comme nécessaire */
+   
     justify-items: start; /* Equivalent de justify-content pour grid */
     align-items: start; /* Equivalent de align-items pour grid */
-    width: 90%;
-    height: 55vh;
+    /* width: 90%;
+    height: 55vh; */
     padding: 0 1rem;
     /* overflow: auto; */
     background-color:#fdfdfb; 
-    border-radius: 15px;
-    box-shadow: 0 0 4px 0 black;
-       margin: 0 auto;
-    margin-top: -2rem; 
+    /* border-radius: 15px;
+    box-shadow: 0 0 4px 0 black; */
+    
 }
 
-.boutton{
+.boutonContainer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10vh; 
-
+  
     
 }
 .title1{
@@ -43,13 +41,12 @@
 }
 .listeEvenement{
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Crée deux colonnes de taille égale */
+    grid-template-columns: 1fr; /* Crée deux colonnes de taille égale */
     grid-gap: 0.1rem; /* Ajustez comme nécessaire */
     justify-items: start; /* Equivalent de justify-content pour grid */
     align-items: start; /* Equivalent de align-items pour grid */
     width: 90%;
-    height: 55vh;
-    padding: 0 1rem;
+    height: 45vh;
     /* overflow: auto; */
     background-color:#fdfdfb; 
     /* border-radius: 15px;  

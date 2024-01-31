@@ -1,13 +1,37 @@
-.evenement{
+.event{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 20px;
     border-radius: 15px;
     box-shadow: 0 0 4px 0 black;
+    height: 70%;
 }
+
+
+.detailEvent{
+
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* width: 50%; */
+    /* border-radius: 15px;
+    box-shadow: 0 0 4px 0 black; */
+
+
+
+}
+
+.boutonContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 3;
+justify-content: space-around;
+}
+
 .Artiste{ 
     font-size: 125%;
 }

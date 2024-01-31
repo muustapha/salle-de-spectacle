@@ -8,6 +8,9 @@ import AjouterAvis from '../components/DetailSalle/AjouterAvis/AjouterAvis';
 import AjouterEvenement from '../components/DetailSalle/AjouterEvenement/AjouterEvenement';
 import Evenement from '../components/DetailSalle/Evenement/Evenement';
 import './DetailPage.css';
+import { useContext } from 'react';
+import { UserContext } from '../components/context/UserContext';
+
 
 const DetailPage = () => {
   const [salle, setSalle] = useState({});
@@ -16,7 +19,8 @@ const DetailPage = () => {
   const urlSalle = 'http://localhost:27290/api/Salles/id?id=2';
   const urlEvents = 'http://localhost:27290/api/event';
   const _id = 2; // Définissez selectedSalleId. Remplacez 2 par l'id de la salle sélectionnée.
-let role = localStorage.getItem('role');
+  const { role } = useContext(UserContext);
+  let isAdmin = role === 'admin';
  
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +76,7 @@ let role = localStorage.getItem('role');
       <div className="listeAvis"> {
         salle.listeAvis.map((avis, index) => { return <Avis key={index} date={avis.date} note={avis.note} /> })
       }
-</div><AjouterAvis />
+</div><AjouterAvis role={isAdmin} />
 <p className="title1">Evènements : </p>
 <div className="listeEvenement">
         {events.map((event, index) => (
@@ -88,9 +92,9 @@ let role = localStorage.getItem('role');
 
 </div>
      
-     <div className='boutton'>  
-      {role ? <AjouterEvenement /> : ""}
-      </div>
+<div className='boutonContainerAjouter'>  
+  {isAdmin ? <AjouterEvenement /> : ""}
+</div>
       
     </>
   );
