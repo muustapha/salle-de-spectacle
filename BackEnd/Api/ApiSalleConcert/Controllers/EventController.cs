@@ -71,8 +71,8 @@ namespace ApiSalleConcert.Controllers
 		}
 
         [Authorize]
-        [HttpPut("{id:length(24)}")]
-		public async Task<IActionResult> Update(string id, Event updatedEvent)
+        [HttpPut]
+		public async Task<IActionResult> Update(Event updatedEvent)
 		{
             var principal = HttpContext.User as ClaimsPrincipal;
             var role = principal.FindFirst(ClaimTypes.Role)?.Value;
@@ -82,7 +82,7 @@ namespace ApiSalleConcert.Controllers
                 return Unauthorized();
             }
 
-            var e = await _eventService.GetAsync(id);
+            var e = await _eventService.GetAsync(updatedEvent.Id);
 
 			if (e is null)
 			{
@@ -91,7 +91,7 @@ namespace ApiSalleConcert.Controllers
 
 			updatedEvent.Id = e.Id;
 
-			await _eventService.UpdateAsync(id, updatedEvent);
+			await _eventService.UpdateAsync(updatedEvent.Id, updatedEvent);
 
 			return NoContent();
 		}

@@ -109,7 +109,7 @@ const SignUp = () => {
                     }
                 </div>
                 <div className={Style.div}>
-                    <label className={Style.label} htmlFor="comfirmPassword">Comfirmer mot de passe </label>
+                    <label className={Style.label} htmlFor="comfirmPassword">Confirmer mot de passe </label>
                     <input 
                         className={Style.input} 
                         type="password" 
