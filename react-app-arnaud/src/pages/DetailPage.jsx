@@ -16,7 +16,7 @@ const DetailPage = () => {
   const urlSalle = 'http://localhost:27290/api/Salles/id?id=2';
   const urlEvents = 'http://localhost:27290/api/event';
   const _id = 2; // Définissez selectedSalleId. Remplacez 2 par l'id de la salle sélectionnée.
-
+let role = localStorage.getItem('role');
  
   useEffect(() => {
     const fetchData = async () => {
@@ -82,14 +82,16 @@ const DetailPage = () => {
     prix={event.prix}
     style={event.style}
     date={event.date}
-  /> 
+ />
  
-))} </div>
-     
-      <div className='boutton'>  
-        <AjouterEvenement />
-      </div>
+))} 
 
+</div>
+     
+     <div className='boutton'>  
+      {role ? <AjouterEvenement /> : ""}
+      </div>
+      
     </>
   );
 }

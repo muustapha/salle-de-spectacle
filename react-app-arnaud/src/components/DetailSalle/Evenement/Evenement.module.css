@@ -5,6 +5,8 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 4px 0 black;
 }
 .Artiste{ 
     font-size: 125%;

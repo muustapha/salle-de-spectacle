@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Evenement.module.css";
+import ModifEvent from "../bouttonModifierSupprimer/modifEvent";
+import SupprimEvent from "../bouttonModifierSupprimer/supprimeEvent";
 
 const Evenement = ({artiste, prix, style, date }) => {
     let formattedDate = new Date(date).toLocaleDateString('fr-FR', {
@@ -14,7 +16,9 @@ const Evenement = ({artiste, prix, style, date }) => {
         <p className={styles.Prix}>{prix}€</p>
         <p className={styles.Style}>{style}</p>
         <p className={styles.date}>{formattedDate}</p>
-        </div></>
+        <ModifEvent />
+        <SupprimEvent />
+ </div></>
     );
 }
 
