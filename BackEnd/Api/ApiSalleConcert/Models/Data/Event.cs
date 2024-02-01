@@ -8,7 +8,8 @@ namespace ApiSalleConcert.Models.Data
 
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
-		public string Id { get; set; }
+        [BsonElement("_id")]
+        public string Id { get; set; }
 
 		[BsonElement("idSalle")]
 		public int IdSalle { get; set; }

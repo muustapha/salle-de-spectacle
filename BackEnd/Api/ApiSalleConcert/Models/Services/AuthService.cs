@@ -52,7 +52,7 @@ namespace ApiSalleConcert.Models.Services
 		{
 			Auth user = _authCollection.Find(x => x.Mail == u.Mail).FirstOrDefault();
 
-			var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 			var tokenKey = Encoding.ASCII.GetBytes(key);
 			var tokenDescription = new SecurityTokenDescriptor()
 			{

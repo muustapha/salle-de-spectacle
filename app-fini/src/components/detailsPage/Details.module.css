@@ -1,0 +1,47 @@
+.h2 {
+  font-size: 48px;
+  text-align: center;
+  margin: 10% 0;
+}
+
+.section {
+  border-radius: 15px;
+  box-shadow: 0 0 4px 0 black;
+  width: 80%;
+  margin: 0 auto;
+  padding: 3%;
+  background: white;
+}
+
+.sectionCarte {
+  height: 40vh;
+  width: 80%;
+  margin: 10% auto;
+}
+
+.sectionCalendrier {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.categorie {
+  margin: 10% 0;
+}
+
+.divUpdate {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.btnUpdate {
+  background-color: var(--color3);
+  padding: 5%;
+  border-radius: 15px;
+}
+
+.icon {
+  font-size: 24px;
+}

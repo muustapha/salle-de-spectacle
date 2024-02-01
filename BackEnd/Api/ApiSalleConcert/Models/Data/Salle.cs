@@ -20,7 +20,7 @@ namespace ApiSalleConcert.Models
 		public List<string>? Styles { get; set; } = null!;
 
 		[BsonElement("avis")]
-		public Avis[]? ListeAvis { get; set; } = null!;
+		public Avis[]? ListeAvis { get; set; } = new Avis[0];
 
 		[BsonElement("capacite")]
 		public int? Capacite { get; set; }
@@ -45,5 +45,5 @@ namespace ApiSalleConcert.Models
 			Smac = null;
 			ContactSalle = null;
 		}
-    }
+	}
 }

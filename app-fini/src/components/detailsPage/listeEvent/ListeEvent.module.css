@@ -1,0 +1,12 @@
+.btn {
+  background-color: var(--color3);
+  font-size: 20px;
+  padding: 10%;
+  width: 100%;
+  border-radius: 15px;
+}
+
+.div {
+  width: 60%;
+  margin: 10% auto;
+}

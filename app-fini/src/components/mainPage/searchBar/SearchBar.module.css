@@ -1,0 +1,57 @@
+.SearchBarContainer {
+  padding: 5% 2%;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.SearchBarContainerLabelInput {
+  display: flex;
+  justify-content: space-between;
+  margin: 6%;
+}
+
+.label {
+  font-size: 20px;
+  text-align: right;
+  width: 35%;
+  padding: 2%;
+}
+.input {
+  width: 65%;
+  font-size: 20px;
+}
+
+.divBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-radius: 15px;
+}
+
+.btn {
+  padding: 5% 15%;
+  width: 90%;
+  background-color: var(--color3);
+  font-size: 24px;
+  border-radius: 15px;
+  margin-bottom: 5%;
+}
+
+@media screen and (min-width: 768px) {
+  .SearchBarContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+  }
+
+  .SearchBarContainerLabelInput {
+    margin: 3%;
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    padding: 2%;
+    width: 70%;
+  }
+}

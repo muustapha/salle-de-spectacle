@@ -1,0 +1,52 @@
+.div {
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 15px;
+  background: white;
+  margin-bottom: 5%;
+  padding: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.divNo {
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 15px;
+  background: white;
+  margin-bottom: 5%;
+  padding: 5%;
+}
+
+.p {
+  padding: 1% 0;
+}
+
+.containerBtn {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divBtn {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouton {
+  background: var(--color3);
+  display: flex;
+  /* padding: 2%; */
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 30px;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  height: 20px;
+}

@@ -1,0 +1,97 @@
+.section {
+  background: white;
+  width: 80%;
+  margin: 10% auto;
+  padding: 4%;
+  box-shadow: 0 0 4px 0 black;
+  border-radius: 15px;
+  height: 190vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.label {
+  font-size: 20px;
+  margin-top: 2%;
+}
+
+.input {
+  font-size: 20px;
+  padding: 2%;
+  width: 100%;
+  margin-top: 5%;
+}
+.divColumn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+.partie {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 2%;
+}
+
+.divSep {
+  margin: 3% 0%;
+}
+
+.divSepSmac {
+  margin: 3% 0%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.divRowCenter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.labelSmac {
+  margin-right: 50%;
+}
+
+.btn {
+  padding: 5% 20%;
+  background-color: var(--color3);
+  border-radius: 15px;
+  font-size: 20px;
+  margin: 10% 0;
+}
+.divBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badInput {
+  border: 2px solid red !important;
+}
+.badText {
+  margin: 2% 0;
+  color: red !important;
+}
+
+.divMap {
+  display: flex;
+  align-items: center;
+  margin: 5% 0;
+}
+
+.divStyles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 5%;
+}
+
+.labelStyle {
+  font-size: 24px;
+  margin-left: 5%;
+}

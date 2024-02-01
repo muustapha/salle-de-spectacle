@@ -1,0 +1,39 @@
+.div {
+  display: grid;
+  grid-template-columns: repeat(3, 1.5fr);
+  gap: 3%;
+}
+
+.divBtn {
+  margin: 15% auto 5%;
+  width: 60%;
+}
+
+.btn {
+  padding: 10%;
+  width: 100%;
+  background-color: var(--color3);
+  font-size: 20px;
+  border-radius: 15px;
+}
+
+.divForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+}
+
+.label {
+  font-size: 24px;
+}
+
+.input {
+  width: 50%;
+  margin-left: 3%;
+  padding: 3%;
+}
+
+.containerBtn {
+  display: flex;
+}

@@ -1,0 +1,13 @@
+.div {
+  padding: 2%;
+  width: 90%;
+}
+.h3 {
+  padding-bottom: 2%;
+}
+.divComplementAdresse {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3%;
+  width: 70%;
+}

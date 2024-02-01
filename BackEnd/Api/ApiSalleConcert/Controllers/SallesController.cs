@@ -29,10 +29,10 @@ namespace ApiSalleConcert.Controllers
 			var principal = HttpContext.User as ClaimsPrincipal;
 			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
 
-			if (role == "False")
+			if(role == "False")
 			{
 				return Unauthorized();
-			}
+			}			
 
 			var listeSalle = await _sallesService.GetAsync();
 			return _mapper.Map<List<SalleRecherche>>(listeSalle);
@@ -131,14 +131,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Post(SalleDtoIn newSalles)
 		{
-			var principal = HttpContext.User as ClaimsPrincipal;
-			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
 
-			if (role == "False")
-			{
-				return Unauthorized();
-			}
-			Salle s = _mapper.Map<Salle>(newSalles);
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
+
+            Salle s = _mapper.Map<Salle>(newSalles);
 
 			await _sallesService.CreateAsync(s);
 
@@ -152,12 +153,13 @@ namespace ApiSalleConcert.Controllers
 			var principal = HttpContext.User as ClaimsPrincipal;
 			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
 
-			if (role == "False")
-			{
-				return Unauthorized();
-			}
+			//if (role == "False")
+			//{
+			//	return Unauthorized();
+			//}
 
 			var book = await _sallesService.GetAsync(id);
+
 
 			if (book is null)
 			{
@@ -175,15 +177,15 @@ namespace ApiSalleConcert.Controllers
 		[HttpDelete("id")]
 		public async Task<ActionResult> Delete(int id)
 		{
-			var principal = HttpContext.User as ClaimsPrincipal;
-			var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+            var principal = HttpContext.User as ClaimsPrincipal;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
 
-			if (role == "False")
-			{
-				return Unauthorized();
-			}
+            if (role == "False")
+            {
+                return Unauthorized();
+            }
 
-			var salle = await _sallesService.GetAsync(id);
+            var salle = await _sallesService.GetAsync(id);
 
 			if (salle is null)
 			{
