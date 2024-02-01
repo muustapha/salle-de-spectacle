@@ -1,10 +1,20 @@
+import ModifSAlle from "../bouttonModifierSupprimer/modifSalle";
 import styles from "./SalleDetail.module.css";
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+
+
+
 
 const SalleDetail = ({nom, adresse, smac, capacite, musicStyles}) => {
-
+    const { role } = useContext(UserContext);
+    let isAdmin = role === 'admin';
     return ( 
-        <>
+        
+        <><div className={styles.title}>
             <h2 className={styles.h2}>{nom}</h2>
+            <ModifSAlle role = {isAdmin} />
+            </div>
             <div className={styles.container}>
                 <div className={styles.container__content}>
                     

@@ -10,7 +10,6 @@
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 0 4px 0 black;
-    transition: all 0.3s ease-in-out;
     margin: 0 auto;
     
 }
@@ -81,4 +80,16 @@
     gap: 50px; /* C'est l'espace entre la ville et le code postal */
     margin-top:-0.7rem;
     margin-bottom: auto;
+}
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 70%;
+
+
+
+
 }
