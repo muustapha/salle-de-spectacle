@@ -3,6 +3,7 @@ import style from "./FormEvent.module.css"
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from "react-router-dom";
 
 const FormEvent = () => 
 {
@@ -113,6 +114,8 @@ const FormEvent = () =>
     }
     const { token } = useContext(UserContext)
 
+    let navigate = useNavigate();
+
     function createEvent()
     {
         const config = {
@@ -129,6 +132,10 @@ const FormEvent = () =>
             date: dateRef.current.value
         }, config).then((response) => {
         });
+
+        let path;
+        path = `/detail-salle/id?${idSalle}`;
+        navigate(path);    
     }
 
     function fillInputs(event)
@@ -157,6 +164,10 @@ const FormEvent = () =>
             date: dateRef.current.value
         }, config).then((response) => {
         });
+
+        let path;
+        path = `/detail-salle/id?${idSalle}`;
+        navigate(path);    
     }
 
     return (
