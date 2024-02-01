@@ -1,0 +1,17 @@
+.bouton {
+    background-color: var(--color3);
+    border: none;
+    
+    padding: 5%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 75%;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }

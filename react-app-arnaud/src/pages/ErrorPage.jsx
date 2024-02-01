@@ -1,5 +1,9 @@
+import react from 'react';
+import ErreurRedirection from '../components/erreurRedirection/erreurRedirection';
+
+
 const ErrorPage = () => {
-    return ( <h1>Error</h1> );
+    return ( <ErreurRedirection/> );
 }
  
 export default ErrorPage;
