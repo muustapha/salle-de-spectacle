@@ -1,10 +1,9 @@
-
-.buttonAjouter{
-    font-size:xx-large;
-    background-color: var(--color3);
-    border-radius: 8px;
-    padding: 5% 15%;
-    margin: 5% 20%;
+.buttonAjouter {
+  font-size: xx-large;
+  background-color: var(--color3);
+  border-radius: 8px;
+  padding: 5% 15%;
+  margin: 5% 20%;
 }
 
 .formList {
@@ -37,11 +36,30 @@
 }
 
 .select {
-    width: 100%;
-    font-size: x-large;
+  width: 100%;
+  font-size: x-large;
 }
 
 .input {
   width: 100%;
   font-size: x-large;
+}
+
+@media screen and (min-width: 768px) {
+  .formList {
+    width: 60%;
+    margin: 5% auto;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .formList {
+    width: 40%;
+    margin: 5% auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  .formList {
+    width: 30%;
+    margin: 5% auto;
+  }
 }
