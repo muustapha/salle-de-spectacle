@@ -79,3 +79,9 @@
     margin-left: 5%;
   }
 }
+
+@media screen and (min-width: 1900px) {
+  .SearchBarContainer {
+    width: 70%;
+  }
+}

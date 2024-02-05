@@ -46,3 +46,14 @@
   border-right: 1px solid black;
   border-bottom: 1px solid black;
 }
+
+@media screen and (min-width: 768px) {
+  .section {
+    width: 60%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .section {
+    width: 30%;
+  }
+}

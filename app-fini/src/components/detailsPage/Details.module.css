@@ -45,3 +45,29 @@
 .icon {
   font-size: 24px;
 }
+
+@media screen and (min-width: 768px) {
+  .divUpdate {
+    width: 60%;
+  }
+
+  .btnUpdate {
+    padding: 3%;
+  }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .section {
+    width: 60%;
+  }
+
+  .sectionCarte {
+    width: 60%;
+  }
+
+  .sectionCalendrier {
+    width: 60%;
+  }
+}

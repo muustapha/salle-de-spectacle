@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { UserContext } from '../../context/UserContext';
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({menu, setMenu}) => {
+const NavBar = ({menu, setMenu, setIsClick}) => {
  
     let { token } = useContext(UserContext)
     const { updateUserContext } = useContext(UserContext);
@@ -18,21 +18,25 @@ const NavBar = ({menu, setMenu}) => {
                 path = "/";
                 navigate(path);
                 setMenu(false);
+                setIsClick(false);
                 break;
             case "connexion":
                 path = "/connexion";
                 navigate(path);
                 setMenu(false);
+                setIsClick(false);
                 break;
             case "profile":
                 path = "/profil"
                 navigate(path);
                 setMenu(false);
+                setIsClick(false);
                 break;            
             case "deconnexion":
                 path = "/"
                 navigate(path);
                 setMenu(false);
+                setIsClick(false);
                 break;
             default:
                 path = "/";
@@ -64,6 +68,7 @@ const NavBar = ({menu, setMenu}) => {
 NavBar.propTypes = {
     menu: PropTypes.bool.isRequired ,
     setMenu: PropTypes.func.isRequired ,
+    setIsClick: PropTypes.func.isRequired ,
   };
  
 export default NavBar;

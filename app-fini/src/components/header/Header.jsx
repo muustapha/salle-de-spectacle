@@ -37,7 +37,7 @@ const Header = () => {
             <FontAwesomeIcon icon={faTimes} className={style.icon} />
           )}
         </button>
-        <NavBar menu={menu} setMenu={setMenu} />
+        <NavBar menu={menu} setMenu={setMenu} setIsClick={setIsClick}/>
       </header>
     </>
   );

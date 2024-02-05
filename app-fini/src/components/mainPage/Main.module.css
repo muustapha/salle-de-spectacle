@@ -20,3 +20,17 @@
     padding: 5% 3%;
   }
 }
+
+@media screen and (min-width: 1900px) {
+  .sectionDesktop {
+    margin: 5% auto;
+    padding: 2%;
+  }
+  .section {
+    width: 80%;
+  }
+
+  .section {
+    margin: 5% auto;
+  }
+}
