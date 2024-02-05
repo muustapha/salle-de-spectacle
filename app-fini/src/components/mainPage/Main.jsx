@@ -9,7 +9,7 @@ const Main = () => {
     <>
     {/* Pemet d'appliquer le context au enfant */}
         <SearchProvider>
-            <section className={style.section}>
+            <section className={`${style.section} ${style.sectionDesktop}`}>
                 <SearchBar  />
             </section>
             <section className={style.section}>

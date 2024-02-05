@@ -42,7 +42,7 @@ const SearchBar = () => {
                 <input type="text" id="city" data-searchinput="input" className={style.input} onChange={(e) => handleInputChange("ville",e.target.value)}/>
             </div>
             <div className={style.SearchBarContainerLabelInput}>
-                <label htmlFor="style" className={style.label}>Style(s) :</label>
+                <label htmlFor="style" className={style.label}>Style:</label>
                 <select id="style" data-searchinput="select" className={style.input} onChange={(e) => handleInputChange("styles", e.target.value)}>
                     <option></option>
                     {
