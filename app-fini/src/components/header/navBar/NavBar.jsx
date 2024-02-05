@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import style from "./NavBar.module.css"
 import PropTypes from "prop-types";
 import { UserContext } from '../../context/UserContext';
@@ -18,25 +18,25 @@ const NavBar = ({menu, setMenu, setIsClick}) => {
                 path = "/";
                 navigate(path);
                 setMenu(false);
-                setIsClick(false);
+                setIsClick(false)
                 break;
             case "connexion":
                 path = "/connexion";
                 navigate(path);
                 setMenu(false);
-                setIsClick(false);
+                setIsClick(false)
                 break;
             case "profile":
                 path = "/profil"
                 navigate(path);
                 setMenu(false);
-                setIsClick(false);
+                setIsClick(false)
                 break;            
             case "deconnexion":
                 path = "/"
                 navigate(path);
                 setMenu(false);
-                setIsClick(false);
+                setIsClick(false)
                 break;
             default:
                 path = "/";
@@ -45,6 +45,14 @@ const NavBar = ({menu, setMenu, setIsClick}) => {
         }
         
     }
+
+    useEffect(() => {
+        if (window.innerWidth >= 1200) {
+            setMenu(true);
+          } else {
+            setMenu(false)
+          }
+    }, [])
 
     const logOut = () => {
         localStorage.clear();

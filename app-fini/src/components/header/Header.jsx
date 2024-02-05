@@ -1,24 +1,29 @@
 import style from "./Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./navBar/NavBar";
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
-  const [click, setIsClick] = useState(false);
+  const [isClick, setIsClick] = useState(false);
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1200) {
-      setMenu(true);
-    }
-  });
 
-  if (click) {
+
+  if (isClick) {
     document.body.style.overflowY = "hidden";
   } else {
     document.body.style.overflowY = "auto";
   }
+
+  useEffect(() => {
+    if (window.innerWidth >= 1200) {
+      setMenu(true);
+    } else {
+      setMenu(false)
+    }
+  }, [menu])
+
 
   return (
     <>
@@ -28,7 +33,7 @@ const Header = () => {
           className={style.btn}
           onClick={() => {
             !menu ? setMenu(true) : setMenu(false);
-            !click ? setIsClick(true) : setIsClick(false);
+            !isClick ? setIsClick(true) : setIsClick(false)
           }}
         >
           {!menu ? (
