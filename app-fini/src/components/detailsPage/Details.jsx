@@ -92,16 +92,18 @@ const Details = () => {
       ) : 
       <h2 className={style.h2}>{salle.nom}</h2>
     }
-
       <section className={style.section}>
         <About {...salle} />
       </section>
+  <div className={style.div}>
       <section className={style.sectionCarte}>
         <Carte {...salle} />
       </section>
       <section className={style.sectionCalendrier}>
         <Calendrier />
       </section>
+      </div>
+      <div className={style.divAvisEvent}>
       <section className={style.sectionCalendrier}>
         <h2 className={style.categorie}>Avis</h2>
         {salle.listeAvis || salle.listeAvis == null ? (
@@ -114,6 +116,7 @@ const Details = () => {
         <h2 className={style.categorie}>Evenements</h2>
         <ListeEvent event={event} id={id} />
       </section>
+      </div>
     </>
   );
 };

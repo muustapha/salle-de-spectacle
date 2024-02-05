@@ -71,3 +71,46 @@
     width: 60%;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .divUpdate {
+    width: 40%;
+  }
+  .section {
+    display: flex;
+    width: 90%;
+  }
+  .div {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .divAvisEvent {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .divUpdate {
+    width: 20%;
+  }
+  .h2 {
+    font-size: 64px;
+  }
+  .section {
+    padding: 0;
+  }
+  .sectionCarte {
+    margin: 5% auto;
+  }
+  .sectionCalendrier {
+    /* margin: 5% auto; */
+  }
+  .categorie {
+    margin: 5% 0;
+    font-size: 42px;
+  }
+}

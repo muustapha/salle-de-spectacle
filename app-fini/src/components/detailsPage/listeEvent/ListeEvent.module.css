@@ -10,3 +10,12 @@
   width: 60%;
   margin: 10% auto;
 }
+
+@media screen and (min-width: 1200px) {
+}
+
+@media screen and (min-width: 1900px) {
+  .div {
+    width: 40%;
+  }
+}
